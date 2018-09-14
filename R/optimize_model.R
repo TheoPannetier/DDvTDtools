@@ -50,7 +50,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
 
   # Assert arguments are correct
   check_model_tag(sim_model) ; check_model_tag(optim_model) ; check_init(init)
-  if (!is.numeric(rangemc)){stop("rangemc must be a numeric vector.")}
+  if (!(is.numeric(rangemc) | is.null(rangemc)) ){stop("rangemc must either be null or a numeric vector.")}
   if (!is.logical(overwrite)){stop("overwrite must be either TRUE or FALSE.")}
 
   # Read parameter values
