@@ -11,5 +11,5 @@
 
 edit_DDvTD_tags <- function(tags){
   DDvTD_tags <- tags
-  save(DDvTD_tags,file = "./data/DDvTD_tags.RData")
+  devtools::use_data(DDvTD_tags)
 }
