@@ -47,7 +47,9 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
 
   # Assert arguments are correct
   check_model_tag(sim_model) ; check_model_tag(optim_model) ; check_init(init)
-
+  if (!is.numeric(rangemc)){stop("rangemc must be a numeric vector.")}
+  if (!is.logical(overwrite)){stop("overwrite must be either TRUE or FALSE.")}
+  
   # Read parameter values
   pars <- read_para(para)
 
@@ -64,7 +66,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
   # Exclude existing results from rangemc if overwrite is off
   if( class(prev_res) == "data.frame" ){
 
-    mc_overlap <- which(rangemc %in% prev_res$mc)
+    mc_overlap <- rangemc[which(rangemc %in% prev_res$mc)]
 
     if(length(mc_overlap) > 0) {
 
@@ -116,23 +118,28 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
 
   # Tidy dataset format
   data("DDvTD_tags")
-  res <- data.frame(
-    "sim" = factor(sim_model, levels = DDvTD_tags),
-    "true_lambda0" = pars[2],
-    "true_mu0" = pars[3],
-    "true_K" = pars[4],
-    "mc" = res_temp$mc,
-    "optim" = factor(optim_model, levels = DDvTD_tags),
-    "df" = res_temp$df,
-    "init" = init,
-    "conv" = res_temp$conv,
-    "loglik" = res_temp$loglik,
-    "AIC" = - 2*res_temp$loglik + 2*res_temp$df,
-    "lambda0" = res_temp[,1],
-    "mu0" = res_temp[,2],
-    "K" = res_temp[,3] * (optim_model != "CR") + Inf * (optim_model == "CR")
-  )
-
+  
+  if (is.null(res_temp)){ 
+    res <- res_temp } 
+  else {
+    res <- data.frame(
+      "sim" = factor(sim_model, levels = DDvTD_tags),
+      "true_lambda0" = pars[2],
+      "true_mu0" = pars[3],
+      "true_K" = pars[4],
+      "mc" = res_temp$mc,
+      "optim" = factor(optim_model, levels = DDvTD_tags),
+      "df" = res_temp$df,
+      "init" = init,
+      "conv" = res_temp$conv,
+      "loglik" = res_temp$loglik,
+      "AIC" = - 2*res_temp$loglik + 2*res_temp$df,
+      "lambda0" = res_temp[,1],
+      "mu0" = res_temp[,2],
+      "K" = res_temp[,3] * (optim_model != "CR") + Inf * (optim_model == "CR")
+    )
+  }
+  
   # Assemble new results with previous ones
   if(class(prev_res) == "data.frame" ){
     if(length(mc_overlap > 0) & overwrite){
