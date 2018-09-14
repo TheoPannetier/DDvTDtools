@@ -1,6 +1,10 @@
 Package: DDvTDtools
 Type: Package
 Title: An R package to compare diversity-dependent (DD) and time-dependent (TD) models of diversification.
+Depend: 
+    R (>= 3.1.0), 
+    DDD, 
+    xfun
 Version: 0.1.0
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
@@ -8,5 +12,9 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3
 Encoding: UTF-8
+Imports: 
+    DDD, 
+    xfun, 
+    devtools
 LazyData: true
 RoxygenNote: 6.1.0

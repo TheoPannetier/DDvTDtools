@@ -8,7 +8,8 @@ optimize_model(sim_model, para, optim_model, init = 1,
   inputfile = paste0("./data/sim/", "sim", sim_model, "-", para,
   ".RData"), outputfile = paste0("./data/optim/", "sim", sim_model,
   "_optim", optim_model, "_init", init, "-", para, ".rds"),
-  rangemc = NULL, overwrite = F, ...)
+  rangemc = NULL, overwrite = F, methode = "ode45",
+  optimmethod = "subplex", tol = rep(1e-06, 3), cond = 1)
 }
 \arguments{
 \item{sim_model}{a character used to identify the desired simulated input dataset. See \code{DDvTD_tags} for a list of possible values.}
@@ -26,6 +27,14 @@ optimize_model(sim_model, para, optim_model, init = 1,
 \item{rangemc}{a numeric vector containing all the indices of the trees to optimize the model on. Default to all the trees in the dataset.}
 
 \item{overwrite}{logical. \code{optimize_model} always try to load previous results if they exist. If \code{overwrite} is \code{FALSE} previous results will be kept and trees for which results already exist are excluded from \code{rangemc}.}
+
+\item{methode}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+
+\item{optimmethod}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+
+\item{tol}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+
+\item{cond}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
 
 \item{...}{additional parameter values to be passed to \code{dd_ML} or \code{bd_ML}, e.g. \code{cond}, \code{tol} or \code{methode}.}
 }

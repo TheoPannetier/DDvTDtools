@@ -11,6 +11,10 @@
 #' @param rangemc a numeric vector containing all the indices of the trees to optimize the model on. Default to all the trees in the dataset.
 #' @param overwrite logical. \code{optimize_model} always try to load previous results if they exist. If \code{overwrite} is \code{FALSE} previous results will be kept and trees for which results already exist are excluded from \code{rangemc}.
 #' @param ... additional parameter values to be passed to \code{dd_ML} or \code{bd_ML}, e.g. \code{cond}, \code{tol} or \code{methode}.
+#' @param methode argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
+#' @param optimmethod argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
+#' @param tol argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
+#' @param cond argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #'
 #' @return A \code{data.frame} including results and metadata:
 #' \itemize{
@@ -33,23 +37,22 @@
 #' @author Theo Pannetier, \email{t.s.c.pannetier@rug.nl}
 #'
 #' @export
-#' @importFrom DDD dd_ML
-#' @importFrom DDD bd_ML
 
 
 optimize_model <- function(sim_model, para, optim_model, init = 1,
                            inputfile = paste0("./data/sim/","sim",sim_model,"-",para,".RData"),
-                           outputfile = paste0("./data/optim/","sim",sim_model,
-                                               "_optim",optim_model,"_init",init,"-",para,".rds"),
-                           rangemc = NULL, overwrite = F, ... ){
-  # Assert DDD is loaded
+                           outputfile = paste0("./data/optim/","sim",sim_model,"_optim",optim_model,"_init",init,"-",para,".rds"),
+                           rangemc = NULL, overwrite = F, methode = "ode45", optimmethod = "subplex",
+                           tol = rep(1E-6,3), cond = 1){
+  # Make sure DDD is loaded
   if(!require('DDD')){install.packages('DDD')}
+  requireNamespace('DDD') ; requireNamespace('xfun') ; requireNamespace('devtools')
 
   # Assert arguments are correct
   check_model_tag(sim_model) ; check_model_tag(optim_model) ; check_init(init)
   if (!is.numeric(rangemc)){stop("rangemc must be a numeric vector.")}
   if (!is.logical(overwrite)){stop("overwrite must be either TRUE or FALSE.")}
-  
+
   # Read parameter values
   pars <- read_para(para)
 
@@ -103,11 +106,11 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
     # Optimise the selected model
     cat("Estimating parameters ... ")
     if (optim_model == "DD"){
-      res_mc = try( DDD::dd_ML(brts, initparsopt = initpars[2:4] + 1E-6, cond = 1, tol = rep(1E-6,3), methode = "ode45"))
+      res_mc = try( DDD::dd_ML(brts, initparsopt = initpars[2:4] + 1E-6, cond = cond, tol = tol, methode = methods, optimmethod = optimmethod))
     } else if (optim_model == "TD"){
-      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:4] + 1E-6, idparsopt = 1:3, cond = 1, tol = rep(1E-6,3), methode = "ode45", tdmodel = 4))
+      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:4] + 1E-6, idparsopt = 1:3, tdmodel = 4, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     } else if (optim_model == "CR"){
-      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:3] + 1E-6, cond = 1, tol = rep(1E-6,3), methode = "ode45"))
+      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:3] + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     }
 
     # Organise results
@@ -118,9 +121,9 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
 
   # Tidy dataset format
   data("DDvTD_tags")
-  
-  if (is.null(res_temp)){ 
-    res <- res_temp } 
+
+  if (is.null(res_temp)){
+    res <- res_temp }
   else {
     res <- data.frame(
       "sim" = factor(sim_model, levels = DDvTD_tags),
@@ -139,7 +142,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
       "K" = res_temp[,3] * (optim_model != "CR") + Inf * (optim_model == "CR")
     )
   }
-  
+
   # Assemble new results with previous ones
   if(class(prev_res) == "data.frame" ){
     if(length(mc_overlap > 0) & overwrite){
