@@ -58,7 +58,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
   # Default rangemc extend to all trees in the input dataset
   if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
 
-  rm(res)
+  if(exists(res)) { rm(res) }
   if(overwrite){
     cat("Previous results will be overwritten.\n")
     } else {
@@ -118,7 +118,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
   }
 
   # Tidy dataset format
-  data("./data/DDVTD_tags.RData")
+  data("./data/DDvTD_tags.RData")
   res <- data.frame(
     "sim" = factor(sim_model, levels = DDvTD_tags),
     "true_lambda0" = pars[2],
