@@ -58,12 +58,6 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
   # Default rangemc extend to all trees in the input dataset
   if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
 
-  if(overwrite){
-    cat("Previous results will be overwritten.\n")
-    } else {
-    cat ("Previous results will not be overwritten.\n")
-    }
-
   # Load previous results if they exist
   prev_res = xfun::try_silent(readRDS(outputfile))
 
@@ -75,7 +69,11 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
     if(length(mc_overlap) > 0) {
 
       cat("Previous results found for the following trees: ", mc_overlap, "\n")
-      if(!overwrite){ rangemc <- rangemc[-which(rangemc %in% mc_overlap)] }
+      if(overwrite){
+        cat("Previous results will be overwritten.\n")
+      } else {
+        cat ("Previous results will not be overwritten.\n")
+        rangemc <- rangemc[-which(rangemc %in% mc_overlap)] }
       }
   }
 
