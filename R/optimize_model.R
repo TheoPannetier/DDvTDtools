@@ -159,7 +159,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
     } else if (optim_model == "TD"){
       res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6, idparsopt = 1:3, tdmodel = 4, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     } else if (optim_model == "CR"){
-      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
+      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt[1:2] + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     }
 
     # Organise results

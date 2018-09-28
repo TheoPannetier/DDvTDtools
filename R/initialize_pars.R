@@ -42,7 +42,7 @@ initialize_pars <- function(pars, init, init_pars, sim_model, optim_model, mc, b
     init_pars = c(pars[2]*0.5, pars[3])
 
   }
-
+  # another mblep
   init_pars <- pmin(init_pars,1000)
 
   return(init_pars)
