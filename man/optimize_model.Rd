@@ -5,11 +5,12 @@
 \title{Optimize a diversification model on a set of simulated phylogenetic trees.}
 \usage{
 optimize_model(sim_model, para, optim_model, init = 1,
-  inputfile = paste0("./data/sim/", "sim", sim_model, "-", para,
-  ".RData"), outputfile = paste0("./data/optim/", "sim", sim_model,
-  "_optim", optim_model, "_init", init, "-", para, ".rds"),
+  init_pars = NULL, inputfile = paste0("./data/sim/", "sim", sim_model,
+  "-", para, ".RData"), outputfile = paste0("./data/optim/", "sim",
+  sim_model, "_optim", optim_model, "_init", init, "-", para, ".rds"),
   rangemc = NULL, overwrite = F, methode = "ode45",
-  optimmethod = "subplex", tol = rep(1e-06, 3), cond = 1)
+  optimmethod = "subplex", tol = rep(1e-06, 3), cond = 1,
+  save_results = T)
 }
 \arguments{
 \item{sim_model}{a character used to identify the desired simulated input dataset. See \code{DDvTD_tags} for a list of possible values.}
@@ -19,6 +20,8 @@ optimize_model(sim_model, para, optim_model, init = 1,
 \item{optim_model}{a character specifying the model to be optimized on input data. See \code{DDvTD_tags} for a list of possible values.}
 
 \item{init}{an integer controlling the initial parameter values to be used.}
+
+\item{init_pars}{only used if \code{init = 0}, in which case it should be a numerical vector of appropriate length containing the initial parameter values.}
 
 \item{inputfile}{path and name of the input file, by default generated automatically from \code{sim_model} and \code{para}}
 
@@ -36,12 +39,13 @@ optimize_model(sim_model, para, optim_model, init = 1,
 
 \item{cond}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
 
-\item{...}{additional parameter values to be passed to \code{dd_ML} or \code{bd_ML}, e.g. \code{cond}, \code{tol} or \code{methode}.}
+\item{save_results}{logical. Should save the results to \code{outpufile} (default) or not.}
 }
 \value{
 A \code{data.frame} including results and metadata:
 \itemize{
    \item{ \code{sim}} the model used to generate simulated data
+   \item{ \code{crown_age}} crown age or simulation time of the input tree
    \item{ \code{true_lambda0}} parameter value used to generate simulated data
    \item{ \code{true_mu0}} parameter value used to generate simulated data
    \item{ \code{true_K}} parameter used to generate simulated data
@@ -49,6 +53,9 @@ A \code{data.frame} including results and metadata:
    \item{ \code{df}} number of parameters estimated in the optimization of the model
    \item{ \code{optim}} optimized model
    \item{ \code{init}} initial parameter values setting
+   \item{ \code{init_lambda0}} initial parameter value for lambda0
+   \item{ \code{init_mu0}} initial parameter value for mu0
+   \item{ \code{init_K}} initial parameter value for K
    \item{ \code{conv}} exit status of the optimization. conv = 0 means convergence.
    \item{ \code{loglik}} log-likelihood estimate associated with optimized parameter values below
    \item{ \code{AIC}} AIC value calculated from \code{loglik} and \code{df}
