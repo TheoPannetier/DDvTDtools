@@ -20,6 +20,7 @@
 #' @return A \code{data.frame} including results and metadata:
 #' \itemize{
 #'    \item{ \code{sim}} the model used to generate simulated data
+#'    \item{ \code{ntips}} number of tips at present in the input tree
 #'    \item{ \code{crown_age}} crown age or simulation time of the input tree
 #'    \item{ \code{true_lambda0}} parameter value used to generate simulated data
 #'    \item{ \code{true_mu0}} parameter value used to generate simulated data
@@ -107,6 +108,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   # Estimates take value -1 by default if no results (i.e. in the case of an error)
   res_template <- data.frame(
     "sim" = factor(sim_model, levels = DDvTD_tags),
+    "ntips" = as.numeric(NA),
     "crown_age" = pars[1],
     "true_lambda0" = pars[2],
     "true_mu0" = pars[3],
@@ -141,11 +143,12 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
     # Set up initial parameter values
     brts = as.numeric(branching.times(trees[[mc]][[1]]))
 
-    initparsopt <- initialize_pars(pars = pars, init = init,
+    initparsopt <- initialize_pars(pars = pars, para = para, init = init,
                                 init_pars = init_pars, sim_model = sim_model,
                                 optim_model = optim_model, mc = mc, brts = brts)
     res_mc <- res_template
     res_mc$mc <- mc
+    res_mc$ntips <- ape::Ntip(trees[[mc]][[1]])
     res_mc$init_lambda0 <- initparsopt[1]
     res_mc$init_mu0 <- initparsopt[2]
     res_mc$init_K <- initparsopt[3]

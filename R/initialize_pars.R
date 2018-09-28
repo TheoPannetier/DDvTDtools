@@ -1,4 +1,4 @@
-initialize_pars <- function(pars, init, init_pars, sim_model, optim_model, mc, brts){
+initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model, mc, brts){
   # accepted init
   data("init_tags")
   # translate para into parameter values
@@ -32,7 +32,6 @@ initialize_pars <- function(pars, init, init_pars, sim_model, optim_model, mc, b
       res_optimCR$mu0[mc],
       length(brts) + 1 # K
     )
-
   } else if (init == 4){
 
     init_pars = c(pars[2:3], length(brts) + 1)
