@@ -77,6 +77,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   print(pars)
   cat("Results will be saved at", outputfile, "\n")
 
+  # mblep
   # Default rangemc extend to all trees in the input dataset
   if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
 

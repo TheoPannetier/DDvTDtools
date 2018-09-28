@@ -43,7 +43,7 @@ initialize_pars <- function(pars, init, init_pars, sim_model, optim_model, mc, b
 
   }
 
-  init_pars <- pmin(pars,1000)
+  init_pars <- pmin(init_pars,1000)
 
   return(init_pars)
 
