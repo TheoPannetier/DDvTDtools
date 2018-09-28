@@ -15,7 +15,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
 
   } else if(init == 1){
     init_pars = pars[2:4]
-    
+
   } else if (init == 2){
 
     res_optimCR <- readRDS(paste0("./data/optim/sim",sim_model,"_optimCR_init1-",para,".rds"))
@@ -33,13 +33,12 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
       length(brts) + 1 # K
     )
   } else if (init == 4){
-
-    init_pars = c(pars[2:3], length(brts) + 1)
+        init_pars = c(pars[2:3], length(brts) + 1)
 
   } else if (init == 5){
-
-    init_pars = c(pars[2]*0.5, pars[3])
-
+    # Expected lambda given the number of tips, from equation (13) in Kendall (1948).
+    lambda_ini <- (log(length(brts)*0.5) + pars[3]) / pars[1]
+    init_pars = c(lambda_ini, pars[3])
   }
   # another mblep
   init_pars <- pmin(init_pars,1000)
