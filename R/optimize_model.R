@@ -6,19 +6,21 @@
 #' @param para a 4-digit code used to identify the desired simulated input dataset.
 #' @param optim_model a character specifying the model to be optimized on input data. See \code{DDvTD_tags} for a list of possible values.
 #' @param init an integer controlling the initial parameter values to be used.
+#' @param init_pars only used if \code{init = 0}, in which case it should be a numerical vector of appropriate length containing the initial parameter values.
 #' @param inputfile path and name of the input file, by default generated automatically from \code{sim_model} and \code{para}
 #' @param outputfile path and name for output file, by default generated automatically from \code{sim_model}, \code{para}, \code{optim_model} and \code{init}.
 #' @param rangemc a numeric vector containing all the indices of the trees to optimize the model on. Default to all the trees in the dataset.
 #' @param overwrite logical. \code{optimize_model} always try to load previous results if they exist. If \code{overwrite} is \code{FALSE} previous results will be kept and trees for which results already exist are excluded from \code{rangemc}.
-#' @param ... additional parameter values to be passed to \code{dd_ML} or \code{bd_ML}, e.g. \code{cond}, \code{tol} or \code{methode}.
 #' @param methode argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param optimmethod argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param tol argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param cond argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
+#' @param save_results logical. Should save the results to \code{outpufile} (default) or not.
 #'
 #' @return A \code{data.frame} including results and metadata:
 #' \itemize{
 #'    \item{ \code{sim}} the model used to generate simulated data
+#'    \item{ \code{crown_age}} crown age or simulation time of the input tree
 #'    \item{ \code{true_lambda0}} parameter value used to generate simulated data
 #'    \item{ \code{true_mu0}} parameter value used to generate simulated data
 #'    \item{ \code{true_K}} parameter used to generate simulated data
@@ -26,6 +28,9 @@
 #'    \item{ \code{df}} number of parameters estimated in the optimization of the model
 #'    \item{ \code{optim}} optimized model
 #'    \item{ \code{init}} initial parameter values setting
+#'    \item{ \code{init_lambda0}} initial parameter value for lambda0
+#'    \item{ \code{init_mu0}} initial parameter value for mu0
+#'    \item{ \code{init_K}} initial parameter value for K
 #'    \item{ \code{conv}} exit status of the optimization. conv = 0 means convergence.
 #'    \item{ \code{loglik}} log-likelihood estimate associated with optimized parameter values below
 #'    \item{ \code{AIC}} AIC value calculated from \code{loglik} and \code{df}
@@ -38,38 +43,49 @@
 #'
 #' @export
 
+# To test:
+# 1 - absence of previous results
+# 2 - presence of previous results, no overlap - overwrite on/off
+# 3 - presence of previous results, overlap of data - overwrite on/off
+# Re-run the optimizations entirely ?
 
-optimize_model <- function(sim_model, para, optim_model, init = 1,
+
+optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = NULL,
                            inputfile = paste0("./data/sim/","sim",sim_model,"-",para,".RData"),
                            outputfile = paste0("./data/optim/","sim",sim_model,"_optim",optim_model,"_init",init,"-",para,".rds"),
                            rangemc = NULL, overwrite = F, methode = "ode45", optimmethod = "subplex",
-                           tol = rep(1E-6,3), cond = 1){
+                           tol = rep(1E-6,3), cond = 1, save_results = T){
   # Make sure DDD is loaded
   if(!require('DDD')){install.packages('DDD')}
   requireNamespace('DDD') ; requireNamespace('xfun') ; requireNamespace('devtools')
 
-  # Assert arguments are correct
-  check_model_tag(sim_model) ; check_model_tag(optim_model) ; check_init(init)
+  # Assert arguments formats are correct
+  data("DDvTD_tags")
+  if( !(sim_model %in% DDvTD_tags & optim_model %in% DDvTD_tags) ){
+    stop("Incorrect model specified - see data(DDvTD_tags) for accepted model inputs.")
+  }
+  data(init_tags)
+  if (!(init %in% init_tags) ){stop("init has incorrect value. See data('init_tags') for possible values.")}
   if (!(is.numeric(rangemc) | is.null(rangemc)) ){stop("rangemc must either be null or a numeric vector.")}
   if (!is.logical(overwrite)){stop("overwrite must be either TRUE or FALSE.")}
 
-  # Read parameter values
-  pars <- read_para(para)
-
   # Read inputfile
   cat("Reading input file", inputfile, "\n")
-  load(inputfile)
+  pars <- NULL
+  load(inputfile) # loads 'trees' and 'pars'
+  if (is.null(pars)){ pars <- read_para(para)}
+  print(pars)
+  cat("Results will be saved at", outputfile, "\n")
 
   # Default rangemc extend to all trees in the input dataset
   if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
 
   # Load previous results if they exist
-  prev_res = xfun::try_silent(readRDS(outputfile))
+  res = xfun::try_silent(readRDS(outputfile))
+  if( is.data.frame(mc) ){
 
-  # Exclude existing results from rangemc if overwrite is off
-  if( class(prev_res) == "data.frame" ){
-
-    mc_overlap <- rangemc[which(rangemc %in% prev_res$mc)]
+    # Exclude existing results from rangemc if overwrite is off
+    mc_overlap <- rangemc[which(rangemc %in% res$mc)]
 
     if(length(mc_overlap) > 0) {
 
@@ -79,11 +95,35 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
       } else {
         cat ("Previous results will not be overwritten.\n")
         rangemc <- rangemc[-which(rangemc %in% mc_overlap)] }
-      }
+    }
+  # If no previous results are found
+  } else {
+    res <- NULL
+    mc_overlap <- NULL
   }
 
-  # Declare results storage dataset
-  res_temp <- NULL
+  # Prepare result data frame
+  # Estimates take value -1 by default if no results (i.e. in the case of an error)
+  res_template <- data.frame(
+    "sim" = factor(sim_model, levels = DDvTD_tags),
+    "crown_age" = pars[1],
+    "true_lambda0" = pars[2],
+    "true_mu0" = pars[3],
+    "true_K" = pars[4],
+    "mc" = as.numeric(NA),# filled below
+    "optim" = factor(optim_model, levels = DDvTD_tags),
+    "df" = -1,
+    "init" = init,
+    "init_lambda0" = as.numeric(NA),
+    "init_mu0" = as.numeric(NA),
+    "init_K" = as.numeric(NA),
+    "conv" = -1, # no convergence
+    "loglik" = -Inf, # no likelihood estimate -> loglik = 0.
+    "AIC" = -1,
+    "lambda0" = -1,
+    "mu0" = -1,
+    "K" = -1
+  )
 
   # Default results in case of error
   if( optim_model == "DD"){
@@ -99,59 +139,52 @@ optimize_model <- function(sim_model, para, optim_model, init = 1,
 
     # Set up initial parameter values
     brts = as.numeric(branching.times(trees[[mc]][[1]]))
-    initpars <- read_init_dd(pars, init)
+
+    initparsopt <- initialize_pars(pars = pars, init = init,
+                                init_pars = init_pars, sim_model = sim_model,
+                                optim_model = optim_model, mc = mc, brts = brts)
+    res_mc <- res_template
+    res_mc$mc <- mc
+    res_mc$init_lambda0 <- initparsopt[1]
+    res_mc$init_mu0 <- initparsopt[2]
+    res_mc$init_K <- initparsopt[3]
 
     flush.console()
 
     # Optimise the selected model
     cat("Estimating parameters ... ")
     if (optim_model == "DD"){
-      res_mc = try( DDD::dd_ML(brts, initparsopt = initpars[2:4] + 1E-6, cond = cond, tol = tol, methode = methods, optimmethod = optimmethod))
+      res_temp = try( DDD::dd_ML(brts, initparsopt = initparsopt + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     } else if (optim_model == "TD"){
-      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:4] + 1E-6, idparsopt = 1:3, tdmodel = 4, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
+      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6, idparsopt = 1:3, tdmodel = 4, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     } else if (optim_model == "CR"){
-      res_mc = try( DDD::bd_ML(brts, initparsopt = initpars[2:3] + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
+      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
     }
 
     # Organise results
-    if(!is.data.frame(res_mc)) { res_mc = outerror } # default dataset if error
-    res_mc <- cbind(res_mc,mc)                       # add tree index
-    res_temp <- rbind(res_temp, res_mc)              # append to result dataset
+    if(is.data.frame(res_mc)){
+      res_mc$df <- res_temp$df
+      res_mc$conv <- res_temp$conv
+      res_mc$loglik <- res_temp$logik
+      res_mc$AIC <- 2*res_temp$loglik + 2*res_temp$df
+      res_mc$lambda0 <- res_temp[,1]
+      res_mc$mu0 <-  res_temp[,2]
+      res_mc$K <- res_temp[,3] * (optim_model != "CR") + Inf * (optim_model == "CR")
+    }
+
+    # Remove pre-existing results if overwrite; then append res_mc to main results
+    if( is.data.frame(res) & length(mc_overlap > 0) & overwrite ){
+      res[which (res$mc == mc),] <- res_mc
+    } else {
+      res <- rbind(res, res_mc)
+      res <- res[order(res$mc),]
+    }
+
+    # Save
+    if (save_results){
+      saveRDS(res,outputfile)
+    }
   }
 
-  # Tidy dataset format
-  data("DDvTD_tags")
-
-  if (is.null(res_temp)){
-    res <- res_temp }
-  else {
-    res <- data.frame(
-      "sim" = factor(sim_model, levels = DDvTD_tags),
-      "true_lambda0" = pars[2],
-      "true_mu0" = pars[3],
-      "true_K" = pars[4],
-      "mc" = res_temp$mc,
-      "optim" = factor(optim_model, levels = DDvTD_tags),
-      "df" = res_temp$df,
-      "init" = init,
-      "conv" = res_temp$conv,
-      "loglik" = res_temp$loglik,
-      "AIC" = - 2*res_temp$loglik + 2*res_temp$df,
-      "lambda0" = res_temp[,1],
-      "mu0" = res_temp[,2],
-      "K" = res_temp[,3] * (optim_model != "CR") + Inf * (optim_model == "CR")
-    )
-  }
-
-  # Assemble new results with previous ones
-  if(class(prev_res) == "data.frame" ){
-    if(length(mc_overlap > 0) & overwrite){
-      res <- rbind(res, prev_res[-which(prev_res$mc %in% mc_overlap),] )
-    } else { res <- rbind(res, prev_res) }
-  }
-  res <- res[order(res$mc),]
-
-  cat("Saving at", outputfile)
-  saveRDS(res,outputfile)
   return(res)
 }
