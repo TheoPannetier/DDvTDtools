@@ -148,7 +148,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
                                 optim_model = optim_model, mc = mc, brts = brts)
     res_mc <- res_template
     res_mc$mc <- mc
-    res_mc$ntips <- length(brts)
+    res_mc$ntips <- length(brts)+1
     res_mc$init_lambda0 <- initparsopt[1]
     res_mc$init_mu0 <- initparsopt[2]
     res_mc$init_K <- initparsopt[3]

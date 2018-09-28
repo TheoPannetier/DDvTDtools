@@ -37,7 +37,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
 
   } else if (init == 5){
     # Expected lambda given the number of tips, from equation (13) in Kendall (1948).
-    lambda_ini <- (log(length(brts)*0.5) + pars[3]) / pars[1]
+    lambda_ini <- (log( (length(brts)+1) * 0.5 ) + pars[3]) / pars[1]
     init_pars = c(lambda_ini, pars[3])
   }
   # another mblep
