@@ -55,7 +55,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
                            inputfile = paste0("./data/sim/","sim",sim_model,"-",para,".RData"),
                            outputfile = paste0("./data/optim/","sim",sim_model,"_optim",optim_model,"_init",init,"-",para,".rds"),
                            rangemc = NULL, overwrite = F, methode = "ode45", optimmethod = "subplex",
-                           tol = rep(1E-6,3), cond = 1, save_results = T){
+                           tol = rep(1E-6,3), cond = 1, save_results = T, return_res = T){
   # Make sure DDD is loaded
   if(!require('DDD')){install.packages('DDD')}
   requireNamespace('DDD') ; requireNamespace('xfun') ; requireNamespace('devtools')
@@ -189,6 +189,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
       saveRDS(res,outputfile)
     }
   }
-
-  return(res)
+  if(return_res){
+    return(res)
+  }
 }
