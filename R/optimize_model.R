@@ -178,7 +178,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
 
     # Remove pre-existing results if overwrite; then append res_mc to main results
     if( is.data.frame(res) & length(mc_overlap > 0) & overwrite ){
-      res[which (res$mc == mc),] <- res_mc
+      res[mc,] <- res_mc
     } else {
       res <- rbind(res, res_mc)
       res <- res[order(res$mc),]
