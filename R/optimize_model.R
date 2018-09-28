@@ -82,7 +82,11 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
 
   # Load previous results if they exist
   res = xfun::try_silent(readRDS(outputfile))
+<<<<<<< HEAD
   if( is.data.frame(res) ){
+=======
+  if( is.data.frame(mc) ){
+>>>>>>> 96a2120ea2cfbfd61a4cb091af25008635ecda5d
 
     # Exclude existing results from rangemc if overwrite is off
     mc_overlap <- rangemc[which(rangemc %in% res$mc)]
