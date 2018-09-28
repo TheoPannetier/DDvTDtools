@@ -167,10 +167,10 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
       res_mc$df <- res_temp$df
       res_mc$conv <- res_temp$conv
       res_mc$loglik <- res_temp$loglik
-      res_mc$AIC <- 2*res_temp$loglik + 2*res_temp$df
+      res_mc$AIC <- 2*res_temp$df - 2*res_temp$loglik
       res_mc$lambda0 <- res_temp[,1]
       res_mc$mu0 <-  res_temp[,2]
-      res_mc$K <- res_temp[,3] * 1/(1 - (optim_model == "CR"))
+      res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
     }
 
     # Remove pre-existing results if overwrite; then append res_mc to main results
