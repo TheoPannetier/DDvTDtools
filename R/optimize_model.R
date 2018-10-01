@@ -16,6 +16,7 @@
 #' @param tol argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param cond argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param save_results logical. Should save the results to \code{outpufile} (default) or not.
+#' @param return_res logical. Should results be returned? Default to \code{TRUE}.
 #'
 #' @return A \code{data.frame} including results and metadata:
 #' \itemize{
