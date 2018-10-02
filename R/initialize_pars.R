@@ -18,7 +18,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
 
   } else if (init == 2){
 
-    res_optimCR <- readRDS(paste0("./data/optim/sim",sim_model,"_optimCR_init1-",para,".rds"))
+    res_optimCR <- readRDS(paste0("./data/optim/sim",sim_model,"_optimCR_init5-",para,".rds"))
     init_pars = c(
       res_optimCR$lambda0[mc],
       res_optimCR$mu0[mc],
@@ -26,7 +26,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
     )
   } else if (init == 3){
 
-    res_optimCR <- readRDS(paste0("./data/optim/sim",sim_model,"_optimCR_init1-",para,".rds"))
+    res_optimCR <- readRDS(paste0("./data/optim/sim",sim_model,"_optimCR_init5-",para,".rds"))
     init_pars = c(
       res_optimCR$lambda0[mc],
       res_optimCR$mu0[mc],
