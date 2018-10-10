@@ -87,9 +87,11 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   res = xfun::try_silent(readRDS(outputfile))
   if( is.data.frame(res) ){
 
+
     # Exclude existing results from rangemc if overwrite is off
     mc_overlap <- rangemc[which(rangemc %in% res$mc)]
 
+    mc_errors <- res$mc[which(res$conv == -1)]
     if(length(mc_overlap) > 0) {
 
       cat("Previous results found for the following trees: ", mc_overlap, "\n")
@@ -97,7 +99,9 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
         cat("Previous results will be overwritten.\n")
       } else {
         cat ("Previous results will not be overwritten.\n")
-        rangemc <- rangemc[-which(rangemc %in% mc_overlap)] }
+        mc_errors <- res$mc[which(res$conv == -1)]
+        mc_overlap <- mc_overlap[!mc_overlap %in% mc_errors] # ignore erroneous runs
+        rangemc <- rangemc[-which(rangemc %in% mc_overlap)] } # remove existing res from run
     }
   # If no previous results are found
   } else {
