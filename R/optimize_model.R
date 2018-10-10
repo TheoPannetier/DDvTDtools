@@ -147,6 +147,20 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
     initparsopt <- initialize_pars(pars = pars, para = para, init = init,
                                 init_pars = init_pars, sim_model = sim_model,
                                 optim_model = optim_model, mc = mc, brts = brts)
+    # Handle illegal conditions
+    if(initparsopt[1] <= initparsopt[2]){
+      warning("changed illegal initial parameter values: la0 <= mu0")
+      print(paste("Illegal values:",initparsopt[1:2]))
+      initparsopt[1] <- initparsopt[1] + abs(initparsopt[1] - initparsopt[2])
+      print(paste("Changed values to:",initparsopt[1:2]))
+    }
+    if(optim_model %in% c("DD","TD") & initparsopt[3] >= 900){
+      warning("changed illegal initial parameter values: K too high")
+      print(paste("Illegal values:",initparsopt[3]))
+      initparsopt[3] <- 500
+      print(paste("Changed values to:",initparsopt[3]))
+    }
+
     res_mc <- res_template
     res_mc$mc <- mc
     res_mc$ntips <- length(brts)+1
