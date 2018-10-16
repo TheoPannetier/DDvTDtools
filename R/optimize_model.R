@@ -163,6 +163,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
       # Optimise the selected model
       cat("Estimating parameters ... ")
       cat(initparsopt)
+
       if (optim_model == "DD"){
         res_temp = try( DDD::dd_ML(brts, initparsopt = initparsopt + 1E-6,
                                    cond = cond, tol = tol, methode = methode,
