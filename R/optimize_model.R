@@ -53,10 +53,15 @@
 
 
 optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = NULL,
-                           inputfile = paste0("./data/sim/","sim",sim_model,"-",para,".RData"),
-                           outputfile = paste0("./data/optim/","sim",sim_model,"_optim",optim_model,"_init",init,"-",para,".rds"),
-                           rangemc = NULL, overwrite = F, methode = "ode45", optimmethod = "subplex",
-                           tol = rep(1E-6,3), cond = 1, save_results = T, return_res = T){
+                           inputfile = paste0("./data/sim/","sim",sim_model,"-",
+                                              para,".RData"),
+                           outputfile = paste0("./data/optim/","sim",sim_model,
+                                               "_optim",optim_model,"_init",init,
+                                               "-",para,".rds"),
+                           rangemc = NULL, overwrite = F, methode = "ode45",
+                           optimmethod = "subplex", tol = rep(1E-6,3), cond = 1,
+                           save_results = T, return_res = T){
+
   # Make sure DDD is loaded
   if(!require('DDD')){install.packages('DDD')}
   requireNamespace('DDD') ; requireNamespace('xfun') ; requireNamespace('devtools')
@@ -79,36 +84,6 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   print(pars)
   cat("Results will be saved at", outputfile, "\n")
 
-  # mblep
-  # Default rangemc extend to all trees in the input dataset
-  if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
-
-  # Load previous results if they exist
-  res = xfun::try_silent(readRDS(outputfile))
-  if( is.data.frame(res) ){
-
-
-    # Exclude existing results from rangemc if overwrite is off
-    mc_overlap <- rangemc[which(rangemc %in% res$mc)]
-
-    mc_errors <- res$mc[which(res$conv == -1)]
-    if(length(mc_overlap) > 0) {
-
-      cat("Previous results found for the following trees: ", mc_overlap, "\n")
-      if(overwrite){
-        cat("Previous results will be overwritten.\n")
-      } else {
-        cat ("Previous results will not be overwritten.\n")
-        mc_errors <- res$mc[which(res$conv == -1)]
-        mc_overlap <- mc_overlap[!mc_overlap %in% mc_errors] # ignore erroneous runs
-        rangemc <- rangemc[-which(rangemc %in% mc_overlap)] } # remove existing res from run
-    }
-  # If no previous results are found
-  } else {
-    res <- NULL
-    mc_overlap <- NULL
-  }
-
   # Prepare result data frame
   # Estimates take value -1 by default if no results (i.e. in the case of an error)
   res_template <- data.frame(
@@ -125,80 +100,99 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
     "init_lambda0" = as.numeric(NA),
     "init_mu0" = as.numeric(NA),
     "init_K" = as.numeric(NA),
-    "conv" = -1, # no convergence
+    "conv" = as.numeric(NA), # no convergence
     "loglik" = -Inf, # no likelihood estimate -> loglik = 0.
-    "AIC" = -1,
-    "lambda0" = -1,
-    "mu0" = -1,
-    "K" = -1
+    "AIC" = as.numeric(NA),
+    "lambda0" = as.numeric(NA),
+    "mu0" = as.numeric(NA),
+    "K" = as.numeric(NA)
   )
 
   # Default results in case of error
   if( optim_model == "DD"){
-    outerror <- data.frame(lambda = -1, mu = -1, K = -1, loglik = -Inf, df = -1, conv = -1)
+    outerror <- data.frame(lambda = -1, mu = -1, K = -1, loglik = -Inf,
+                           df = -1, conv = -1)
   } else {
-    outerror <- data.frame(lambda0 = -1, mu0 = -1, lambda1 = -1, mu1 = -1, loglik = -Inf, df = -1, conv = -1)
+    outerror <- data.frame(lambda0 = -1, mu0 = -1, lambda1 = -1, mu1 = -1,
+                           loglik = -Inf, df = -1, conv = -1)
+  }
+  # Default rangemc extend to all trees in the input dataset
+  if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
+
+  # Load previous results if they exist
+  res = xfun::try_silent(readRDS(outputfile))
+
+  # Initialize the results data frame if no previous results exist
+  if( !is.data.frame (res) ){
+    res <- NULL
+    for(i in 1:1000){ res <- rbind(res,res_template) }
+    res$mc <- seq_along(trees)
   }
 
   # Optimize model for each specified tree in the dataset
   for(mc in rangemc){
 
-    cat("Optimizing on tree", mc,"\n")
+    if( res[mc,'conv'] %in% c(NA,-1) | overwrite == T ){
 
-    # Set up initial parameter values
-    brts = as.numeric(branching.times(trees[[mc]][[1]]))
+      cat("Optimizing on tree", mc,"\n")
+      # Set up initial parameter values
+      brts = as.numeric(branching.times(trees[[mc]][[1]]))
 
-    initparsopt <- initialize_pars(pars = pars, para = para, init = init,
-                                init_pars = init_pars, sim_model = sim_model,
-                                optim_model = optim_model, mc = mc, brts = brts)
-    # Handle illegal conditions
-    if(initparsopt[1] <= initparsopt[2]){
-      warning(paste("Illegal values: la0 =",initparsopt[1],"< mu0 =",initparsopt[2]))
-      initparsopt[1] <- initparsopt[1] + 2 * abs(initparsopt[1] - initparsopt[2])
-      warning(paste("Changed values to:",initparsopt[1],initparsopt[2]))
-    }
-    if(optim_model %in% c("DD","TD") & initparsopt[3] >= 900){
-      warning(paste("Illegal value: K =",initparsopt[3],">= 900"))
-      initparsopt[3] <- 500
-      warning(paste("Changed value to:",initparsopt[3]))
-    }
+      initparsopt <- initialize_pars(pars = pars, para = para, init = init,
+                                     init_pars = init_pars, sim_model = sim_model,
+                                     optim_model = optim_model, mc = mc, brts = brts)
+      # Handle illegal conditions
+      if(initparsopt[1] <= initparsopt[2]){
+        cat(paste("Illegal values: la0 =",initparsopt[1],"< mu0 =",initparsopt[2]))
+        initparsopt[1] <- initparsopt[1] + 2 * abs(initparsopt[1] - initparsopt[2])
+        cat(paste("Changed values to:",initparsopt[1],initparsopt[2]))
+      }
+      if(optim_model %in% c("DD","TD") & initparsopt[3] >= 900){
+        cat(paste("Illegal value: K =",initparsopt[3],">= 900"))
+        initparsopt[3] <- 500
+        cat(paste("Changed value to:",initparsopt[3]))
+      }
 
-    res_mc <- res_template
-    res_mc$mc <- mc
-    res_mc$ntips <- length(brts)+1
-    res_mc$init_lambda0 <- initparsopt[1]
-    res_mc$init_mu0 <- initparsopt[2]
-    res_mc$init_K <- initparsopt[3]
+      res_mc <- res_template
+      res_mc$mc <- mc
+      res_mc$ntips <- length(brts) + 1
+      res_mc$init_lambda0 <- initparsopt[1]
+      res_mc$init_mu0 <- initparsopt[2]
+      res_mc$init_K <- initparsopt[3]
 
-    flush.console()
+      # Optimise the selected model
+      cat("Estimating parameters ... ")
+      cat(initparsopt)
+      if (optim_model == "DD"){
+        res_temp = try( DDD::dd_ML(brts, initparsopt = initparsopt + 1E-6,
+                                   cond = cond, tol = tol, methode = methode,
+                                   optimmethod = optimmethod))
+      } else if (optim_model == "TD"){
+        res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6,
+                                   idparsopt = 1:3, tdmodel = 4, cond = cond,
+                                   tol = tol, methode = methode,
+                                   optimmethod = optimmethod))
+      } else if (optim_model == "CR"){
+        res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt[1:2] + 1E-6,
+                                   cond = cond, tol = tol, methode = methode,
+                                   optimmethod = optimmethod))
+      }
 
-    # Optimise the selected model
-    cat("Estimating parameters ... ")
-    if (optim_model == "DD"){
-      res_temp = try( DDD::dd_ML(brts, initparsopt = initparsopt + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
-    } else if (optim_model == "TD"){
-      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt + 1E-6, idparsopt = 1:3, tdmodel = 4, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
-    } else if (optim_model == "CR"){
-      res_temp = try( DDD::bd_ML(brts, initparsopt = initparsopt[1:2] + 1E-6, cond = cond, tol = tol, methode = methode, optimmethod = optimmethod))
-    }
+      # Organise results
+      if(is.data.frame(res_mc)){
+        res_mc$df <- res_temp$df
+        res_mc$conv <- res_temp$conv
+        res_mc$loglik <- res_temp$loglik
+        res_mc$AIC <- 2 * res_temp$df - 2 * res_temp$loglik
+        res_mc$lambda0 <- res_temp[,1]
+        res_mc$mu0 <-  res_temp[,2]
+        res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
+      }
 
-    # Organise results
-    if(is.data.frame(res_mc)){
-      res_mc$df <- res_temp$df
-      res_mc$conv <- res_temp$conv
-      res_mc$loglik <- res_temp$loglik
-      res_mc$AIC <- 2*res_temp$df - 2*res_temp$loglik
-      res_mc$lambda0 <- res_temp[,1]
-      res_mc$mu0 <-  res_temp[,2]
-      res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
-    }
-
-    # Remove pre-existing results if overwrite; then append res_mc to main results
-    if( is.data.frame(res) & length(mc_overlap > 0) & overwrite ){
       res[mc,] <- res_mc
+
     } else {
-      res <- rbind(res, res_mc)
-      res <- res[order(res$mc),]
+      cat(paste("Results already found for tree", mc))
     }
 
     # Save
@@ -206,6 +200,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
       saveRDS(res,outputfile)
     }
   }
+
   if(return_res){
     return(res)
   }

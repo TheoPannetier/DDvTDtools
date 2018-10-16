@@ -22,7 +22,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
     init_pars = c(
       res_optimCR$lambda0[mc],
       res_optimCR$mu0[mc],
-      1000 # K
+      500 # K
     )
   } else if (init == 3){
 
@@ -49,7 +49,7 @@ initialize_pars <- function(pars, para, init, init_pars, sim_model, optim_model,
     init_pars = c(lambda_ini, pars[4])
   }
   # another mblep
-  init_pars <- pmin(init_pars,1000)
+  init_pars <- pmin(init_pars,800)
 
   return(init_pars)
 
