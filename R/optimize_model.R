@@ -134,7 +134,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   for(mc in rangemc){
 
     if( c(NULL,res[res$mc == mc,'conv'])[1] %in% c(NA,-1) | overwrite == T ){
-      # above vector is a (dirty) trick to evaluate its second element, which can take value integer(O) if no result exist for this mc.
+      # above vector is a (dirty) trick to evaluate its second element, which can take value integer (O) if no result exist for this mc.
       cat("Optimizing on tree", mc,"\n")
       # Set up initial parameter values
       brts = as.numeric(branching.times(trees[[mc]][[1]]))
@@ -144,14 +144,14 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
                                      optim_model = optim_model, mc = mc, brts = brts)
       # Handle illegal conditions
       if(initparsopt[1] <= initparsopt[2]){
-        cat(paste("Illegal values: la0 =",initparsopt[1],"< mu0 =",initparsopt[2]))
+        cat(paste("Illegal values: la0 =",initparsopt[1],"< mu0 =",initparsopt[2],"\n"))
         initparsopt[1] <- initparsopt[1] + 2 * abs(initparsopt[1] - initparsopt[2])
-        cat(paste("Changed values to:",initparsopt[1],initparsopt[2]))
+        cat(paste("Changed values to:",initparsopt[1],initparsopt[2]),"\n")
       }
       if(optim_model %in% c("DD","TD") & initparsopt[3] >= 900){
-        cat(paste("Illegal value: K =",initparsopt[3],">= 900"))
+        cat(paste("Illegal value: K =",initparsopt[3],">= 900"),"\n")
         initparsopt[3] <- 500
-        cat(paste("Changed value to:",initparsopt[3]))
+        cat(paste("Changed value to:",initparsopt[3]),"\n")
       }
 
       res_mc <- res_template
@@ -163,7 +163,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
 
       # Optimise the selected model
       cat("Estimating parameters ... ")
-      cat(initparsopt)
+      cat(paste(initparsopt,"\n"))
 
       if (optim_model == "DD"){
         res_temp = try( DDD::dd_ML(brts, initparsopt = initparsopt + 1E-6,
@@ -207,7 +207,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
 
 
     } else {
-      cat(paste("Results already found for tree", mc))
+      cat(paste("Results already found for tree", mc, "\n"))
     }
 
     # Save
