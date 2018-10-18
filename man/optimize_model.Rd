@@ -10,7 +10,7 @@ optimize_model(sim_model, para, optim_model, init = 1,
   sim_model, "_optim", optim_model, "_init", init, "-", para, ".rds"),
   rangemc = NULL, overwrite = F, methode = "ode45",
   optimmethod = "subplex", tol = rep(1e-06, 3), cond = 1,
-  save_results = T)
+  save_results = T, return_res = T)
 }
 \arguments{
 \item{sim_model}{a character used to identify the desired simulated input dataset. See \code{DDvTD_tags} for a list of possible values.}
@@ -40,11 +40,14 @@ optimize_model(sim_model, para, optim_model, init = 1,
 \item{cond}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
 
 \item{save_results}{logical. Should save the results to \code{outpufile} (default) or not.}
+
+\item{return_res}{logical. Should results be returned? Default to \code{TRUE}.}
 }
 \value{
 A \code{data.frame} including results and metadata:
 \itemize{
    \item{ \code{sim}} the model used to generate simulated data
+   \item{ \code{ntips}} number of tips at present in the input tree
    \item{ \code{crown_age}} crown age or simulation time of the input tree
    \item{ \code{true_lambda0}} parameter value used to generate simulated data
    \item{ \code{true_mu0}} parameter value used to generate simulated data

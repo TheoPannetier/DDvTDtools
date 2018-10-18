@@ -129,11 +129,12 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
     res$mc <- seq_along(trees)
   }
 
+
   # Optimize model for each specified tree in the dataset
   for(mc in rangemc){
 
-    if( res[mc,'conv'] %in% c(NA,-1) | overwrite == T ){
-
+    if( c(NULL,res[res$mc == mc,'conv'])[1] %in% c(NA,-1) | overwrite == T ){
+      # above vector is a (dirty) trick to evaluate its second element, which can take value integer(O) if no result exist for this mc.
       cat("Optimizing on tree", mc,"\n")
       # Set up initial parameter values
       brts = as.numeric(branching.times(trees[[mc]][[1]]))
@@ -179,18 +180,31 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
                                    optimmethod = optimmethod))
       }
 
-      # Organise results
-      if(is.data.frame(res_mc)){
-        res_mc$df <- res_temp$df
-        res_mc$conv <- res_temp$conv
-        res_mc$loglik <- res_temp$loglik
-        res_mc$AIC <- 2 * res_temp$df - 2 * res_temp$loglik
-        res_mc$lambda0 <- res_temp[,1]
-        res_mc$mu0 <-  res_temp[,2]
-        res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
+      if(!is.data.frame(res_temp)){
+        res_temp <- outerror
       }
 
-      res[mc,] <- res_mc
+      # Organise results
+      res_mc$df <- res_temp$df
+      res_mc$conv <- res_temp$conv
+      res_mc$loglik <- res_temp$loglik
+      res_mc$AIC <- 2 * res_temp$df - 2 * res_temp$loglik
+      res_mc$lambda0 <- res_temp[,1]
+      res_mc$mu0 <-  res_temp[,2]
+      res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
+
+      #res[rangemc,'conv'] %in% c(NA,-1)
+
+      # if an entry already exist for this mc, cut it out
+      overlap <- which(res$mc == mc)
+      if(length(overlap) > 0){
+        res <- res[-overlap,]
+      }
+
+      # Then append results and reorder
+      res <- rbind(res, res_mc)
+      res <- res[order(res$mc),]
+
 
     } else {
       cat(paste("Results already found for tree", mc))
