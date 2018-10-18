@@ -134,7 +134,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   for(mc in rangemc){
 
     if( c(NULL,res[res$mc == mc,'conv'])[1] %in% c(NA,-1) | overwrite == T ){
-      # above vector is a (dirty) trick to evaluate its second element, which can take value integer(O) if no result exist for this mc.
+      # above vector is a (dirty) trick to evaluate its second element, which can take value integer (O) if no result exist for this mc.
       cat("Optimizing on tree", mc,"\n")
       # Set up initial parameter values
       brts = as.numeric(branching.times(trees[[mc]][[1]]))
