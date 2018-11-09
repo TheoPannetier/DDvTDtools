@@ -37,4 +37,3 @@ check_res <- function(sim, para, optim, init, path = "./data/optim/", return_out
     ))
   }
 }
-
