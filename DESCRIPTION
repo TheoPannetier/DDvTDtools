@@ -5,7 +5,7 @@ Depend:
     R (>= 3.1.0), 
     DDD, 
     xfun
-Version: 0.1.4
+Version: 0.1.5
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
 Description: More about what it does (maybe more than one line)
