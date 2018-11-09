@@ -7,7 +7,7 @@ check_incomplete_rows <- function(res, return_out){
     }
   }
   if(length(incomplete_rows > 0)){
-    warning(
+    print(
       c("There are NAs in the following rows: ",
         paste(incomplete_rows, collapse = " ")
       )
