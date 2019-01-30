@@ -21,7 +21,7 @@ simulate_trees <- function(sim_model, para, nbmc = 1000,
                                               para,".RData"),
                           save_results = T, return_res = T){
 
-  if(!require('DDD')){install.packages('DDD')}
+  #if(!require('DDD')){install.packages('DDD')}
   set.seed(42)
 
   pars <- read_para(para)

@@ -63,7 +63,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
                            save_results = T, return_res = T){
 
   # Make sure DDD is loaded
-  if(!require('DDD')){install.packages('DDD')}
+  #if(!require('DDD')){install.packages('DDD')}
   requireNamespace('DDD') ; requireNamespace('xfun') ; requireNamespace('devtools')
 
   # Assert arguments formats are correct
@@ -118,7 +118,7 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
   }
   # Default rangemc extend to all trees in the input dataset
   if( is.null(rangemc) ){ rangemc <- seq_along(trees) }
-  
+
   # Initialize the results data frame if no previous results exist
   res = xfun::try_silent(readRDS(outputfile))
   if( !is.data.frame (res) ){
@@ -130,10 +130,10 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
 
   # Optimize model for each specified tree in the dataset
   for(mc in rangemc){
-    
+
     # Update res
     res <- readRDS(outputfile)
-    
+
     if( c(NULL,res[res$mc == mc,'conv'])[1] %in% c(NA,-1) | overwrite == T ){
       # above vector is a (dirty) trick to evaluate its second element, which can take value integer (O) if no result exist for this mc.
       cat("Optimizing on tree", mc,"\n")
@@ -195,10 +195,10 @@ optimize_model <- function(sim_model, para, optim_model, init = 1, init_pars = N
       res_mc$K <- res_temp[,3] #* 1/(1 - (optim_model == "CR"))
 
       #res[rangemc,'conv'] %in% c(NA,-1)
-      
+
       # Update res again in case new rows have been added in the meantime
       res <- readRDS(outputfile)
-      
+
       # if an entry already exist for this mc, cut it out
       overlap <- which(res$mc == mc)
       if(length(overlap) > 0){
