@@ -1,7 +1,7 @@
 Package: DDvTDtools
 Type: Package
 Title: An R package to compare diversity-dependent (DD) and time-dependent (TD) models of diversification.
-Depend: 
+Depend:
     R (>= 3.1.0), 
     DDD, 
     xfun
@@ -12,9 +12,11 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3
 Encoding: UTF-8
-Imports: 
+Imports:
     DDD, 
     xfun, 
-    devtools
+    devtools,
+    testthat
 LazyData: true
 RoxygenNote: 6.1.0
+Suggests: testthat
