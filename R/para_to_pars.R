@@ -7,10 +7,12 @@
 #' @return a four-element numeric vector containing the parameter values associated to 'para'.
 #'
 #' @author Theo Pannetier
+#'
 #' @export
+#'
 para_to_pars <- function(para){
 
-  is_para_accepted(para)
+  assert_para(para)
 
   crown_age = c(5, 10, 15, 60)
   lambda0 = c(0.4, 0.8, 1.4, 3.2)
