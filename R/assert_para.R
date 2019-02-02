@@ -3,6 +3,8 @@
 #' @param para numeric or character. A four-digits code specifying a set of parameter values.
 #' @author Theo Pannetier
 #' @seealso \code{get_para_values()}, \code{para_to_pars()}
+#'
+#' @export
 
 assert_para <- function(para) {
   if ( !(para %in% DDvTDtools::get_para_values())){
