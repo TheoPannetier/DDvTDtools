@@ -73,7 +73,7 @@ compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir
       print(paste("No likelihood available - skipping for mc =", mc))
       loglik_diff <- c(pars1,rep(NA,3))
     } else {
-      loglik_diff <- diff_dd_loglik_version(
+      loglik_diff <- llDDD::diff_dd_loglik_version(
         brts = brts,
         pars1 = pars1,
         pars2  = pars2,

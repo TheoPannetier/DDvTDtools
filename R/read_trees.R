@@ -23,7 +23,7 @@ read_trees <- function(dir, sim, para){
   load(paste0(dir, filename))
 
   # Assert we are dealing with the right class of object
-  if(!is.binary.phylo(trees[[1]][[1]])){
+  if(!ape::is.binary.phylo(trees[[1]][[1]])){
     stop(paste0(dir,filename, " is not a list of binary phylo objects."))
   }
   return(trees)
