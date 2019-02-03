@@ -3,6 +3,8 @@
 export(assert_optim)
 export(assert_para)
 export(assert_sim)
+export(compare_bd_loglik_version)
+export(compare_dd_loglik_version)
 export(get_brts)
 export(get_multi_brts)
 export(get_optim_names)
