@@ -29,7 +29,11 @@ compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir
   rangemc = 1:1000
 
   # Extract branching times from the sim file
+<<<<<<< HEAD
   brts_list <- get_multi_brts(sim_dir, sim = sim, para = para, rangemc = rangemc)
+=======
+  brts_list <- get_multi_brts(input_dir, sim = sim, para = para, rangemc = rangemc)
+>>>>>>> 5c1cc17fb082613c65bfe3bf26536fc7c8099856
 
   # Open 'optim' data frame in the environment
   res <- read_optim_table(optim_dir, sim = sim, optim = optim, init = init, para = para)
