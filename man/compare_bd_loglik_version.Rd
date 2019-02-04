@@ -4,16 +4,14 @@
 \alias{compare_bd_loglik_version}
 \title{Compare likelihood values outputed by two versions of bd_loglik() using DDvTD results}
 \usage{
-compare_bd_loglik_version(sim, para, methode = "lsoda",
-  sim_dir = "./data/sim/", optim_dir = "./data/optim/",
+compare_bd_loglik_version(sim, para, sim_dir = "./data/sim/",
+  optim_dir = "./data/optim/",
   output_dir = "./DDD_loglik_version_comparison/")
 }
 \arguments{
 \item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
 
 \item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
-
-\item{methode}{character, optimization methode passed to \code{bd_loglik()}. See \code{DDD} documentation for details.}
 
 \item{sim_dir}{character, path to the directory where the sim file is located.}
 

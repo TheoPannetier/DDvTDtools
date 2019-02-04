@@ -4,7 +4,6 @@
 #'
 #' @param sim name of the model used to simulate the trees. See \code{get_sim_names()}
 #' @param para four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.
-#' @param methode character, optimization methode passed to \code{dd_loglik()}. See \code{DDD} documentation for details.
 #' @param sim_dir character, path to the directory where the sim file is located.
 #' @param optim_dir character, path to the directory where the optim file is located.
 #' @param output_dir character, path to the directory where to save the output.
@@ -15,7 +14,7 @@
 #'
 #' @export
 
-compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir = "./data/sim/", optim_dir = "./data/optim/", output_dir = "./DDD_loglik_version_comparison/"){
+compare_dd_loglik_version <- function(sim, para, sim_dir = "./data/sim/", optim_dir = "./data/optim/", output_dir = "./DDD_loglik_version_comparison/"){
   # Assert input format
   assert_sim(sim)
   assert_para(para)
@@ -32,7 +31,7 @@ compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir
   brts_list <- get_multi_brts(sim_dir, sim = sim, para = para, rangemc = rangemc)
 
   # Open 'optim' data frame in the environment
-  res <- read_optim_table(optim_dir, sim = sim, optim = optim, init = init, para = para)
+  res <- read_optim_table(optim_dir, sim = sim, optim = "DD", init = init, para = para)
   print(paste("Comparing likelihoods using data from sim", sim, "_optimDD_init", init, "-", para, ".rds"))
 
   # Initialize output data frame
@@ -85,7 +84,7 @@ compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir
     df[mc,] <- output_row
   }
   # Save at destination
-  outputfile = paste0("diffLL-", methode, "-", sim, "-DD-", para, ".RData")
+  outputfile = paste0("diffLL-analytical-", sim, "-DD-", para, ".RData")
   save(df, file = paste0(output_dir, outputfile))
 }
 
