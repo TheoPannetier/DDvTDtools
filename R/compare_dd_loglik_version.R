@@ -52,7 +52,7 @@ compare_dd_loglik_version <- function(sim, para, sim_dir = "./data/sim/", optim_
       print(paste("mc =", mc, "..."))
     }
     # extract branching times for this tree
-    brts = brts_list[mc]
+    brts = brts_list[[mc]]
     # extract parameter values for this row
     pars1 = c(
       res$lambda0[mc],
