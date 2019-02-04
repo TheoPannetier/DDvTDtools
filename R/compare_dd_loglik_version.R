@@ -18,7 +18,6 @@ compare_dd_loglik_version <- function(sim, para, sim_dir = "./data/sim/", optim_
   # Assert input format
   assert_sim(sim)
   assert_para(para)
-  if(!is.character(methode)){stop("'methode' should be a character.")}
   if(!is.character(sim_dir)){stop("'sim_dir' should be a character.")}
   if(!is.character(optim_dir)){stop("'optim_dir' should be a character.")}
   if(!is.character(output_dir)){stop("'output_dir' should be a character.")}
