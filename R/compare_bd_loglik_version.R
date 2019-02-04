@@ -23,7 +23,7 @@ compare_bd_loglik_version <- function(sim, para, methode = 'lsoda', sim_dir = ".
   if(!is.character(sim_dir)){stop("'sim_dir' should be a character.")}
   if(!is.character(optim_dir)){stop("'optim_dir' should be a character.")}
   if(!is.character(output_dir)){stop("'output_dir' should be a character.")}
-  
+
   # Set optim parameters
   init = 1 # likelihoods from true-value initialisation
   rangemc = 1:1000
@@ -73,7 +73,7 @@ compare_bd_loglik_version <- function(sim, para, methode = 'lsoda', sim_dir = ".
       print(paste("No likelihood available - skipping for mc =", mc))
       loglik_diff <- c(pars1,rep(NA,3))
     } else {
-      loglik_diff <- diff_bd_loglik_version(
+      loglik_diff <- llDDD::diff_bd_loglik_version(
         brts = brts,
         pars1 = pars1,
         pars2  = pars2,

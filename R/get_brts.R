@@ -34,10 +34,10 @@ get_brts <- function(dir, sim, para, mc, with_extinct = F){
 
   if(!with_extinct){
     # return brts for reconstructed tree
-    brts <- as.numeric( branching.times( trees[[mc]][[1]] ) )
+    brts <- as.numeric( ape::branching.times( trees[[mc]][[1]] ) )
   } else {
     # return brts for complete tree
-    brts <- as.numeric( branching.times( trees[[mc]][[2]] ) )
+    brts <- as.numeric( ape::branching.times( trees[[mc]][[2]] ) )
   }
 
   rm(trees)

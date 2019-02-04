@@ -76,8 +76,7 @@ compare_dd_loglik_version <- function(sim, para, methode = 'analytical', sim_dir
       loglik_diff <- llDDD::diff_dd_loglik_version(
         brts = brts,
         pars1 = pars1,
-        pars2  = pars2,
-        methode = methode
+        pars2  = pars2
       )
     }
 
