@@ -61,7 +61,7 @@ compare_bd_ML_version <- function(sim, para){
     df$mu0_previous[mc] = previous$mu0[mc]
     df$K_previous[mc] = previous$K[mc]
 
-    ML_3.2 <- bd_ML_3.2(
+    ML_3.2 <- llDDD::bd_ML_3.2(
       brts = brts,
       initparsopt = pars,
       idparsopt = idparsopt,
@@ -78,7 +78,7 @@ compare_bd_ML_version <- function(sim, para){
     df$mu0_3.2[mc] <- ML_3.2$mu0
     df$K_3.2[mc] <- ML_3.2$lambda1
 
-    ML_3.8 <- bd_ML(
+    ML_3.8 <- DDD::bd_ML(
       brts = brts,
       initparsopt = pars,
       idparsopt = idparsopt,
