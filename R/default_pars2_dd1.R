@@ -3,6 +3,8 @@
 #' Returns default settings to call dd_loglik() for DDvTD, model DD1
 #'
 #' @author Theo Pannetier
+#'
+#' @export
 
 default_pars2_dd1 <- function(){
   c(

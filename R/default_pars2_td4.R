@@ -3,6 +3,8 @@
 #' Returns default settings to call bd_loglik() for DDvTD, model TD4
 #'
 #' @author Theo Pannetier
+#'
+#' @export
 default_pars2_td4 <- function(){
   c(
     4, # tdmodel
