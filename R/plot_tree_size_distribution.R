@@ -7,8 +7,6 @@
 #' @export
 
 plot_tree_size_distribution <- function(sim, para){
-  sim <- "TD"
-  para <- 4241
 
   trees <- read_trees("data/sim/", sim, para)
   tree_size_vector <- c()
