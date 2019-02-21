@@ -8,7 +8,7 @@
 
 plot_tree_size_distribution <- function(sim){
 
-  trees <- read_trees("data/sim/", sim, para)
+  trees <- read_trees(sim, para)
   tree_size_vector <- c()
   for(mc in seq_along(trees)){
     N <- ape::Ntip(trees[[mc]][[1]])

@@ -4,18 +4,13 @@
 \alias{compare_dd_loglik_version}
 \title{Compare likelihood values outputed by two versions of dd_loglik() using DDvTD results}
 \usage{
-compare_dd_loglik_version(sim, para, sim_dir = "./data/sim/",
-  optim_dir = "./data/optim/",
+compare_dd_loglik_version(sim, para,
   output_dir = "./DDD_loglik_version_comparison/")
 }
 \arguments{
 \item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
 
 \item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
-
-\item{sim_dir}{character, path to the directory where the sim file is located.}
-
-\item{optim_dir}{character, path to the directory where the optim file is located.}
 
 \item{output_dir}{character, path to the directory where to save the output.}
 }

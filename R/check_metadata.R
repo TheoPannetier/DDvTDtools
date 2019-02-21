@@ -1,6 +1,6 @@
 check_metadata <- function(res, sim, para, optim, init){
 
-  pars <- DDvTDtools:::read_para(para)
+  pars <- read_para(para)
 
   if(any(res$sim != sim)){
     print("res$sim does not match optim argument !")

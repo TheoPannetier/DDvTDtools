@@ -44,7 +44,7 @@ compare_bd_ML_version <- function(sim, para){
   )
   outputfile = paste0("diffML-", sim, "-TD-", para, ".RData")
 
-  previous <- read_optim_table(dir = "data/optim/", sim = sim, optim = "TD", init = init, para = para)
+  previous <- read_optim_table(sim = sim, optim = "TD", init = init, para = para)
   pars <- para_to_pars(para)[2:4]
 
   for(mc in rangemc){
@@ -52,7 +52,7 @@ compare_bd_ML_version <- function(sim, para){
     print(paste("Running likelihoods for tree ", mc))
 
     # Load data
-    brts <- get_brts(dir = "data/sim/", sim = sim, para = para, mc = mc)
+    brts <- get_brts(sim = sim, para = para, mc = mc)
 
     # Fill previous data entries
     df$mc[mc] = mc

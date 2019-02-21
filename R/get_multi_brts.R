@@ -12,7 +12,7 @@
 #' @author Theo Pannetier
 #' @export
 
-get_multi_brts <- function( sim, para, rangemc, with_extinct = F) {
+get_multi_brts <- function(sim, para, rangemc, with_extinct = F) {
   assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)

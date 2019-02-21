@@ -4,11 +4,9 @@
 \alias{read_optim_table}
 \title{Access a table with model fitting results}
 \usage{
-read_optim_table(dir, sim, optim, init, para)
+read_optim_table(sim, optim, init, para)
 }
 \arguments{
-\item{dir}{character, path to the directory where the target file is located.}
-
 \item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
 
 \item{optim}{name of the model fitted to the simulated trees. See \code{get_optim_names()}}

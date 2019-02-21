@@ -4,8 +4,6 @@
 #'
 #' @param sim name of the model used to simulate the trees. See \code{get_sim_names()}
 #' @param para four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.
-#' @param sim_dir character, path to the directory where the sim file is located.
-#' @param optim_dir character, path to the directory where the optim file is located.
 #' @param output_dir character, path to the directory where to save the output.
 #'
 #' @details \code{DDvTDtools} parameter \code{init} is set to 1 (true value).
@@ -14,12 +12,11 @@
 #'
 #' @export
 
-compare_dd_loglik_version <- function(sim, para, sim_dir = "./data/sim/", optim_dir = "./data/optim/", output_dir = "./DDD_loglik_version_comparison/"){
+compare_dd_loglik_version <- function(sim, para, output_dir = "./DDD_loglik_version_comparison/"){
   # Assert input format
+  assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)
-  if(!is.character(sim_dir)){stop("'sim_dir' should be a character.")}
-  if(!is.character(optim_dir)){stop("'optim_dir' should be a character.")}
   if(!is.character(output_dir)){stop("'output_dir' should be a character.")}
 
   # Set optim parameters
@@ -27,10 +24,10 @@ compare_dd_loglik_version <- function(sim, para, sim_dir = "./data/sim/", optim_
   rangemc = 1:1000
 
   # Extract branching times from the sim file
-  brts_list <- get_multi_brts(sim_dir, sim = sim, para = para, rangemc = rangemc)
+  brts_list <- get_multi_brts(sim = sim, para = para, rangemc = rangemc)
 
   # Open 'optim' data frame in the environment
-  res <- read_optim_table(optim_dir, sim = sim, optim = "DD", init = init, para = para)
+  res <- read_optim_table(sim = sim, optim = "DD", init = init, para = para)
   print(paste("Comparing likelihoods using data from sim", sim, "_optimDD_init", init, "-", para, ".rds"))
 
   # Initialize output data frame
