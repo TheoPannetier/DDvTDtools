@@ -4,11 +4,9 @@
 \alias{get_brts}
 \title{Extract a set of branching times from a dataset of simulated trees}
 \usage{
-get_brts(dir, sim, para, mc, with_extinct = F)
+get_brts(sim, para, mc, with_extinct = F)
 }
 \arguments{
-\item{dir}{character, the directory where simulated datasets are stored}
-
 \item{sim}{character, the name of a simulation model. See \code{get_sim_names()} for possible values.}
 
 \item{para}{numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()}}

@@ -4,7 +4,7 @@
 \alias{plot_tree_size_distribution}
 \title{Plots the size distribution of trees in a sim dataset}
 \usage{
-plot_tree_size_distribution(sim, para)
+plot_tree_size_distribution(sim)
 }
 \description{
 Plots the nb of tips at present in the 1,000 trees of the selected tree dataset.
