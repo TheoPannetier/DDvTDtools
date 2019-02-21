@@ -2,7 +2,6 @@
 #'
 #' Read the dataset at specified location and returns branching times for multiple trees specified by indices.
 #'
-#' @param dir character, the directory where simulated datasets are stored
 #' @param sim character, the name of a simulation model. See \code{get_sim_names()} for possible values.
 #' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()}
 #' @param rangemc numeric vector. The indices of the trees to return branching times from.
@@ -13,10 +12,8 @@
 #' @author Theo Pannetier
 #' @export
 
-get_multi_brts <- function(dir, sim, para, rangemc, with_extinct = F) {
-  if( !is.character(dir) ){
-    stop('dir must be a character.')
-  }
+get_multi_brts <- function( sim, para, rangemc, with_extinct = F) {
+  assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)
   if(!is.numeric(rangemc) | any(!rangemc %in% 1:1000 )){
@@ -28,7 +25,7 @@ get_multi_brts <- function(dir, sim, para, rangemc, with_extinct = F) {
 
   brts_bundle = list()
 
-  trees <- read_trees(dir = dir, sim = sim, para = para)
+  trees <- read_trees(sim = sim, para = para)
 
   if(any(!rangemc %in% seq_along(trees))){
     stop('rangemc out of bounds of the trees list.')
