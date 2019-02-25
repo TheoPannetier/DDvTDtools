@@ -5,7 +5,7 @@
 #'
 #' @author Théo Pannetier
 #'
-#'
+#' @export
 assert_DDvTD_wd <- function(){
   working_dir <- getwd()
   nchar_path <- nchar(working_dir)
