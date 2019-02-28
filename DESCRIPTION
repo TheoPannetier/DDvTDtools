@@ -15,7 +15,6 @@ License: GPL-3
 Encoding: UTF-8
 Imports:
     DDD,
-    llDDD,
     ape,
     xfun, 
     devtools,
