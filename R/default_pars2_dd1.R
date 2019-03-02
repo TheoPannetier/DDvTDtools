@@ -12,7 +12,7 @@ default_pars2_dd1 <- function(){
     1, # ddmodel
     1, # cond
     1, # btorph
-    0, # print
+    0, # verbose
     2  # soc
   )
 }

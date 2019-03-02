@@ -10,7 +10,7 @@ default_pars2_td4 <- function(){
     4, # tdmodel
     1, # cond
     1, # btorph
-    0, # print
+    0, # verbose
     2, # soc
     1000 # max lx
   )
