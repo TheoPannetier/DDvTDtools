@@ -4,7 +4,7 @@
 \alias{get_multi_brts}
 \title{Extract multiple sets of branching times from a dataset of simulated trees}
 \usage{
-get_multi_brts(sim, para, rangemc, with_extinct = F)
+get_multi_brts(sim, para, rangemc = NULL, with_extinct = F)
 }
 \arguments{
 \item{sim}{character, the name of a simulation model. See \code{get_sim_names()} for possible values.}
