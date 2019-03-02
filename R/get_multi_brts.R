@@ -12,10 +12,11 @@
 #' @author Theo Pannetier
 #' @export
 
-get_multi_brts <- function(sim, para, rangemc, with_extinct = F) {
+get_multi_brts <- function(sim, para, rangemc = NULL, with_extinct = F) {
   assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)
+  if( is.null(rangemc)) { rangemc <- 1:1000 }
   if(!is.numeric(rangemc) | any(!rangemc %in% 1:1000 )){
     stop('mc must be a vector of numeric values between 1 and 1000')
   }
