@@ -34,7 +34,7 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
   assert_para(para)
   if (!is.null(custom_pars) & !(is.numeric(custom_pars))){stop("custom_pars must be a numeric vector")}
   if (optim %in% c("DD", "TD")){custom_length <- 3} else {custom_length <- 2}
-  if (!is.null(custom_pars) & length(custom_pars != custom_length)){stop(paste("For optim =", optim, "custom_pars must have length", custom_length))}
+  if (!is.null(custom_pars) & length(custom_pars) != custom_length){stop(paste("For optim =", optim, "custom_pars must have length", custom_length))}
   if (!(is.numeric(rangemc) | is.null(rangemc)) ){stop("rangemc must either be null or a numeric vector.")}
   if (save_results == TRUE & !is.character(outputfile)){stop("outputfile must be a specified")}
   if (!is.character(methode)){stop("methode must be a character")}
@@ -55,7 +55,7 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
   for(mc in rangemc){
     cat("\nRunning ML for tree", mc,"\n")
 
-    brts <- brts_bundle[[mc]]
+    brts <- brts_bundle[[which(rangemc == mc)]]
     cat(paste("N = ", length(brts)+1, "\n"))
 
     # Set initial parameter values
@@ -73,30 +73,25 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
       ML_output = try( DDD::dd_ML(
         brts,
         initparsopt = init_pars + 1E-6,
+        idparsopt = seq_along(init_pars),
         tol = tol,
         methode = methode,
         optimmethod = optimmethod
       ))
-    } else if (optim == "TD"){
+    } else if(optim %in% c("TD", "CR")){
+      if(optim == "TD"){tdmodel = 4} else {tdmodel = 1}
       ML_output = try( DDD::bd_ML(
         brts,
         initparsopt = init_pars + 1E-6,
-        tdmodel = 4,
-        tol = tol,
-        methode = methode,
-        optimmethod = optimmethod
-      ))
-    } else if (optim == "CR"){
-      ML_output = try( DDD::bd_ML(
-        brts,
-        initparsopt = init_pars + 1E-6,
+        idparsopt = seq_along(init_pars),
+        tdmodel = tdmodel,
         tol = tol,
         methode = methode,
         optimmethod = optimmethod
       ))
     }
     if(!is.data.frame(ML_output)){ # default results in case of an error
-      ML_output <- data.frame(lambda = -1, mu = -1, K = -1, loglik = -1, df = -1, conv = -1)
+      ML_output <- data.frame(lambda = NA, mu = NA, K = NA, loglik = -Inf, df = -1, conv = -1)
     }
 
     # Format output
@@ -109,10 +104,12 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
     )
 
     results_df <- rbind(results_df, results_row)
-    df <- df[order(df$mc),]
+    results_df <- results_df[order(results_df$mc),]
 
     assert_DDvTD_wd()
-    saveRDS(paste0("data/optim/", outputfile))
+    if(save_results){
+      saveRDS(results_df, file = paste0("data/optim/", outputfile))
+    }
   }
 
   if(return_res){
