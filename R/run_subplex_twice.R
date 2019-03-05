@@ -14,7 +14,7 @@
 #'
 #' @export
 
-run_subplex_twice <- function(sim, para, optim, mc, verbose = 0, methode = "ode45"){
+run_subplex_twice <- function(sim, para, optim, mc, verbose = 0, methode = "ode45", optimmethod = "subplex"){
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)
@@ -34,6 +34,7 @@ run_subplex_twice <- function(sim, para, optim, mc, verbose = 0, methode = "ode4
         initparsopt = init_pars,
         idparsopt = seq_along(init_pars),
         methode = methode,
+        optimmethod = optimmethod,
         verbose = verbose
       )
     } else if (optim == "TD"){
@@ -43,6 +44,7 @@ run_subplex_twice <- function(sim, para, optim, mc, verbose = 0, methode = "ode4
         idparsopt = seq_along(init_pars),
         tdmodel = 4,
         methode = methode,
+        optimmethod = optimmethod,
         verbose = verbose
       )
     }
