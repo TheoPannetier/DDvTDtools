@@ -8,7 +8,7 @@
 #' Call \code{get_para_values()} for possible inputs, and \code{para_to_pars()} for the corresponding parameter values.
 #' @param optim character. The name of the model to fit to the simulated phylogenies. See \code{get_optim_names()} for possible inputs.
 #'
-#' @return a 3-element numeric vector containing the loglik after the first run, second run, and imporvement
+#' @return a 3-element numeric vector containing the loglik after the first run, second run, and improvement
 #' between the two (second - first)
 #' @author Théo Pannetier
 #'
