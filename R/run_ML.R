@@ -17,6 +17,7 @@
 #' @param tol argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.
 #' @param save_results logical. Should save the results to \code{outputfile} (default) or not.
 #' @param return_res logical. Should results be returned? Default to \code{FALSE}.
+#' @param jobID is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.
 #'
 #' @author Théo Pannetier
 #'
@@ -24,7 +25,8 @@
 #'
 run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
                    rangemc = NULL, methode = "ode45", optimmethod = "subplex",
-                   tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE
+                   tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,
+                   jobName = NA
 )
 {
   # Check argument values format
@@ -36,7 +38,7 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
   if (optim %in% c("DD", "TD")){custom_length <- 3} else {custom_length <- 2}
   if (!is.null(custom_pars) & length(custom_pars) != custom_length){stop(paste("For optim =", optim, "custom_pars must have length", custom_length))}
   if (!(is.numeric(rangemc) | is.null(rangemc)) ){stop("rangemc must either be null or a numeric vector.")}
-  if (save_results == TRUE & !is.character(outputfile)){stop("outputfile must be a specified")}
+  if (save_results == TRUE & !is.character(outputfile)){stop("outputfile must be specified")}
   if (!is.character(methode)){stop("methode must be a character")}
   if (!is.character(optimmethod)){stop("optimmethod must be a character")}
   if (!is.numeric(tol) | length(tol) != 3 ){stop("tol must be a numeric vector of length 3.")}
@@ -100,7 +102,7 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
       sim = sim, optim = optim, brts = brts,
       true_pars = true_pars, init_pars = init_pars,
       ML_output = ML_output, methode = methode,
-      optimmethod = optimmethod
+      optimmethod = optimmethod, jobID = jobID
     )
 
     results_df <- rbind(results_df, results_row)

@@ -6,7 +6,8 @@
 \usage{
 run_ML(sim, optim, para, custom_pars = NULL, outputfile = NULL,
   rangemc = NULL, methode = "ode45", optimmethod = "subplex",
-  tol = rep(1e-06, 3), save_results = TRUE, return_res = FALSE)
+  tol = rep(1e-06, 3), save_results = TRUE, return_res = FALSE,
+  jobName = NA)
 }
 \arguments{
 \item{sim}{character, the simulation model. Call \code{get_sim_names()} for a list of possible values.}
@@ -33,6 +34,8 @@ Must be specified if \code{save_results = TRUE}.}
 \item{save_results}{logical. Should save the results to \code{outputfile} (default) or not.}
 
 \item{return_res}{logical. Should results be returned? Default to \code{FALSE}.}
+
+\item{jobID}{is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.}
 }
 \description{
 \code{run_ML} fetches the branching times from the dataset indicated by

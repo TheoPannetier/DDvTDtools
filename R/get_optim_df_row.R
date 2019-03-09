@@ -5,7 +5,7 @@
 #' @author Théo Pannetier
 
 get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-                             methode, optimmethod)
+                             methode, optimmethod, jobID)
 {
   df <- data.frame(
     sim = factor(sim, levels = get_sim_names()),
@@ -27,6 +27,7 @@ get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_outp
     hasConverged = (ML_output$conv == 0),
     methode = factor(methode, levels = c("lsoda", "ode45", "lsodes", "analytical")),
     optimmethod = factor(optimmethod, levels = c("simplex", "subplex")),
+    jobID = jobID,
     row.names = mc
   )
   if(df$K_ML == 0){df$K_ML <- NA}
