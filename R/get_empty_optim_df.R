@@ -24,7 +24,8 @@ get_empty_optim_df <- function(){
     K_ML = numeric(),
     hasConverged = logical(),
     methode = factor(levels = c("lsoda", "ode45", "lsodes", "analytical")),
-    optimmethod = factor(levels = c("simplex", "subplex"))
+    optimmethod = factor(levels = c("simplex", "subplex")),
+    jobID = numeric()
   )
 }
 
