@@ -2,10 +2,11 @@
 #'
 #' Internal function called only by \code{run_ML}.
 #'
+#'
 #' @author Théo Pannetier
 
 get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-                             methode, optimmethod, jobID)
+                             numCycles = 1, methode, optimmethod, jobID)
 {
   df <- data.frame(
     sim = factor(sim, levels = get_sim_names()),
@@ -25,6 +26,7 @@ get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_outp
     mu0_ML = ML_output[,2],
     K_ML = ML_output[,3],
     hasConverged = (ML_output$conv == 0),
+    numCycles = numCycles,
     methode = factor(methode, levels = c("lsoda", "ode45", "lsodes", "analytical")),
     optimmethod = factor(optimmethod, levels = c("simplex", "subplex")),
     jobID = jobID,
