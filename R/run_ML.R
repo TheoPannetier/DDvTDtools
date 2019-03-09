@@ -26,7 +26,7 @@
 run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
                    rangemc = NULL, methode = "ode45", optimmethod = "subplex",
                    tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,
-                   jobName = NA
+                   jobID = NA
 )
 {
   # Check argument values format

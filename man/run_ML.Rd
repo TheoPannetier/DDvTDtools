@@ -7,7 +7,7 @@
 run_ML(sim, optim, para, custom_pars = NULL, outputfile = NULL,
   rangemc = NULL, methode = "ode45", optimmethod = "subplex",
   tol = rep(1e-06, 3), save_results = TRUE, return_res = FALSE,
-  jobName = NA)
+  jobID = NA)
 }
 \arguments{
 \item{sim}{character, the simulation model. Call \code{get_sim_names()} for a list of possible values.}
