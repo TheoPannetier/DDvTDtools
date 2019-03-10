@@ -32,6 +32,6 @@ get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_outp
     jobID = jobID,
     row.names = mc
   )
-  if(df$K_ML == 0){df$K_ML <- NA}
+  if(!is.na(df$K_ML) & df$K_ML == 0){df$K_ML <- NA}
   return(df)
 }
