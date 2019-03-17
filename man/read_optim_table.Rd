@@ -4,14 +4,12 @@
 \alias{read_optim_table}
 \title{Access a table with model fitting results}
 \usage{
-read_optim_table(sim, optim, init, para)
+read_optim_table(sim, optim, para)
 }
 \arguments{
 \item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
 
 \item{optim}{name of the model fitted to the simulated trees. See \code{get_optim_names()}}
-
-\item{init}{integer, the initialization parameter of model fitting.}
 
 \item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
 }
