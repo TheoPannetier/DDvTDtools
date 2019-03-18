@@ -16,7 +16,7 @@ get_dAIC_DDvTD <- function(sim, para){
     if (any(c(res_DD$AIC[mc], res_TD$AIC[mc]) %in% c(Inf, -Inf, NA, -1) )){
       dAIC <- c(dAIC, NA)
     } else {
-      dAIC <-  c(dAIC, res_DD$AIC[mc] - res_TD$AIC[mc])
+      dAIC <-  c(dAIC, res_TD$AIC[mc] - res_DD$AIC[mc])
     }
   }
   dAIC
