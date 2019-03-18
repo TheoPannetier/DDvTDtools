@@ -41,7 +41,9 @@ plot_LR_para <- function(sim, para_set){
     ggplot2::scale_fill_manual(values = sim_color, guide = FALSE) +
     ggplot2::ylim(-10,10) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
-    ggplot2::coord_flip()
+    ggplot2::coord_flip() +
+    ggplot2::xlab("logL_DD - logL_TD")
+
   gg
 
 }

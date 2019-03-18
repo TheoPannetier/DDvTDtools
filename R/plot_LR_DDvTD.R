@@ -30,7 +30,7 @@ plot_LR_DDvTD <- function(para){
   gg <- ggplot2::ggplot(data = LR_table, ggplot2::aes(x = LR, fill = sim)) +
     ggplot2::geom_density(alpha=.2) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
-    ggplot2::xlim(-20,20) +
+    ggplot2::xlim(-10,10) +
     ggplot2::geom_vline(xintercept = 0, linetype = "dashed") +
     ggplot2::xlab("logL_DD - logL_TD")
   gg
