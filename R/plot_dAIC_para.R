@@ -10,8 +10,9 @@
 #'
 plot_dAIC_para <- function(sim, para_set){
   assert_DDvTD_wd()
+  assert_sim(sim)
   for(para in para_set){
-    assert_para(para)
+    assert_para(para = para)
   }
 
   dAIC_table <- data.frame(
