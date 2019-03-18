@@ -35,11 +35,14 @@ plot_N_distrib_DDvTD <- function(para){
 
   # boxplot(N_distrib$N ~ N_distrib$sim)
 
-  ggplot2::ggplot(data = N_distrib, ggplot2::aes(x = sim, y = N, fill = sim)) +
-    ggplot2::geom_violin(trim = FALSE) +
+  gg <- ggplot2::ggplot(data = N_distrib, ggplot2::aes(x = sim, y = N, fill = sim)) +
+    ggplot2::geom_violin() +
+    #ggplot2::geom_boxplot() +
     ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed") +
-    ggplot2::scale_fill_manual(values = c("#009933", "#0000e6"))
+    ggplot2::scale_fill_manual(values = c("green4", "blue"),  guide = FALSE) +
+    ggplot2::theme(axis.title.x = ggplot2::element_blank())
 
+  gg
   # ggtitle("DAISIE extintion rate estimates in ontogeny \nand null-ontogeny scenarios")  +
   #   ylab("Extinction rate estimates (log transformed)") +
   #   xlab(element_blank()) +

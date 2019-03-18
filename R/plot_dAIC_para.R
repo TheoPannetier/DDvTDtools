@@ -17,7 +17,7 @@ plot_dAIC_para <- function(sim, para_set){
   dAIC_table <- data.frame(
     dAIC = numeric(),
     para = factor(levels = rev(get_para_values()), ordered = TRUE),
-    sim = factor(levels = get_sim_names())
+    sim = factor(levels = get_sim_names(), ordered = TRUE)
   )
 
   for(para in para_set){
@@ -26,16 +26,18 @@ plot_dAIC_para <- function(sim, para_set){
     dAIC_subtable <- data.frame(
       dAIC = dAIC,
       para = factor(para,levels = rev(get_para_values()), ordered = TRUE),
-      sim = factor(sim, levels = get_sim_names())
+      sim = factor(sim, levels = get_sim_names(), ordered = TRUE)
     )
     dAIC_table <- rbind(dAIC_table, dAIC_subtable)
 
   }
 
+  sim_color <- ifelse(sim == "DD", "green4", "blue")
+
   gg <- ggplot2::ggplot(data = dAIC_table, ggplot2::aes(x = para, y = dAIC, fill = sim)) +
     ggplot2::geom_boxplot(outlier.colour="black", outlier.shape=16, outlier.size=2,
                           notch=FALSE)  +
-    ggplot2::scale_fill_manual(values = c("blue", "green4"), guide = FALSE) +
+    ggplot2::scale_fill_manual(values = sim_color, guide = FALSE) +
     ggplot2::ylim(-8,8) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
   ggplot2::coord_flip()
