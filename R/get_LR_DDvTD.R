@@ -18,7 +18,7 @@ get_LR_DDvTD <- function(sim, para){
     if (any(c(res_DD$loglik[mc], res_TD$loglik[mc]) %in% c(Inf, -Inf, NA, -1) )){
       LR <- c(LR, NA)
     } else {
-      LR <-  c(LR, res_TD$loglik[mc] - res_DD$loglik[mc])
+      LR <-  c(LR, res_DD$loglik[mc] - res_TD$loglik[mc])
     }
   }
   LR
