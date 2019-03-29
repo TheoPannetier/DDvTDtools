@@ -18,15 +18,17 @@
 #' @param save_results logical. Should save the results to \code{outputfile} (default) or not.
 #' @param return_res logical. Should results be returned? Default to \code{FALSE}.
 #' @param jobID is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.
+#' @param num_cycles numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of cycles of optimisation.
 #'
 #' @author Théo Pannetier
 #'
 #' @export
 #'
-run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
-                   rangemc = NULL, methode = "ode45", optimmethod = "subplex",
-                   tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,
-                   jobID = NA
+run_ML <- function(
+  sim, optim, para, custom_pars = NULL, outputfile = NULL,
+  rangemc = NULL, methode = "ode45", optimmethod = "subplex",
+  tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,
+  jobID = NA, num_cycles = 1
 )
 {
   # Check argument values format
@@ -78,7 +80,8 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
         idparsopt = seq_along(init_pars),
         tol = tol,
         methode = methode,
-        optimmethod = optimmethod
+        optimmethod = optimmethod,
+        num_cycles = num_cycles
       ))
     } else if(optim %in% c("TD", "CR")){
       if(optim == "TD"){tdmodel = 4} else {tdmodel = 1}
@@ -89,7 +92,8 @@ run_ML <- function(sim, optim, para, custom_pars = NULL, outputfile = NULL,
         tdmodel = tdmodel,
         tol = tol,
         methode = methode,
-        optimmethod = optimmethod
+        optimmethod = optimmethod,
+        num_cycles = num_cycles
       ))
     }
     if(!is.data.frame(ML_output)){ # default results in case of an error
