@@ -106,7 +106,8 @@ run_ML <- function(
       sim = sim, optim = optim, brts = brts,
       true_pars = true_pars, init_pars = init_pars,
       ML_output = ML_output, methode = methode,
-      optimmethod = optimmethod, jobID = jobID
+      optimmethod = optimmethod, jobID = jobID,
+      num_cycles = num_cycles
     )
 
     results_df <- rbind(results_df, results_row)
