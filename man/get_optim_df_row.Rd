@@ -5,7 +5,7 @@
 \title{Format run_ML optimisation results in a data frame row}
 \usage{
 get_optim_df_row(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-  numCycles = 1, methode, optimmethod, jobID)
+  num_cycles = 1, methode, optimmethod, jobID)
 }
 \description{
 Internal function called only by \code{run_ML}.
