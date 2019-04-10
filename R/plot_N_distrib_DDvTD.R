@@ -2,7 +2,8 @@
 #'
 #' Jointly plots the distribution of the number of tips at present for a pair
 #' of TD and DD trees that share the same parameter set.
-#' @param para numeric or character. A four-digits code specifying a set of parameter values.
+#' @param para numeric or character. A four-digits code specifying a set of
+#' parameter values.
 #'
 #' @author Théo Pannetier
 #' @export
@@ -13,13 +14,13 @@ plot_N_distrib_DDvTD <- function(para){
 
   trees_DD <- get_sim_multiPhylo(sim = "DD", para = para)
   N_distrib <- data.frame(
-    N = numeric(),
-    sim = factor(levels = get_sim_names())
+    "N" = numeric(),
+    "sim" = factor(levels = get_sim_names())
   )
   for(mc in seq_along(trees_DD)){
     row <- data.frame(
-      N = ape::Ntip(trees_DD[[mc]]),
-      sim = factor("DD", levels = get_sim_names())
+      "N" = ape::Ntip(trees_DD[[mc]]),
+      "sim" = factor("DD", levels = get_sim_names())
     )
     N_distrib <- rbind(N_distrib, row)
   }
@@ -27,15 +28,18 @@ plot_N_distrib_DDvTD <- function(para){
   trees_TD <- get_sim_multiPhylo(sim = "TD", para = para)
   for(mc in seq_along(trees_TD)){
     row <- data.frame(
-      N = ape::Ntip(trees_TD[[mc]]),
-      sim = factor("TD", levels = get_sim_names())
+      "N" = ape::Ntip(trees_TD[[mc]]),
+      "sim" = factor("TD", levels = get_sim_names())
     )
     N_distrib <- rbind(N_distrib, row)
   }
 
   # boxplot(N_distrib$N ~ N_distrib$sim)
 
-  gg <- ggplot2::ggplot(data = N_distrib, ggplot2::aes(x = sim, y = N, fill = sim)) +
+  gg <- ggplot2::ggplot(
+    data = N_distrib,
+    ggplot2::aes(x = N_distrib$sim, y = N_distrib$N, fill = N_distrib$sim)
+    ) +
     ggplot2::geom_violin() +
     #ggplot2::geom_boxplot() +
     ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed") +

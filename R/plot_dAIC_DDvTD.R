@@ -1,6 +1,7 @@
 #' Plot dAIC distribution for DD & TD trees
 #'
-#' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.
+#' @param para numeric or character. A four-digits code specifying a set of
+#' parameter values. See \code{get_para_values()} for possible values.
 #'
 #' @author Théo Pannetier
 #'
@@ -27,8 +28,10 @@ plot_dAIC_DDvTD <- function(para){
     dAIC_table <- rbind(dAIC_table, dAIC_subtable)
   }
 
-  gg <- ggplot2::ggplot(data = dAIC_table, ggplot2::aes(x = dAIC, fill = sim)) +
-    ggplot2::geom_density(alpha=.2) +
+  gg <- ggplot2::ggplot(
+    data = dAIC_table, ggplot2::aes(x = dAIC_table$dAIC, fill = dAIC_table$sim)
+  ) +
+    ggplot2::geom_density(alpha = .2) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE)
   #ggplot2::ylim(-8,8) +
   #ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +

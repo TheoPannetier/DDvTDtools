@@ -7,7 +7,8 @@
 plot_dAIC_DDvTD(para)
 }
 \arguments{
-\item{para}{numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.}
+\item{para}{numeric or character. A four-digits code specifying a set of
+parameter values. See \code{get_para_values()} for possible values.}
 }
 \description{
 Plot dAIC distribution for DD & TD trees

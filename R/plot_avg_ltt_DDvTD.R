@@ -14,6 +14,10 @@ plot_avg_ltt_DDvTD <- function(para, with_extinct = FALSE){
   if(!is.logical(with_extinct)){
     stop('with_extinct must be a logical')
   }
+  if (!requireNamespace("TreeSim", quietly = TRUE)) {
+    stop("Package TreeSim is required for this function",
+         call. = FALSE)
+  }
   # Plot average DD ltt
   avg_ltt_DD <- TreeSim::LTT.plot.gen(trees = list(get_sim_multiPhylo("DD", para = para, with_extinct = with_extinct)))[[1]]
   graphics::plot(avg_ltt_DD[which(avg_ltt_DD[,2] >= 2),], type = "l", las = 1, col = "green4", xlab = "", ylab = "")

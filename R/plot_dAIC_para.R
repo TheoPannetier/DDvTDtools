@@ -35,13 +35,19 @@ plot_dAIC_para <- function(sim, para_set){
 
   sim_color <- ifelse(sim == "DD", "green4", "blue")
 
-  gg <- ggplot2::ggplot(data = dAIC_table, ggplot2::aes(x = para, y = dAIC, fill = sim)) +
-    ggplot2::geom_boxplot(outlier.colour="black", outlier.shape=16, outlier.size=2,
-                          notch=FALSE)  +
+  gg <- ggplot2::ggplot(
+    data = dAIC_table,
+    ggplot2::aes(
+      x = dAIC_table$para, y = dAIC_table$dAIC, fill = dAIC_table$sim)
+  ) +
+    ggplot2::geom_boxplot(
+      outlier.colour = "black", outlier.shape = 16, outlier.size = 2,
+      notch = FALSE
+    )  +
     ggplot2::scale_fill_manual(values = sim_color, guide = FALSE) +
     ggplot2::ylim(-8,8) +
     ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
-  ggplot2::coord_flip()
+    ggplot2::coord_flip()
   gg
 
 }

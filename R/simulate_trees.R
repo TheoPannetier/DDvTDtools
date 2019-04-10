@@ -10,7 +10,7 @@
 #' simulation. See \code{parameter_list} for possible values.
 #' @param nbmc Integer. How many trees should be generated?
 #' @param outputfile path and name for output file, by default generated
-#' automatically from \code{sim_model} and \code{para}.
+#' automatically from \code{sim} and \code{para}.
 #' @param save_results logical. Should save the results to \code{outpufile}
 #' (default) or not.
 #' @param return_results logical. Should results be returned? Default to
@@ -27,7 +27,7 @@ simulate_trees <- function(
   sim,
   para,
   nbmc = 1000,
-  outputfile = paste0("./data/sim/sim", sim_model,"-", para,".RData"),
+  outputfile = paste0("./data/sim/sim", sim, "-", para, ".RData"),
   save_results = TRUE,
   return_results = TRUE
   ){
@@ -57,16 +57,16 @@ simulate_trees <- function(
   for(mc in 1:nbmc)
   {
     cat("Simulating tree ", mc, "...\n")
-    if(sim_model == "DD"){
+    if(sim == "DD"){
       trees[[mc]] = DDD::dd_sim(pars[2:4], pars[1])
     } else {
-      trees[[mc]] = DDD::td_sim(pars[2:4], pars[1])
+      trees[[mc]] = DDD:::td_sim(pars[2:4], pars[1])
     }
     if (save_results){
-      save(trees, sim_model, pars, file = outputfile)
+      save(trees, sim, pars, file = outputfile)
     }
   }
-  if (return_res == TRUE){
+  if (return_results == TRUE){
     return(trees)
   }
 }

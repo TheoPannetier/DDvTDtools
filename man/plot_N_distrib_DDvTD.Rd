@@ -7,7 +7,8 @@
 plot_N_distrib_DDvTD(para)
 }
 \arguments{
-\item{para}{numeric or character. A four-digits code specifying a set of parameter values.}
+\item{para}{numeric or character. A four-digits code specifying a set of
+parameter values.}
 }
 \description{
 Jointly plots the distribution of the number of tips at present for a pair

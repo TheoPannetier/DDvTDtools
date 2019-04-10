@@ -1,6 +1,7 @@
 #' Plot logLR distribution for DD & TD trees
 #'
-#' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.
+#' @param para numeric or character. A four-digits code specifying a set of
+#' parameter values. See \code{get_para_values()} for possible values.
 #'
 #' @author Théo Pannetier
 #'
@@ -21,16 +22,18 @@ plot_LR_DDvTD <- function(para){
     LR <- get_LR_DDvTD(sim = sim, para = para)
     LR_subtable <- data.frame(
       LR = LR,
-      para = factor(para,levels = rev(get_para_values()), ordered = TRUE),
+      para = factor(para, levels = rev(get_para_values()), ordered = TRUE),
       sim = factor(sim, levels = get_sim_names(), ordered = TRUE)
     )
     LR_table <- rbind(LR_table, LR_subtable)
   }
 
-  gg <- ggplot2::ggplot(data = LR_table, ggplot2::aes(x = LR, fill = sim)) +
-    ggplot2::geom_density(alpha=.2) +
+  gg <- ggplot2::ggplot(
+    data = LR_table, ggplot2::aes(x = LR_table$LR, fill = LR_table$sim)
+  ) +
+    ggplot2::geom_density(alpha = .2) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
-    ggplot2::xlim(-10,10) +
+    ggplot2::xlim(-10, 10) +
     ggplot2::geom_vline(xintercept = 0, linetype = "dashed") +
     ggplot2::xlab("logL_DD - logL_TD")
   gg

@@ -6,7 +6,7 @@
 diversity-dependent model of diversification.}
 \usage{
 simulate_trees(sim, para, nbmc = 1000,
-  outputfile = paste0("./data/sim/sim", sim_model, "-", para, ".RData"),
+  outputfile = paste0("./data/sim/sim", sim, "-", para, ".RData"),
   save_results = TRUE, return_results = TRUE)
 }
 \arguments{
@@ -19,7 +19,7 @@ simulation. See \code{parameter_list} for possible values.}
 \item{nbmc}{Integer. How many trees should be generated?}
 
 \item{outputfile}{path and name for output file, by default generated
-automatically from \code{sim_model} and \code{para}.}
+automatically from \code{sim} and \code{para}.}
 
 \item{save_results}{logical. Should save the results to \code{outpufile}
 (default) or not.}

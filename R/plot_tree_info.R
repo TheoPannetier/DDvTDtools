@@ -69,7 +69,7 @@ plot_tree_info <- function(sim, para){
     )
     graphics::abline(v = c(49,51))
     # Plot TD ML results
-    text(
+    graphics::text(
       x = rep(70,5),
       y = seq(90,10, by = -20), adj = 0,
       col = "blue", cex = 1.5,
