@@ -7,8 +7,43 @@
 get_optim_df_row(mc, sim, optim, brts, true_pars, init_pars, ML_output,
   num_cycles = 1, methode, optimmethod, jobID)
 }
+\arguments{
+\item{mc}{numeric, the index of the tree on which model \code{optim} was
+fitted.}
+
+\item{sim}{character. The model used to simulate the tree.
+Call \code{get_sim_names} for possible values.}
+
+\item{optim}{character. The model fitted to the tree.
+Call \code{get_optim_names} for possible values.}
+
+\item{brts}{numeric vector. Branching times of the tree, used to compute
+metadata entry \code{ntips}.}
+
+\item{true_pars}{numeric vector. The true parameter values used to simulate
+the tree.}
+
+\item{init_pars}{numeric vector. The initial parameter values used for
+likelihood optimisation.}
+
+\item{ML_output}{numeric vector. Raw output of \code{DDD::dd_loglik} /
+\code{DDD::bd_loglik}.}
+
+\item{num_cycles}{numeric. Maximum number of optimisation cycles.}
+
+\item{methode}{character. Integration methode for computing the likelihood.
+See \code{DDD::dd_loglik} / \code{DDD::bd_loglik} for details.}
+
+\item{optimmethod}{character. Optimisation methode used to compute the
+maximum likelihood. See \code{DDD::dd_ML} / \code{DDD::bd_ML} for details.}
+
+\item{jobID}{the ID number of the cluster job that returned the results.
+Saved in metadata to retrieve logs, for example. A value of \code{NULL} means
+that the result was obtained locally.}
+}
 \description{
-Internal function called only by \code{run_ML}.
+Internal function called by \code{run_ML}. Formats optimisation results and
+metadata in a data frame row.
 }
 \author{
 Théo Pannetier

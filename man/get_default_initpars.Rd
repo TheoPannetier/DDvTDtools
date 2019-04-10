@@ -6,8 +6,33 @@
 \usage{
 get_default_initpars(true_pars, optim, brts)
 }
+\arguments{
+\item{true_pars}{numeric vector. The true parameter values used to simulate
+the trees.}
+
+\item{optim}{character, the model to fit on the tree.
+Call \code{get_optim_names()} for possible values.}
+
+\item{brts}{numeric vector. The branching times for the tree to fit model
+\code{optim} on.}
+}
 \description{
-Internal function called only by \code{run_ML}.
+Returns default initial parameter values used to fit \code{optim} models to
+phylogenies with \code{run_ML}. Called by \code{run_ML} if \code{custom_pars}
+are not provided.
+}
+\details{
+For the DD and TD models, initial parameter values are by default
+set to the true values used to simulate the trees. For thr CR model, la0
+is set to the expected speciation rate, knowing the age, number of tips and
+the extinction rate for the tree. This is computed using equation (15) from
+Kendall (1948) for the expected number of particles over time in a
+constant-rate birth-death process.
+}
+\references{
+Kendall, David G. On the Generalized "Birth-and-Death"
+Process. Ann. Math. Statist. 19 (1948), no. 1, 1--15.
+doi:10.1214/aoms/1177730285
 }
 \author{
 Théo Pannetier

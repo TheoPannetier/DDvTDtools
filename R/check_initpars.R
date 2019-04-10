@@ -1,24 +1,38 @@
 #' Check initial parameter values for run_ML
 #'
-#' Internal function called by \code{run_ML}. The function checks that default
-#' or user-specified values entered to initialize the ML optimisation do not break
-#' forbidden conditions inside \code{DDD::dd_ML()} and \code{DDD::bd_ML()}.
+#' Checks that default or user-specified values entered to initialize the
+#' ML optimisation do not break forbidden conditions inside \code{DDD::dd_ML()}
+#' and \code{DDD::bd_ML()}.
+#'
+#' @param init_pars numeric vector. The initial parameter values to be checked.
+#' @param optim character, the model to fit on the tree.
+#' Call \code{get_optim_names()} for possible values.
+#' @param brts numeric vector. The branching times for the tree to fit model
+#' \code{optim} on.
 #'
 #' @author Théo Pannetier
+#'
+#' @export
 
 check_initpars <- function(init_pars, optim, brts){
-  if(!is.numeric(init_pars)){stop("init_pars() should be a numeric vector.")}
-  if(optim == "CR" & length(init_pars) != 2){stop("init_pars should have length 2")}
-  if(optim %in% c("DD","TD") & length(init_pars) != 3){stop("init_pars should have length 3")}
+  assert_optim(optim)
+  if(!is.numeric(init_pars)){stop("brts should be a numeric vector.")}
+  if(!is.numeric(brts)){stop("init_pars should be a numeric vector.")}
+  if(optim == "CR" & length(init_pars) != 2){
+    stop("init_pars should have length 2")
+    }
+  if(optim %in% c("DD","TD") & length(init_pars) != 3){
+    stop("init_pars should have length 3")
+    }
 
   if(init_pars[1] < 0){ stop("Initial lambda0 has a negative value.") }
   if(init_pars[2] < 0){ stop("Initial mu0 has a negative value.") }
-  if(init_pars[1] <= init_pars[2] ){
+  if(init_pars[1] <= init_pars[2]){
     init_pars[1] <- init_pars[2] * 1.1
     cat(paste("lambda0 was step up to ", init_pars[1], "\n"))
   }
 
-  if(optim  %in% c("DD","TD")){
+  if(optim %in% c("DD","TD")){
 
     if(init_pars[3] < 1){ stop("Initial K must be greater than 1.")}
 

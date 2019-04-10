@@ -6,10 +6,19 @@
 \usage{
 check_initpars(init_pars, optim, brts)
 }
+\arguments{
+\item{init_pars}{numeric vector. The initial parameter values to be checked.}
+
+\item{optim}{character, the model to fit on the tree.
+Call \code{get_optim_names()} for possible values.}
+
+\item{brts}{numeric vector. The branching times for the tree to fit model
+\code{optim} on.}
+}
 \description{
-Internal function called by \code{run_ML}. The function checks that default
-or user-specified values entered to initialize the ML optimisation do not break
-forbidden conditions inside \code{DDD::dd_ML()} and \code{DDD::bd_ML()}.
+Checks that default or user-specified values entered to initialize the
+ML optimisation do not break forbidden conditions inside \code{DDD::dd_ML()}
+and \code{DDD::bd_ML()}.
 }
 \author{
 Théo Pannetier

@@ -1,8 +1,30 @@
 #' Get default initial parameter values for run_ML optimisation
 #'
-#' Internal function called only by \code{run_ML}.
+#' Returns default initial parameter values used to fit \code{optim} models to
+#' phylogenies with \code{run_ML}. Called by \code{run_ML} if \code{custom_pars}
+#' are not provided.
+#'
+#' @param true_pars numeric vector. The true parameter values used to simulate
+#' the trees.
+#' @param optim character, the model to fit on the tree.
+#' Call \code{get_optim_names()} for possible values.
+#' @param brts numeric vector. The branching times for the tree to fit model
+#' \code{optim} on.
+#'
+#' @details For the DD and TD models, initial parameter values are by default
+#' set to the true values used to simulate the trees. For thr CR model, la0
+#' is set to the expected speciation rate, knowing the age, number of tips and
+#' the extinction rate for the tree. This is computed using equation (15) from
+#' Kendall (1948) for the expected number of particles over time in a
+#' constant-rate birth-death process.
+#'
+#' @references Kendall, David G. On the Generalized "Birth-and-Death"
+#' Process. Ann. Math. Statist. 19 (1948), no. 1, 1--15.
+#' doi:10.1214/aoms/1177730285
 #'
 #' @author Théo Pannetier
+#'
+#' @export
 
 get_default_initpars <- function(true_pars, optim, brts){
   assert_optim(optim)
