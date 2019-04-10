@@ -7,7 +7,7 @@
 count_errors(log_filename)
 }
 \arguments{
-\item{log_file}{a log file to search the errors in. Can be a \code{.txt} or
+\item{log_filename}{a log file to search the errors in. Can be a \code{.txt} or
 \code{.log} file.}
 }
 \value{

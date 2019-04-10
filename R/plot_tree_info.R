@@ -31,9 +31,9 @@ plot_tree_info <- function(sim, para){
 
   Age <- para_to_pars(para)[1]
 
-  pdf(paste0("figures/trees_info_s", sim, "_", para ,".pdf"))
-  par(mar = c(2,2,2,2))
-  layout(matrix(c(1,2,3,3), nrow = 2, ncol = 2, byrow = T))
+  grDevices::pdf(paste0("figures/trees_info_s", sim, "_", para ,".pdf"))
+  graphics::par(mar = c(2,2,2,2))
+  graphics::layout(matrix(c(1,2,3,3), nrow = 2, ncol = 2, byrow = T))
 
   for(mc in seq_along(trees)){
 
@@ -50,12 +50,12 @@ plot_tree_info <- function(sim, para){
       main = paste("Age =", Age, " N =", N)
     )
     # Blank plot to put text on
-    plot(
+    graphics::plot(
       1:100, 1:100, type = "n", xlab = "", ylab = "", xaxt = "n", yaxt = "n",
       bty = "n"
     )
     # Plot DD ML results
-    text(
+    graphics::text(
       x = rep(10,5),
       y = seq(90,10, by = -20), adj = 0,
       col = "green4", cex = 1.5,
@@ -67,7 +67,7 @@ plot_tree_info <- function(sim, para){
         paste("K =",   round(res_DD$K_ML[mc], 2))
       )
     )
-    abline(v = c(49,51))
+    graphics::abline(v = c(49,51))
     # Plot TD ML results
     text(
       x = rep(70,5),
@@ -84,9 +84,9 @@ plot_tree_info <- function(sim, para){
 
   }
 
-  dev.off()
+  grDevices::dev.off()
 
   #avg_ltt <- TreeSim::LTT.plot.gen(trees = list(trees))[[1]]
-  #plot(avg_ltt[which(avg_ltt[,2] >= 2),], type = "l", las = 1, xlab = "", ylab = "")
-  #lines(ape::ltt.plot.coords(phy = trees[[mc]]))
+  #graphics::plot(avg_ltt[which(avg_ltt[,2] >= 2),], type = "l", las = 1, xlab = "", ylab = "")
+  #graphics::lines(ape::ltt.plot.coords(phy = trees[[mc]]))
 }

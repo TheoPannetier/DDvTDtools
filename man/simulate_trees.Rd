@@ -2,30 +2,38 @@
 % Please edit documentation in R/simulate_trees.R
 \name{simulate_trees}
 \alias{simulate_trees}
-\title{Simulate a set of phylogenetic trees under a time-dependent or diversity-dependent model of diversification.}
+\title{Simulate a set of phylogenetic trees under a time-dependent or
+diversity-dependent model of diversification.}
 \usage{
-simulate_trees(sim_model, para, nbmc = 1000,
+simulate_trees(sim, para, nbmc = 1000,
   outputfile = paste0("./data/sim/sim", sim_model, "-", para, ".RData"),
-  save_results = T, return_res = T)
+  save_results = TRUE, return_results = TRUE)
 }
 \arguments{
-\item{sim_model}{a character used to select the model, can be either 'DD' or 'TD4.}
+\item{sim}{a character used to select the model, can be either 'DD' or
+'TD'.}
 
-\item{para}{a 4-digit code used to set the parameter values used for the simulation. See \code{parameter_list} for possible values.}
+\item{para}{a 4-digit code used to set the parameter values used for the
+simulation. See \code{parameter_list} for possible values.}
 
 \item{nbmc}{Integer. How many trees should be generated?}
 
-\item{outputfile}{path and name for output file, by default generated automatically from \code{sim_model} and \code{para}.}
+\item{outputfile}{path and name for output file, by default generated
+automatically from \code{sim_model} and \code{para}.}
 
-\item{save_results}{logical. Should save the results to \code{outpufile} (default) or not.}
+\item{save_results}{logical. Should save the results to \code{outpufile}
+(default) or not.}
 
-\item{return_res}{logical. Should results be returned? Default to \code{TRUE}.}
+\item{return_results}{logical. Should results be returned? Default to
+\code{TRUE}.}
 }
 \value{
-A \code{list} containing itself \code{nbmc} lists corresponding a simulated trees. See \code{DDD:dd_sim} for the content of these lists.
+A \code{list} containing itself \code{nbmc} lists corresponding a
+simulated trees. See \code{DDD:dd_sim} for the content of these lists.
 }
 \description{
-Reads a model name and coded parameter input to simulate a dataset of a number of simulated phylogenetic trees.
+Reads a model name and coded parameter input to simulate a dataset of a
+number of simulated phylogenetic trees.
 }
 \author{
 Cesar Martinez and Theo Pannetier
