@@ -31,10 +31,9 @@ plot_dAIC_DDvTD <- function(para){
   gg <- ggplot2::ggplot(
     data = dAIC_table, ggplot2::aes(x = dAIC_table$dAIC, fill = dAIC_table$sim)
   ) +
-    ggplot2::geom_density(alpha = .2) +
+    ggplot2::geom_density(alpha = 0.2) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE)
   #ggplot2::ylim(-8,8) +
   #ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
   gg
 }
-

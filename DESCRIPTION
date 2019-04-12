@@ -12,7 +12,8 @@ License: GPL-3
 Encoding: UTF-8
 Imports:
     DDD,
-    ape
+    ape,
+    ggplot2
 Suggests:
     TreeSim,
     testthat

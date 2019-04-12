@@ -60,7 +60,7 @@ simulate_trees <- function(
     if(sim == "DD"){
       trees[[mc]] = DDD::dd_sim(pars[2:4], pars[1])
     } else {
-      trees[[mc]] = DDD:::td_sim(pars[2:4], pars[1])
+      trees[[mc]] = DDD::td_sim(pars[2:4], pars[1])
     }
     if (save_results){
       save(trees, sim, pars, file = outputfile)

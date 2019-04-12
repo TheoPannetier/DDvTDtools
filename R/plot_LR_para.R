@@ -52,5 +52,4 @@ plot_LR_para <- function(sim, para_set){
     ggplot2::xlab("logL_DD - logL_TD")
 
   gg
-
 }
