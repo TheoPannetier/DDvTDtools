@@ -4,20 +4,18 @@
 \alias{get_likelihood_along_K}
 \title{Compute the likelihood landscape along the K-axis}
 \usage{
-get_likelihood_along_K(sim, optim, para, mc, lambda0, mu0,
-  K_seq = seq(10, 1000, by = 10))
+get_likelihood_along_K(optim, brts, lambda0, mu0, K_seq = seq(10, 1000,
+  by = 10))
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See
-\code{get_sim_names()} for possible values.}
-
 \item{optim}{character. The name of the model to fit to the simulated
-phylogenies. See \code{get_optim_names()} for possible inputs.}
+phylogenies, either "DD" or "TD".}
 
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values. See \code{get_para_values()}}
+\item{brts}{numeric vector, a set of branching times.}
 
-\item{mc}{numeric. The index of the tree to return branching times from.}
+\item{lambda0}{numeric. A (fixed) value for the speciation rate.}
+
+\item{mu0}{numeric. A (fixed) value for the extinction rate.}
 
 \item{K_seq}{numeric vector, the values of parameter K to return values for.}
 }
