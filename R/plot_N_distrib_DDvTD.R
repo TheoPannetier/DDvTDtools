@@ -11,7 +11,7 @@
 plot_N_distrib_DDvTD <- function(para){
   assert_DDvTD_wd()
   assert_para(para)
-
+  
   trees_DD <- get_sim_multiPhylo(sim = "DD", para = para)
   N_distrib <- data.frame(
     "N" = numeric(),
@@ -24,7 +24,7 @@ plot_N_distrib_DDvTD <- function(para){
     )
     N_distrib <- rbind(N_distrib, row)
   }
-
+  
   trees_TD <- get_sim_multiPhylo(sim = "TD", para = para)
   for(mc in seq_along(trees_TD)){
     row <- data.frame(
@@ -33,20 +33,22 @@ plot_N_distrib_DDvTD <- function(para){
     )
     N_distrib <- rbind(N_distrib, row)
   }
-
+  
   # boxplot(N_distrib$N ~ N_distrib$sim)
-
+  
   gg <- ggplot2::ggplot(
     data = N_distrib,
     ggplot2::aes(x = N_distrib$sim, y = N_distrib$N, fill = N_distrib$sim)
-    ) +
-    ggplot2::geom_violin() +
-    #ggplot2::geom_boxplot() +
+  ) +
+    ggplot2::geom_violin(scale = "width") +
     ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"),  guide = FALSE) +
-    ggplot2::theme(axis.title.x = ggplot2::element_blank())
-
+    ggplot2::labs(
+      x = ggplot2::element_blank(), y = "N",
+      title = paste("para =", para)
+    )
   gg
+  
   # ggtitle("DAISIE extintion rate estimates in ontogeny \nand null-ontogeny scenarios")  +
   #   ylab("Extinction rate estimates (log transformed)") +
   #   xlab(element_blank()) +
