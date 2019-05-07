@@ -21,7 +21,7 @@ plot_n_distrib <- function(para) {
   )
   n_distrib <- rbind(n_distrib_DD, n_distrib_TD)
 
-  n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(x = sim, y = N, fill = sim)) +
+  n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(x = n_distrib$sim, y = n_distrib$N, fill = n_distrib$sim)) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed")

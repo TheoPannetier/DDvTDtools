@@ -1,5 +1,7 @@
-# Return the average number of lineage over time for a dataset
-#
+#' Return the average number of lineage over time for a dataset
+#'
+#' Returns the average number of lineage over time for a dataset
+#'
 #' @param sim name of the model used to simulate the trees. See \code{get_sim_names()}
 #' @param para numeric or character. A four-digits code specifying a set of
 #' parameter values.

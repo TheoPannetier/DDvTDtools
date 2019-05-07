@@ -31,7 +31,7 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
 
   avg_ltt_plot <- ggplot2::ggplot(
     avg_ltt,
-    ggplot2::aes(x = Time, y = avg_N, color = sim)
+    ggplot2::aes(x = avg_ltt$Time, y = avg_ltt$avg_N, color = avg_ltt$sim)
   ) +
     ggplot2::geom_line() +
     ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
