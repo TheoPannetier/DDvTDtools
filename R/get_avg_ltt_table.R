@@ -26,7 +26,7 @@ get_avg_ltt_table <- function(sim, para, with_extinct = FALSE) {
     with_extinct = with_extinct
     )
   avg_ltt_matrix <- TreeSim::LTT.plot.gen(trees = list(phylos))[[1]]
-  avg_ltt <- tibble(
+  avg_ltt <- dplyr::tibble(
     "Time" = as.numeric(avg_ltt_matrix[,1]),
     "avg_N" = as.numeric(avg_ltt_matrix[,2]),
     "sim" = factor(sim, levels = get_sim_names())

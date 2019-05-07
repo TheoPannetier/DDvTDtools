@@ -13,7 +13,7 @@ Encoding: UTF-8
 Imports:
     DDD,
     ape,
-    ggplot2
+    tidyverse
 Suggests:
     TreeSim,
     testthat
