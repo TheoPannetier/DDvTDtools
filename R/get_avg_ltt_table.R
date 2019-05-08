@@ -22,29 +22,26 @@ get_avg_ltt_table <- function(sim, para, with_extinct = FALSE) {
     stop("Package TreeSim is required for this function",
          call. = FALSE)
   }
+
   phylos <- get_sim_multiPhylo(
     sim = sim,
     para = para,
     with_extinct = with_extinct
     )
+  crown_age <- para_to_pars(para)[1]
+
   avg_ltt_matrix <- TreeSim::LTT.plot.gen(trees = list(phylos))[[1]]
   avg_ltt <- dplyr::tibble(
-    "Time" = as.numeric(avg_ltt_matrix[,1]),
-    "avg_N" = as.numeric(avg_ltt_matrix[,2]),
+    "raw_time" = as.numeric(avg_ltt_matrix[,1]),
+    "raw_avg_n" = as.numeric(avg_ltt_matrix[,2]),
     "sim" = factor(sim, levels = get_sim_names())
-  )
-  crown_n <- which(round(avg_ltt$Time, digits = 6) == -para_to_pars(para)[1])
-  avg_ltt <- avg_ltt[-crown_n,]
-
-  # Alternative with tidyverse (/!\ Results erroneous)
-  # phylo_list <- DDvTDtools::get_sim_multiPhylo(sim, para)
-  #
-  # ltt_coords <- purrr::map(
-  #   phylo_list,
-  #   function (x) {make_tibble_ltt(x)}
-  # ) %>%
-  #   bind_rows() %>%
-  #   mutate(time_round = plyr::round_any(time, 0.0001)) %>%
-  #   group_by(time_round) %>%
-  #   summarise(N_mean = mean(N), N_variance = var(N))
+  ) %>%
+    # points from 0 to 2 tips (crown) are irrelevant
+    dplyr::filter(round(raw_time, digits = 6) != -crown_age) %>%
+    dplyr::bind_rows() %>%
+    # needs to lighten the data frame by binning points
+    dplyr::mutate(time = plyr::round_any(raw_time, 0.01)) %>%
+    dplyr::group_by(time, sim) %>%
+    dplyr::summarise(avg_n = mean(raw_avg_n))
+  avg_ltt
 }
