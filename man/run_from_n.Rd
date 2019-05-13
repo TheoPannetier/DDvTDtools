@@ -11,7 +11,8 @@ run_from_n(sim, optim, para, rangemc = NULL, methode = "ode45",
 \arguments{
 \item{sim}{character, the simulation model. Call \code{get_sim_names()} for a list of possible values.}
 
-\item{optim}{character. The name of the model to fit to the simulated phylogenies. See \code{get_optim_names()} for possible inputs.}
+\item{optim}{character. The name of the model to fit to the simulated phylogenies. See \code{get_optim_names()} for possible inputs.
+If \code{NULL} (default), values are initialized using true values used to simulate the trees.}
 
 \item{para}{character or numeric, the code specifying the parameter values used in the simulation.
 Call \code{get_para_values()} for possible inputs, and \code{para_to_pars()} for the corresponding parameter values.}
@@ -27,16 +28,6 @@ Call \code{get_para_values()} for possible inputs, and \code{para_to_pars()} for
 \item{jobID}{is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.}
 
 \item{num_cycles}{numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of cycles of optimisation.}
-
-\item{custom_pars}{numeric vector, user-specified initial values for the parameters to be optimized.
-If \code{NULL} (default), values are initialized using true values used to simulate the trees.}
-
-\item{outputfile}{character, the name of the file to save the output data frame in.
-Must be specified if \code{save_results = TRUE}.}
-
-\item{save_results}{logical. Should save the results to \code{outputfile} (default) or not.}
-
-\item{return_res}{logical. Should results be returned? Default to \code{FALSE}.}
 }
 \description{
 \code{run_from_n} is simply a wrapper of \code{run_ML} where K is initialized
