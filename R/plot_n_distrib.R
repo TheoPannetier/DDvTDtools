@@ -24,6 +24,10 @@ plot_n_distrib <- function(para) {
   n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(x = n_distrib$sim, y = n_distrib$N, fill = n_distrib$sim)) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
+    ggplot2::theme(
+      axis.title.y = ggplot2::element_text(angle = 180, vjust = 0.5),
+      axis.title.x = ggplot2::element_blank()) +
+    ggplot2::labs(y = "N")
     ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed")
  n_plot
 

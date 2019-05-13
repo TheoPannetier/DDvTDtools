@@ -35,8 +35,9 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
   ) +
     ggplot2::geom_line() +
     ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
-    ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed") +
-    ggplot2::coord_cartesian(ylim = c(0, max(avg_ltt$avg_n))) +
+    ggplot2::geom_hline(yintercept = 40, color = "grey60", linetype = "dashed") +
+    ggplot2::theme(axis.title.y = ggplot2::element_text(angle = 180, vjust = 0.5)) +
+    #ggplot2::coord_cartesian(ylim = c(0, max(avg_ltt$avg_n))) +
     ggplot2::labs(x = "Time", y = "N")
   avg_ltt_plot
 }
