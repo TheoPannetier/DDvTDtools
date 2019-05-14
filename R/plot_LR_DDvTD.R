@@ -2,14 +2,17 @@
 #'
 #' @param para numeric or character. A four-digits code specifying a set of
 #' parameter values. See \code{get_para_values()} for possible values.
-#'
+#' @param init_k character, the setting used to initialise parameter K.
+#' See \code{get_possible_init_k()} for possible values.
+##'
 #' @author Théo Pannetier
 #'
 #' @export
 
-plot_LR_DDvTD <- function(para){
+plot_LR_DDvTD <- function(para, init_k = "true_k"){
   assert_DDvTD_wd()
   assert_para(para)
+  assert_init_k(init_k)
 
   LR_table <- data.frame(
     LR = numeric(),
@@ -19,7 +22,7 @@ plot_LR_DDvTD <- function(para){
 
   for(sim in get_sim_names()){
 
-    LR <- get_LR_DDvTD(sim = sim, para = para)
+    LR <- get_LR_DDvTD(sim = sim, para = para, init_k = init_k)
     LR_subtable <- data.frame(
       LR = LR,
       para = factor(para, levels = rev(get_para_values()), ordered = TRUE),

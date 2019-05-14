@@ -4,11 +4,14 @@
 \alias{plot_LR_DDvTD}
 \title{Plot logLR distribution for DD & TD trees}
 \usage{
-plot_LR_DDvTD(para)
+plot_LR_DDvTD(para, init_k = "true_k")
 }
 \arguments{
 \item{para}{numeric or character. A four-digits code specifying a set of
 parameter values. See \code{get_para_values()} for possible values.}
+
+\item{init_k}{character, the setting used to initialise parameter K.
+See \code{get_possible_init_k()} for possible values.}
 }
 \description{
 Plot logLR distribution for DD & TD trees

@@ -4,17 +4,24 @@
 \alias{read_optim_table}
 \title{Access a table with model fitting results}
 \usage{
-read_optim_table(sim, optim, para)
+read_optim_table(sim, optim, para, init_k = "true_k")
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
+\item{sim}{name of the model used to simulate the trees.
+See \code{get_sim_names()}}
 
-\item{optim}{name of the model fitted to the simulated trees. See \code{get_optim_names()}}
+\item{optim}{name of the model fitted to the simulated trees.
+See \code{get_optim_names()}}
 
-\item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
+\item{para}{four-digit-character specifying the parameters used to
+simulate the trees. See \code{get_para_values}.}
+
+\item{init_k}{character, the setting used to initialise parameter K.
+See \code{get_possible_init_k()} for possible values.}
 }
 \description{
-The function will go fetch the data frame corresponding to the arguments and return it.
+The function will go fetch the data frame corresponding to the arguments and
+return it.
 }
 \author{
 Theo Pannetier

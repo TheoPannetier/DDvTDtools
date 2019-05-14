@@ -4,12 +4,16 @@
 \alias{get_LR_DDvTD}
 \title{Compute logL_DD - logL_TD for a set of trees}
 \usage{
-get_LR_DDvTD(sim, para)
+get_LR_DDvTD(sim, para, init_k = "true_k")
 }
 \arguments{
 \item{sim}{character. The name of a simulation model}
 
-\item{para}{numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.}
+\item{para}{numeric or character. A four-digits code specifying a set of
+parameter values. See \code{get_para_values()} for possible values.}
+
+\item{init_k}{character, the setting used to initialise parameter K.
+See \code{get_possible_init_k()} for possible values.}
 }
 \description{
 Compute logL_DD - logL_TD for a set of trees
