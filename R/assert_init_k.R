@@ -7,7 +7,7 @@
 #'
 #' @export
 
-assert_init <- function(init_k) {
+assert_init_k <- function(init_k) {
   if(!init_k %in% get_possible_init_k()) {
     stop(
       "Input init is incorrect. Call get_possible_init_k() for accepted values"

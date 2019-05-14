@@ -2,7 +2,7 @@
 
 export(assemble_landscape_data)
 export(assert_DDvTD_wd)
-export(assert_init)
+export(assert_init_k)
 export(assert_optim)
 export(assert_para)
 export(assert_sim)
