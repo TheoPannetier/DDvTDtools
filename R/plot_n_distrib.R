@@ -27,8 +27,8 @@ plot_n_distrib <- function(para) {
     ggplot2::theme(
       axis.title.y = ggplot2::element_text(angle = 180, vjust = 0.5),
       axis.title.x = ggplot2::element_blank()) +
-    ggplot2::labs(y = "N")
-    ggplot2::geom_hline(yintercept = 40, color = "red", linetype = "dashed")
+    ggplot2::labs(y = "N") +
+    ggplot2::geom_hline(yintercept = 40, color = "grey50", linetype = "dashed")
  n_plot
 
  # Distribution plot
