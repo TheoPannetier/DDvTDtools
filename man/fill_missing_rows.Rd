@@ -4,15 +4,14 @@
 \alias{fill_missing_rows}
 \title{Fill missing results row with default values}
 \usage{
-fill_missing_rows(sim, optim, para)
+fill_missing_rows(df, para)
 }
 \arguments{
-\item{sim}{character. The model used to simulate the tree.}
-
-\item{optim}{character. The model fitted to the tree.}
+\item{df}{a results data frame, i.e. as read by
+\code{DDvTDtools::read_optim_table()}}
 
 \item{para}{numeric or character. A four-digits code specifying a set of
-parameter values. See \code{get_para_values()} for possible values.}
+parameter values.}
 }
 \description{
 Function used to fill result data for trees that miss any result.
