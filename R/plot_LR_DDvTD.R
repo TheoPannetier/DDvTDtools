@@ -36,8 +36,15 @@ plot_LR_DDvTD <- function(para, init_k = "true_k"){
   ) +
     ggplot2::geom_density(alpha = 0.2) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
-    ggplot2::xlim(-10, 10) +
+    ggplot2::xlim(min(-5, min(LR)) , max(10, max(LR))) +
     ggplot2::geom_vline(xintercept = 0, linetype = "dashed") +
-    ggplot2::xlab("logL_DD - logL_TD")
+    ggplot2::labs(
+      title = bquote(
+        "Age"       ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
+        lambda[0]   ~ "=" ~ .(DDvTDtools::para_to_pars(para)[2]) ~ " " ~
+        mu[0]       ~ "=" ~ .(DDvTDtools::para_to_pars(para)[3])
+      ),
+      x = "loglik(DD/TD)"
+    )
   gg
 }
