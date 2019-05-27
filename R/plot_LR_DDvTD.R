@@ -15,7 +15,7 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
   assert_DDvTD_wd()
   assert_para(para)
   assert_init_k(init_k)
-  if(!which_geom %in% c("density", "histograms")) {
+  if(!which_geom %in% c("density", "histogram")) {
     stop("invalid input - which_geom options are 'density' or 'histogram'")
   }
 
@@ -25,7 +25,7 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
     sim = factor(levels = get_sim_names(), ordered = TRUE)
   )
 
-  for(sim in get_sim_names()){
+  for (sim in get_sim_names()) {
 
     LR <- get_LR_DDvTD(sim = sim, para = para, init_k = init_k)
     LR_subtable <- data.frame(
@@ -37,7 +37,7 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
   }
 
   title = bquote(
-    "Age"       ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
+    "Age"         ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
       lambda[0]   ~ "=" ~ .(DDvTDtools::para_to_pars(para)[2]) ~ " " ~
       mu[0]       ~ "=" ~ .(DDvTDtools::para_to_pars(para)[3])
   )
@@ -59,17 +59,25 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
     )
   } else {
     gg <- gg + ggplot2::geom_histogram(
-      data = subset(LR_table, sim == "DD"),
       ggplot2::aes(x = LR, fill = sim),
-      alpha = 0.2,
-      binwidth = 1
-    ) +
-      ggplot2::geom_histogram(
-        data = subset(LR_table, sim == "TD"),
-        ggplot2::aes(x = LR, fill = sim),
-        alpha = 0.2,
-        binwidth = 1
-      )
+      position = "dodge",
+      binwidth = 0.5,
+      alpha = 0.5
+
+    )
   }
+  #   gg <- gg + ggplot2::geom_histogram(
+  #     data = subset(LR_table, sim == "DD"),
+  #     ggplot2::aes(x = LR, fill = sim),
+  #     alpha = 0.2,
+  #     binwidth = 0.2
+  #   ) +
+  #     ggplot2::geom_histogram(
+  #       data = subset(LR_table, sim == "TD"),
+  #       ggplot2::aes(x = LR, fill = sim),
+  #       alpha = 0.2,
+  #       binwidth = 0.2
+  #     )
+  # }
   gg
 }
