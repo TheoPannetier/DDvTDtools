@@ -11,7 +11,7 @@
 #'
 #' @export
 
-plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
+plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "histogram"){
   assert_DDvTD_wd()
   assert_para(para)
   assert_init_k(init_k)
@@ -37,9 +37,9 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
   }
 
   title = bquote(
-    "Age"         ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
-      lambda[0]   ~ "=" ~ .(DDvTDtools::para_to_pars(para)[2]) ~ " " ~
-      mu[0]       ~ "=" ~ .(DDvTDtools::para_to_pars(para)[3])
+   "Age"     ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
+   lambda[0] ~ "=" ~ .(DDvTDtools::para_to_pars(para)[2]) ~ " " ~
+   mu[0]     ~ "=" ~ .(DDvTDtools::para_to_pars(para)[3])
   )
 
   gg <- ggplot2::ggplot(
@@ -55,15 +55,15 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
   if (which_geom == "density") {
     gg <- gg +  ggplot2::geom_density(
       ggplot2::aes(x = LR, fill = sim),
-      alpha = 0.2
+      alpha = 0.2#,
+      #bw = 0.15
     )
   } else {
     gg <- gg + ggplot2::geom_histogram(
       ggplot2::aes(x = LR, fill = sim),
-      position = "dodge",
+      position = "dodge2",
       binwidth = 0.5,
       alpha = 0.5
-
     )
   }
   #   gg <- gg + ggplot2::geom_histogram(
@@ -79,5 +79,5 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "density"){
   #       binwidth = 0.2
   #     )
   # }
-  gg
+  gg + plot_quantiles(df = LR_table, which_dd = 0.05, which_td = 0.95)
 }

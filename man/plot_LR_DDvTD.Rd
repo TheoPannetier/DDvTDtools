@@ -4,7 +4,7 @@
 \alias{plot_LR_DDvTD}
 \title{Plot logLR distribution for DD & TD trees}
 \usage{
-plot_LR_DDvTD(para, init_k = "true_k", which_geom = "density")
+plot_LR_DDvTD(para, init_k = "true_k", which_geom = "histogram")
 }
 \arguments{
 \item{para}{numeric or character. A four-digits code specifying a set of
