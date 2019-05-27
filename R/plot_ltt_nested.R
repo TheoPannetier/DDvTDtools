@@ -17,8 +17,8 @@ plot_ltt_nested <- function(para) {
   ltt <- plot_avg_ltt(para) +
     ggplot2::labs(
       title = bquote(
-        "Age"     ~ "="  ~ .(crown_age) ~ " " ~
-        lambda[0] ~ "="  ~ .(lambda)    ~ " " ~
+        "Age"     ~ "="  ~ .(crown_age) ~
+        lambda[0] ~ "="  ~ .(lambda)    ~
         mu[0]     ~ "="  ~ .(mu)
       ))
   ltt_nested <- ltt + annotation_custom(
