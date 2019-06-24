@@ -62,8 +62,7 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "histogram"){
     gg <- gg + ggplot2::geom_histogram(
       ggplot2::aes(x = LR, fill = sim),
       position = "dodge2",
-      binwidth = 0.5,
-      alpha = 0.5
+      binwidth = 0.5
     )
   }
   #   gg <- gg + ggplot2::geom_histogram(
