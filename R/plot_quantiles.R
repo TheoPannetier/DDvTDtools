@@ -4,17 +4,21 @@
 #' plot
 #'
 #' @param df data frame containing the data, as passed from \code{plot_LR_DDvTD}
-#' @param quantile_dd numeric,
+#' @param which_dd numeric, which quantiles to plot for dd.
+#' @param which_td numeric, which quantiles to plot for td.
 
-
-plot_quantiles <- function(df, which_dd = 0.05, which_td = 0.95) {
+plot_quantiles <- function(df,
+                           which_dd = c(0.05, 0.95),
+                           which_td = c(0.05, 0.95)
+                           ) {
 
   quantile_dd <- df %>%
     subset(sim == "DD", select = LR) %>%
     quantile(df$LR, probs = which_dd, na.rm = TRUE)
   quantile_dd <- ggplot2::geom_vline(
     xintercept = quantile_dd,
-    color = "green4"
+    color = "green4",
+    alpha = 0.5
     )
 
   quantile_td <- df %>%
@@ -22,7 +26,8 @@ plot_quantiles <- function(df, which_dd = 0.05, which_td = 0.95) {
     quantile(df$LR, probs = which_td, na.rm = TRUE)
   quantile_td <- ggplot2::geom_vline(
     xintercept = quantile_td,
-    color = "blue"
+    color = "blue",
+    alpha = 0.5
   )
 
   return(c(quantile_dd, quantile_td))

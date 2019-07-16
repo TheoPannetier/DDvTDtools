@@ -4,7 +4,8 @@
 \alias{plot_LR_DDvTD}
 \title{Plot logLR distribution for DD & TD trees}
 \usage{
-plot_LR_DDvTD(para, init_k = "true_k", which_geom = "histogram")
+plot_LR_DDvTD(para, init_k = "true_k", quantiles_dd = c(0, 0.95),
+  quantiles_td = c(0, 0.95), which_geom = "histogram")
 }
 \arguments{
 \item{para}{numeric or character. A four-digits code specifying a set of
@@ -12,6 +13,12 @@ parameter values. See \code{get_para_values()} for possible values.}
 
 \item{init_k}{character, the setting used to initialise parameter K.
 See \code{get_possible_init_k()} for possible values.}
+
+\item{quantiles_dd}{numeric, quantiles of the lr distribution that should be
+added to the plot.}
+
+\item{quantiles_td}{numeric, quantiles of the lr distribution that should be
+added to the plot.}
 
 \item{which_geom}{character giving the type of plot to be drawn. Options are
 \code{"density"} and \code{"histograms"}.}

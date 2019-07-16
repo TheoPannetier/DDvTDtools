@@ -4,12 +4,14 @@
 \alias{plot_quantiles}
 \title{Add quantile bars to logLR distribution plot}
 \usage{
-plot_quantiles(df, which_dd = 0.05, which_td = 0.95)
+plot_quantiles(df, which_dd = c(0.05, 0.95), which_td = c(0.05, 0.95))
 }
 \arguments{
 \item{df}{data frame containing the data, as passed from \code{plot_LR_DDvTD}}
 
-\item{quantile_dd}{numeric,}
+\item{which_dd}{numeric, which quantiles to plot for dd.}
+
+\item{which_td}{numeric, which quantiles to plot for td.}
 }
 \description{
 Extracts quantiles from the loglik ratios distribution and add them to the

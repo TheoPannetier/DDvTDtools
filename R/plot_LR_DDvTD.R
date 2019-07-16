@@ -4,6 +4,10 @@
 #' parameter values. See \code{get_para_values()} for possible values.
 #' @param init_k character, the setting used to initialise parameter K.
 #' See \code{get_possible_init_k()} for possible values.
+#' @param quantiles_dd numeric, quantiles of the lr distribution that should be
+#' added to the plot.
+#' @param quantiles_td numeric, quantiles of the lr distribution that should be
+#' added to the plot.
 #' @param which_geom character giving the type of plot to be drawn. Options are
 #' \code{"density"} and \code{"histograms"}.
 #'
@@ -11,12 +15,19 @@
 #'
 #' @export
 
-plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "histogram"){
+plot_LR_DDvTD <- function(para,
+                          init_k = "true_k",
+                          quantiles_dd = c(0.0, 0.95),
+                          quantiles_td = c(0.0, 0.95),
+                          which_geom = "histogram"){
   assert_DDvTD_wd()
   assert_para(para)
   assert_init_k(init_k)
   if(!which_geom %in% c("density", "histogram")) {
     stop("invalid input - which_geom options are 'density' or 'histogram'")
+  }
+  if(!is.numeric(quantiles_dd) | !is.numeric(quantiles_dd)) {
+    stop("invalid input - quantiles_dd and quantiles_td must be numeric")
   }
 
   LR_table <- data.frame(
@@ -65,18 +76,9 @@ plot_LR_DDvTD <- function(para, init_k = "true_k", which_geom = "histogram"){
       binwidth = 0.5
     )
   }
-  #   gg <- gg + ggplot2::geom_histogram(
-  #     data = subset(LR_table, sim == "DD"),
-  #     ggplot2::aes(x = LR, fill = sim),
-  #     alpha = 0.2,
-  #     binwidth = 0.2
-  #   ) +
-  #     ggplot2::geom_histogram(
-  #       data = subset(LR_table, sim == "TD"),
-  #       ggplot2::aes(x = LR, fill = sim),
-  #       alpha = 0.2,
-  #       binwidth = 0.2
-  #     )
-  # }
-  gg + plot_quantiles(df = LR_table, which_dd = 0.05, which_td = 0.95)
+  gg + plot_quantiles(
+    df = LR_table,
+    which_dd = quantiles_dd,
+    which_td = quantiles_td
+    )
 }
