@@ -13,7 +13,7 @@ fit_td_setophaga(lambda_ini, mu_ini, k_ini, outputfile)
 
 \item{k_ini}{numeric, the initial value for parameter K}
 
-\item{outptufile}{character. Name of the outputfilen should be a .rds}
+\item{outputfile}{character. Name of the outputfile should be a .rds}
 }
 \description{
 Run the maximum likelihood of the time-dependent model on the phylogeny of
