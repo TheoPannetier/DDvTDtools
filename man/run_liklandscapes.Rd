@@ -4,24 +4,33 @@
 \alias{run_liklandscapes}
 \title{Compute likelihood landscape along K for a range of trees}
 \usage{
-run_liklandscapes(sim, optim, para, fixed_pars_values = "true_values",
+run_liklandscapes(sim, optim, para, rangemc = seq(1, 1000, by = 50),
+  fixed_pars_values = "true_values", K_seq = NULL,
   outputfile = paste0("data/lik_landscapes/lik_landscape_", "s", sim,
   "_o", optim, "_", para, "_", fixed_pars_values, ".rds"))
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See 
+\item{sim}{character, the name of a simulation model. See
 \code{get_sim_names()} for possible values.}
 
 \item{optim}{character. The name of the model to get the likelihood landscape
 of, can be either "DD" or "TD".}
 
-\item{para}{numeric or character. A four-digits code specifying a set of 
+\item{para}{numeric or character. A four-digits code specifying a set of
 parameter values. See \code{get_para_values()}}
 
+\item{rangemc}{numeric vector, the index(es) of the tree(s) to compute the
+landscape for.}
+
 \item{fixed_pars_values}{character specifying which values to use for lambda0
-and mu0. Either 'true_values', using true values of the parameters given by
-\code{para_to_pars()}; or 'ML_estimates', using maximum likelihood estimates
-fetched from the ML results dataset stored in \code{data/optim/}.}
+and mu0. 'true_values', to use true values of the parameters as given by
+\code{para_to_pars()}; 'true_k', to fetch ML estimates obtained starting
+from true K, or 'from_n', to fetch ML estimates obtained starting from N.}
+
+\item{K_seq}{numeric vector, the values of K to get the likelihood for, i.e.
+the points on which the landscape will be drawn. Default option is every 10
+up to 100, and every 100 up to 1000, plus increased resolution around both N
+and the true value of K (40).}
 
 \item{outputfile}{character, the path and filename to save results at.}
 }
