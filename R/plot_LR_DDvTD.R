@@ -4,6 +4,8 @@
 #' parameter values. See \code{get_para_values()} for possible values.
 #' @param init_k character, the setting used to initialise parameter K.
 #' See \code{get_possible_init_k()} for possible values.
+#' @param add_quantiles logical, should quantile bars be plotted with the
+#' distribution ?
 #' @param quantiles_dd numeric, quantiles of the lr distribution that should be
 #' added to the plot.
 #' @param quantiles_td numeric, quantiles of the lr distribution that should be
@@ -17,19 +19,24 @@
 
 plot_LR_DDvTD <- function(para,
                           init_k = "true_k",
+                          add_quantiles = FALSE,
                           quantiles_dd = c(0.0, 0.95),
                           quantiles_td = c(0.0, 0.95),
                           which_geom = "histogram"){
   assert_DDvTD_wd()
   assert_para(para)
   assert_init_k(init_k)
-  if(!which_geom %in% c("density", "histogram")) {
+  if (!is.logical(add_quantiles)) {
+    stop("invalid input - add_quantiles must be logical")
+  }
+  if (!which_geom %in% c("density", "histogram")) {
     stop("invalid input - which_geom options are 'density' or 'histogram'")
   }
-  if(!is.numeric(quantiles_dd) | !is.numeric(quantiles_dd)) {
+  if (!is.numeric(quantiles_dd) | !is.numeric(quantiles_dd)) {
     stop("invalid input - quantiles_dd and quantiles_td must be numeric")
   }
 
+  # Fetch and assemble data sets -----------------------------------------------
   LR_table <- data.frame(
     LR = numeric(),
     para = factor(levels = rev(get_para_values()), ordered = TRUE),
@@ -47,12 +54,14 @@ plot_LR_DDvTD <- function(para,
     LR_table <- rbind(LR_table, LR_subtable)
   }
 
-  title = bquote(
+  # Set up label variables -----------------------------------------------------
+  title <-  bquote(
    "Age"     ~ "=" ~ .(DDvTDtools::para_to_pars(para)[1]) ~ " " ~
    lambda[0] ~ "=" ~ .(DDvTDtools::para_to_pars(para)[2]) ~ " " ~
    mu[0]     ~ "=" ~ .(DDvTDtools::para_to_pars(para)[3])
   )
 
+  # Plot, proper ---------------------------------------------------------------
   gg <- ggplot2::ggplot(
     data = LR_table
   ) +
@@ -76,9 +85,12 @@ plot_LR_DDvTD <- function(para,
       binwidth = 0.5
     )
   }
-  gg + plot_quantiles(
-    df = LR_table,
-    which_dd = quantiles_dd,
-    which_td = quantiles_td
+  if (add_quantiles == TRUE) {
+    gg <- gg + plot_quantiles(
+      df = LR_table,
+      which_dd = quantiles_dd,
+      which_td = quantiles_td
     )
+  }
+  gg
 }

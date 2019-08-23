@@ -17,14 +17,14 @@ get_p_DD_table <- function() {
         get_p_DD(sim = "DD", para = para, init_k = init_k)
       },
       paras,
-      initks
+      init_ks
     ),
     "TD" = mapply(
       FUN = function(para, init_k) {
         get_p_DD(sim = "TD", para = para, init_k = init_k)
       },
       paras,
-      initks
+      init_ks
     )
   )
   row.names(p_DD_table) <- paras
