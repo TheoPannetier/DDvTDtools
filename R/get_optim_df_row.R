@@ -25,13 +25,15 @@
 #' @param jobID the ID number of the cluster job that returned the results.
 #' Saved in metadata to retrieve logs, for example. A value of \code{NULL} means
 #' that the result was obtained locally.
+#' @param cond numeric, conditionning parameter passed to
+#' \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.
 #'
 #' @author Théo Pannetier
 #'
 #' @export
 
 get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-                             num_cycles = 1, methode, optimmethod, jobID)
+                             num_cycles = 1, methode, optimmethod, jobID, cond)
 {
   df <- data.frame(
     sim = factor(sim, levels = get_sim_names()),
@@ -55,6 +57,7 @@ get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_outp
     methode = factor(methode, levels = c("lsoda", "ode45", "lsodes", "analytical")),
     optimmethod = factor(optimmethod, levels = c("simplex", "subplex")),
     jobID = jobID,
+    cond = cond,
     row.names = mc
   )
   if(!is.na(df$K_ML) & df$K_ML == 0){df$K_ML <- NA}

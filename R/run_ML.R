@@ -19,6 +19,8 @@
 #' @param return_res logical. Should results be returned? Default to \code{FALSE}.
 #' @param jobID is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.
 #' @param num_cycles numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of cycles of optimisation.
+#' @param cond numeric, conditionning parameter passed to
+#' \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.
 #'
 #' @author Théo Pannetier
 #'
@@ -28,7 +30,7 @@ run_ML <- function(
   sim, optim, para, custom_pars = NULL, outputfile = NULL,
   rangemc = NULL, methode = "ode45", optimmethod = "subplex",
   tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,
-  jobID = NA, num_cycles = 1
+  jobID = NA, num_cycles = 1, cond = 1
 )
 {
   # Check argument values format
@@ -46,6 +48,7 @@ run_ML <- function(
   if (!is.numeric(tol) | length(tol) != 3 ){stop("tol must be a numeric vector of length 3.")}
   if (!is.logical(save_results)){stop("save_results must be a logical.")}
   if (!is.logical(return_res)){stop("return_res must be a logical.")}
+  if (!(cond %in% 0:3)){stop("cond must be a number between 0 and 3.")}
 
   # Fetch branch lengths from input file
   cat("Reading trees from input file\n")
@@ -81,11 +84,16 @@ run_ML <- function(
         tol = tol,
         methode = methode,
         optimmethod = optimmethod,
-        num_cycles = num_cycles
+        num_cycles = num_cycles,
+        cond = cond
       ))
-    } else if(optim %in% c("TD", "CR")){
-      if(optim == "TD"){tdmodel = 4} else {tdmodel = 1}
-      ML_output = try( DDD::bd_ML(
+    } else if (optim %in% c("TD", "CR")) {
+      if (optim == "TD") {
+        tdmodel = 4
+      } else {
+        tdmodel = 1
+      }
+      ML_output = try(DDD::bd_ML(
         brts,
         initparsopt = init_pars + 1E-6,
         idparsopt = seq_along(init_pars),
@@ -93,7 +101,8 @@ run_ML <- function(
         tol = tol,
         methode = methode,
         optimmethod = optimmethod,
-        num_cycles = num_cycles
+        num_cycles = num_cycles,
+        cond = cond
       ))
     }
     if(!is.data.frame(ML_output)){ # default results in case of an error
@@ -107,7 +116,7 @@ run_ML <- function(
       true_pars = true_pars, init_pars = init_pars,
       ML_output = ML_output, methode = methode,
       optimmethod = optimmethod, jobID = jobID,
-      num_cycles = num_cycles
+      num_cycles = num_cycles, cond = cond
     )
 
     results_df <- rbind(results_df, results_row)

@@ -6,7 +6,8 @@
 \usage{
 run_from_n(sim, optim, para, rangemc = NULL, methode = "ode45",
   optimmethod = "subplex", tol = rep(1e-06, 3), jobID = NA,
-  num_cycles = 1, save_results = TRUE, return_res = FALSE)
+  num_cycles = 1, save_results = TRUE, return_res = FALSE,
+  cond = 1)
 }
 \arguments{
 \item{sim}{character, the simulation model. Call \code{get_sim_names()} for a
@@ -48,6 +49,8 @@ cycles of optimisation.}
 
 \item{return_res}{logical. Should results be returned? Default to
 \code{FALSE}.}
+
+\item{cond}{numeric, conditionning parameter passed to}
 }
 \description{
 \code{run_from_n} is simply a wrapper of \code{run_ML} where K is initialized

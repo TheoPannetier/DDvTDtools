@@ -32,7 +32,9 @@
 #' this argument. \code{NA} if run locally.
 #' @param num_cycles numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of
 #' cycles of optimisation.
-#'
+#' @param cond numeric, conditionning parameter passed to
+#' \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.
+
 #' @author Théo Pannetier
 #'
 #' @export
@@ -40,7 +42,7 @@
 run_from_n <- function(sim, optim, para, rangemc = NULL,
                        methode = "ode45", optimmethod = "subplex",
                        tol = rep(1E-6,3), jobID = NA, num_cycles = 1,
-                       save_results = TRUE, return_res = FALSE) {
+                       save_results = TRUE, return_res = FALSE, cond = 1) {
   # Check argument values format
   assert_DDvTD_wd()
   assert_sim(sim)
@@ -68,6 +70,7 @@ run_from_n <- function(sim, optim, para, rangemc = NULL,
   if (is.null(rangemc)) {
     rangemc <- 1:1000
   }
+  if (!(cond %in% 0:3)){stop("cond must be a number between 0 and 3.")}
 
   res <- lapply(
     X = rangemc,
@@ -93,7 +96,8 @@ run_from_n <- function(sim, optim, para, rangemc = NULL,
         save_results = FALSE,
         return_res = TRUE,
         jobID = jobID,
-        num_cycles = num_cycles
+        num_cycles = num_cycles,
+        cond = cond
       )
       cat("\n")
       row

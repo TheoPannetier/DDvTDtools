@@ -26,7 +26,8 @@ get_empty_optim_df <- function(){
     numCycles = numeric(),
     methode = factor(levels = c("lsoda", "ode45", "lsodes", "analytical")),
     optimmethod = factor(levels = c("simplex", "subplex")),
-    jobID = numeric()
+    jobID = numeric(),
+    cond = numeric()
   )
 }
 
