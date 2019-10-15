@@ -4,7 +4,11 @@
 \alias{get_para_values}
 \title{Get possible values of para argument}
 \usage{
-get_para_values()
+get_para_values(incl_unused = FALSE)
+}
+\arguments{
+\item{incl_unused}{logical, specify whether you want to include values that
+have been considered in earlier phases of the project.}
 }
 \description{
 Input values currently accepted for para.
