@@ -4,7 +4,11 @@
 \alias{fetch_init_k}
 \title{Fetch values for argument init_k}
 \usage{
-fetch_init_k()
+fetch_init_k(incl_unused = FALSE)
+}
+\arguments{
+\item{incl_unused}{logical, specify whether you want to include values that
+have been considered in earlier phases of the project.}
 }
 \description{
 Labels for initial value of K associated with each parameter setting for the
