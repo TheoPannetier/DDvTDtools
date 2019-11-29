@@ -9,7 +9,7 @@
 #' @author Théo Pannetier
 #' @export
 
-get_LR_DDvTD <- function(sim, para, init_k = "true_k") {
+get_lr_table <- function(sim, para, init_k = "true_k") {
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)
@@ -22,15 +22,15 @@ get_LR_DDvTD <- function(sim, para, init_k = "true_k") {
     sim = sim, para = para, optim = "TD", init_k = init_k
     )
 
-  LR <- c()
+  lr_table <- c()
   for(mc in 1:1000) {
     if (any(
         c(res_DD$loglik[mc], res_TD$loglik[mc]) %in% c(Inf, -Inf, NA, -1))
       ) {
-      LR <- c(LR, NA)
+      lr_table <- c(lr_table, NA)
     } else {
-      LR <-  c(LR, res_DD$loglik[mc] - res_TD$loglik[mc])
+      lr_table <-  c(lr_table, res_DD$loglik[mc] - res_TD$loglik[mc])
     }
   }
-  LR
+  lr_table
 }

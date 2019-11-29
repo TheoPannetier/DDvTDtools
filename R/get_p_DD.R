@@ -18,6 +18,6 @@ get_p_DD <- function(sim, para, init_k = "true_k") {
   assert_para(para)
   assert_init_k(init_k)
 
-  lr <- get_LR_DDvTD(sim = sim, para = para, init_k = init_k)
+  lr <- get_lr_table(sim = sim, para = para, init_k = init_k)
   length(which(lr > 0)) / 1000
 }

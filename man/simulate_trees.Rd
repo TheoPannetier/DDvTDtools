@@ -5,9 +5,15 @@
 \title{Simulate a set of phylogenetic trees under a time-dependent or
 diversity-dependent model of diversification.}
 \usage{
-simulate_trees(sim, para = NULL, custom_pars = NULL, nbmc = 1000,
+simulate_trees(
+  sim,
+  para = NULL,
+  custom_pars = NULL,
+  nbmc = 1000,
   outputfile = paste0("./data/sim/sim", sim, "-", para, ".RData"),
-  save_results = TRUE, return_results = TRUE)
+  save_results = TRUE,
+  return_results = TRUE
+)
 }
 \arguments{
 \item{sim}{a character used to select the model, can be either 'DD' or

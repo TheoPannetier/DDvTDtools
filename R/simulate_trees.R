@@ -47,16 +47,16 @@ simulate_trees <- function(sim,
   set.seed(42)
   assert_DDvTD_wd()
   assert_sim(sim)
-  if(!is.numeric(nbmc)) {
+  if (!is.numeric(nbmc)) {
     stop("argument nbmc should be a numeric.")
   }
-  if(!is.character(outputfile)){
+  if (!is.character(outputfile)) {
     stop("argument outputfile should be a character.")
   }
-  if(!is.logical(save_results)){
+  if (!is.logical(save_results)) {
     stop("argument save_results should be a logical")
   }
-  if(!is.logical(return_results)){
+  if (!is.logical(return_results)) {
     stop("argument return_results should be a logical")
   }
 
@@ -65,7 +65,7 @@ simulate_trees <- function(sim,
     if (is.null(custom_pars)) {
       stop("Either para or custom_pars must be supplied.")
     } else {
-      if(!is.numeric(custom_pars) | length(custom_pars) != 4) {
+      if (!is.numeric(custom_pars) | length(custom_pars) != 4) {
         stop("custom_pars must be a length 4 numeric vector.")
       } else {
         age <- custom_pars[1]
@@ -88,7 +88,7 @@ simulate_trees <- function(sim,
   trees <- list()
   for (mc in 1:nbmc) {
     cat("Simulating tree ", mc, "...\n")
-    if(sim == "DD") {
+    if (sim == "DD") {
       trees[[mc]] = DDD::dd_sim(pars = pars, age = age)
     } else {
       trees[[mc]] = DDD::td_sim(pars = pars, age = age)

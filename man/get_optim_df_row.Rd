@@ -4,8 +4,20 @@
 \alias{get_optim_df_row}
 \title{Format run_ML optimisation results in a data frame row}
 \usage{
-get_optim_df_row(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-  num_cycles = 1, methode, optimmethod, jobID, cond)
+get_optim_df_row(
+  mc,
+  sim,
+  optim,
+  brts,
+  true_pars,
+  init_pars,
+  ML_output,
+  num_cycles = 1,
+  methode,
+  optimmethod,
+  jobID,
+  cond
+)
 }
 \arguments{
 \item{mc}{numeric, the index of the tree on which model \code{optim} was
@@ -40,6 +52,9 @@ maximum likelihood. See \code{DDD::dd_ML} / \code{DDD::bd_ML} for details.}
 \item{jobID}{the ID number of the cluster job that returned the results.
 Saved in metadata to retrieve logs, for example. A value of \code{NULL} means
 that the result was obtained locally.}
+
+\item{cond}{numeric, conditionning parameter passed to
+\code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.}
 }
 \description{
 Internal function called by \code{run_ML}. Formats optimisation results and

@@ -21,7 +21,7 @@ plot_ltt_nested <- function(para) {
         lambda[0] ~ "="  ~ .(lambda)    ~
         mu[0]     ~ "="  ~ .(mu)
       ))
-  ltt_nested <- ltt + annotation_custom(
+  ltt_nested <- ltt + ggplot2::annotation_custom(
     n_distrib,
     xmin = -crown_age, xmax = -(crown_age / 2),
     ymin = 50, ymax = 100

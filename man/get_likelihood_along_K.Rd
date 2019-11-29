@@ -4,8 +4,13 @@
 \alias{get_likelihood_along_K}
 \title{Compute the likelihood landscape along the K-axis}
 \usage{
-get_likelihood_along_K(optim, brts, lambda0, mu0, K_seq = seq(10, 1000,
-  by = 10))
+get_likelihood_along_K(
+  optim,
+  brts,
+  lambda0,
+  mu0,
+  K_seq = seq(10, 1000, by = 10)
+)
 }
 \arguments{
 \item{optim}{character. The name of the model to fit to the simulated

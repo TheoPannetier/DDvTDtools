@@ -4,10 +4,16 @@
 \alias{run_liklandscapes}
 \title{Compute likelihood landscape along K for a range of trees}
 \usage{
-run_liklandscapes(sim, optim, para, rangemc = seq(1, 1000, by = 50),
-  fixed_pars_values = "true_values", K_seq = NULL,
-  outputfile = paste0("data/lik_landscapes/lik_landscape_", "s", sim,
-  "_o", optim, "_", para, "_", fixed_pars_values, ".rds"))
+run_liklandscapes(
+  sim,
+  optim,
+  para,
+  rangemc = seq(1, 1000, by = 50),
+  fixed_pars_values = "true_values",
+  K_seq = NULL,
+  outputfile = paste0("data/lik_landscapes/lik_landscape_", "s", sim, "_o", optim, "_",
+    para, "_", fixed_pars_values, ".rds")
+)
 }
 \arguments{
 \item{sim}{character, the name of a simulation model. See

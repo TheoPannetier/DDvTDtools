@@ -23,7 +23,7 @@ plot_LR_para <- function(sim, para_set){
 
   for(para in para_set){
 
-    LR <- get_LR_DDvTD(sim = sim, para = para)
+    LR <- get_lr_table(sim = sim, para = para)
     LR_subtable <- data.frame(
       logLR = LR,
       para = factor(para,levels = rev(get_para_values()), ordered = TRUE),

@@ -15,9 +15,9 @@
 fill_missing_rows <- function(df, para) {
   assert_DDvTD_wd()
   assert_para(para)
-  
+
   missing_rows <- which(!(1:1000 %in% df$mc))
-  
+
   if (length(missing_rows) > 0) {
     sim <- df$sim %>% as.character() %>% unique()
     optim <- df$optim %>% as.character() %>% unique()
@@ -26,8 +26,8 @@ fill_missing_rows <- function(df, para) {
       stop("para input does not match true parameters in metadata")
     }
     all_brts <- get_multi_brts(sim = sim, para = para)
-    
-    new_rows <- DDvTDtools:::get_empty_optim_df()
+
+    new_rows <- get_empty_optim_df()
     for(mc in missing_rows) {
       cat("Filling missing row:", mc, "\n")
       new_row <- get_optim_df_row(

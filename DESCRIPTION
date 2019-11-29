@@ -13,9 +13,13 @@ Encoding: UTF-8
 Imports:
     DDD,
     ape,
-    tidyverse
+    ggplot2,
+    dplyr,
+    purrr,
+    plyr,
+    magrittr
 Suggests:
     TreeSim,
     testthat
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
