@@ -1,4 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^scripts/$
-.travis.yml
+^\.travis\.yml$
+^LICENSE$
+^README\.html$
+^scripts$
