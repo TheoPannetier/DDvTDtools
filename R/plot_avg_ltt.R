@@ -41,10 +41,17 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
   ) +
     ggplot2::geom_line() +
     ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
-    ggplot2::geom_hline(yintercept = 40, color = "grey50", linetype = "dashed") +
-    ggplot2::theme(axis.title.y = ggplot2::element_text(angle = 180, vjust = 0.5)) +
+    ggplot2::geom_hline(
+      yintercept = 40, color = "grey50", linetype = "dashed"
+      ) +
     ggplot2::coord_cartesian(ylim = c(0, ymax)) +
     ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
-    ggplot2::labs(x = "Time", y = "N")
+    ggplot2::theme_classic() +
+    ggplot2::theme(
+      text = ggplot2::element_text(size = 14),
+      axis.title.y = ggplot2::element_text(vjust = 0.5, size = 16),
+      axis.title.x = ggplot2::element_text(size = 16)
+    ) +
+    ggplot2::labs(x = "Time", y = "Number of tips")
   avg_ltt_plot
 }

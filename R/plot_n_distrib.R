@@ -21,21 +21,21 @@ plot_n_distrib <- function(para) {
   )
   n_distrib <- rbind(n_distrib_DD, n_distrib_TD)
 
-  n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(x = n_distrib$sim, y = n_distrib$N, fill = n_distrib$sim)) +
+  n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(
+    x = n_distrib$sim, y = n_distrib$N, fill = n_distrib$sim
+    )) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
+    # ggplot2::labs(y = "", x = "", title = "") +
+    ggplot2::geom_hline(
+      yintercept = 40, color = "grey50", linetype = "dashed"
+      ) +
+    ggplot2::theme_classic() +
     ggplot2::theme(
-      axis.title.y = ggplot2::element_text(angle = 180, vjust = 0.5),
-      axis.title.x = ggplot2::element_blank()) +
-    ggplot2::labs(y = "N") +
-    ggplot2::geom_hline(yintercept = 40, color = "grey50", linetype = "dashed")
+      text = ggplot2::element_text(size = 14),
+      title = ggplot2::element_blank(),
+      axis.title.x = ggplot2::element_blank(),
+      axis.title.y = ggplot2::element_blank()
+      )
  n_plot
-
- # Distribution plot
- # n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(x = N, color = sim)) +
- #   ggplot2::geom_density() +
- #   ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
- #   ggplot2::geom_vline(xintercept = 40, color = "red", linetype = "dashed")
- # n_plot
-
 }
