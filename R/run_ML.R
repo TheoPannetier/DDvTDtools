@@ -71,7 +71,7 @@ run_ML <- function(
     } else {
       init_pars <- get_default_initpars(true_pars = true_pars, optim = optim, brts = brts)
     }
-    init_pars <- check_initpars(init_pars = init_pars, optim = optim, brts = brts)
+    init_pars <- check_init_pars(init_pars = init_pars, optim = optim, brts = brts)
     cat(paste("Initial parameter values:"))
     cat(paste(round(init_pars, digits = 2)),"\n")
 

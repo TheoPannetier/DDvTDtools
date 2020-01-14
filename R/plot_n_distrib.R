@@ -1,32 +1,33 @@
-#' Plot the distribution of N for DD & TD trees
+#' Plot the distribution of N for DD & TD trees as violins
 #'
-#' Jointly plots the distribution of the number of tips at present for a pair
+#' Plots the distribution of the number of tips at present for a pair
 #' of TD and DD trees that share the same parameter set.
+#'
 #' @param para numeric or character. A four-digits code specifying a set of
 #' parameter values.
 #'
 #' @author Théo Pannetier
 #' @export
+#'
 plot_n_distrib <- function(para) {
   assert_DDvTD_wd()
   assert_para(para)
 
-  n_distrib_DD <- cbind(
-    get_n_distrib(sim = "DD", para = para),
+  n_table_DD <- cbind(
+    get_n_table(sim = "DD", para = para),
     "sim" = factor("DD", levels = get_sim_names())
   )
-  n_distrib_TD <- cbind(
-    get_n_distrib(sim = "TD", para = para),
+  n_table_TD <- cbind(
+    get_n_table(sim = "TD", para = para),
     "sim" = factor("TD", levels = get_sim_names())
   )
-  n_distrib <- rbind(n_distrib_DD, n_distrib_TD)
+  n_table <- rbind(n_table_DD, n_table_TD)
 
-  n_plot <- ggplot2::ggplot(n_distrib, ggplot2::aes(
-    x = n_distrib$sim, y = n_distrib$N, fill = n_distrib$sim
+  n_plot <- ggplot2::ggplot(n_table, ggplot2::aes(
+    x = n_table$sim, y = n_table$N, fill = n_table$sim
     )) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
-    # ggplot2::labs(y = "", x = "", title = "") +
     ggplot2::geom_hline(
       yintercept = 40, color = "grey50", linetype = "dashed"
       ) +

@@ -2,22 +2,17 @@
 % Please edit documentation in R/get_lr_table.R
 \name{get_lr_table}
 \alias{get_lr_table}
-\title{Compute logL_DD - logL_TD for a set of trees}
+\title{Assemble a table containing likelihood ratios}
 \usage{
-get_lr_table(sim, para, init_k = "true_k")
+get_lr_table(para, init_k)
 }
 \arguments{
-\item{sim}{character. The name of a simulation model}
-
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values. See \code{get_para_values()} for possible values.}
-
-\item{init_k}{character, the setting used to initialise parameter K.
-See \code{get_possible_init_k()} for possible values.}
+\item{init_k}{}
 }
 \description{
-Compute logL_DD - logL_TD for a set of trees
+Calls \code{get_lr} and binds results in a table with corresponding
+\code{sim} ans \code{para} values.
 }
 \author{
-Théo Pannetier
+Theo Pannetier
 }

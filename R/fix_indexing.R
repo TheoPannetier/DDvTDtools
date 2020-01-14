@@ -28,7 +28,7 @@ fix_indexing <- function(df) {
       df_copy[i,] <- df[which(df$mc == i),]
     }
     if (any(!df_copy$mc == seq(1, 1000))) {
-      stop("Failed to fix indexing. Check your code, Theo!")
+      stop("Failed to fix indexing.")
     }
     df <- df_copy
   } else {

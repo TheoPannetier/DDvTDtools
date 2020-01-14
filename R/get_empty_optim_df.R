@@ -1,4 +1,4 @@
-#' Get an empty skeleton for run_ML output data frame.
+#' Get an empty data frame to initiate run_ML output.
 #'
 #' Internal function called only by \code{run_ML}.
 #'

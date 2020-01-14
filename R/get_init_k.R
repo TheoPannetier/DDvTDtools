@@ -1,4 +1,4 @@
-#' Fetch values for argument init_k
+#' Get values for argument init_k
 #'
 #' Labels for initial value of K associated with each parameter setting for the
 #' main analysis.
@@ -9,7 +9,7 @@
 #' @export
 
 
-fetch_init_k <- function(incl_unused = FALSE) {
+get_init_k <- function(incl_unused = FALSE) {
   if (!is.logical(incl_unused)) {
     stop("incl_unused must be logical")
   }

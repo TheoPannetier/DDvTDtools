@@ -10,11 +10,12 @@
 #' @param brts numeric vector. The branching times for the tree to fit model
 #' \code{optim} on.
 #'
+#'
 #' @author Théo Pannetier
 #'
 #' @export
 
-check_initpars <- function(init_pars, optim, brts){
+check_init_pars <- function(init_pars, optim, brts){
   assert_optim(optim)
   if(!is.numeric(init_pars)){stop("brts should be a numeric vector.")}
   if(!is.numeric(brts)){stop("init_pars should be a numeric vector.")}
@@ -29,7 +30,9 @@ check_initpars <- function(init_pars, optim, brts){
   if(init_pars[2] < 0){ stop("Initial mu0 has a negative value.") }
   if(init_pars[1] <= init_pars[2]){
     init_pars[1] <- init_pars[2] * 1.1
-    cat(paste("lambda0 was step up to ", init_pars[1], "\n"))
+    cat(
+      paste("lambda0 < mu0. lambda0 was increased up to ", init_pars[1], "\n")
+      )
   }
 
   if(optim %in% c("DD","TD")){
@@ -39,9 +42,9 @@ check_initpars <- function(init_pars, optim, brts){
     N <- length(brts) + 1
     Kprime = init_pars[1] / (init_pars[1] - init_pars[2]) * init_pars[3]
 
-    if (ceiling(Kprime) < N ){
+    if (ceiling(Kprime) < N ) {
       init_pars[3] <-  ceiling(N * (init_pars[1] - init_pars[2]) / init_pars[1])
-      cat(paste("K was stepped up to", init_pars[3], "\n"))
+      cat(paste("K' < N. K was increased up to", init_pars[3], "\n"))
       Kprime = init_pars[1] / (init_pars[1] - init_pars[2]) * init_pars[3]
     }
   }

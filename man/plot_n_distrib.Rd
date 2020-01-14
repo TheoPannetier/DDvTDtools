@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_n_distrib.R
 \name{plot_n_distrib}
 \alias{plot_n_distrib}
-\title{Plot the distribution of N for DD & TD trees}
+\title{Plot the distribution of N for DD & TD trees as violins}
 \usage{
 plot_n_distrib(para)
 }
@@ -11,7 +11,7 @@ plot_n_distrib(para)
 parameter values.}
 }
 \description{
-Jointly plots the distribution of the number of tips at present for a pair
+Plots the distribution of the number of tips at present for a pair
 of TD and DD trees that share the same parameter set.
 }
 \author{

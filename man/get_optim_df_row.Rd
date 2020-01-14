@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_optim_df_row.R
 \name{get_optim_df_row}
 \alias{get_optim_df_row}
-\title{Format run_ML optimisation results in a data frame row}
+\title{Assemble a row of results for run_ML output}
 \usage{
 get_optim_df_row(
   mc,

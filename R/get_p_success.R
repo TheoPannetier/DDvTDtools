@@ -1,5 +1,19 @@
+#' Computes the proportion of trees that can successfully be assigned to either
+#' model
+#'
+#' Computes the proportion of trees in the dataset that reject the opposite
+#' model, i.e. logLR is beyond the corresponding threshold computed by
+#' \code{get_lr_threshold}.
+#'
+#' @param sim
+#' @param optim
+#' @param init_k
+#'
+#' @author Theo Pannetier
+#' @export
+
 get_p_success <- function(sim, para, init_k) {
-  lr_table <- get_lr_table(
+  lr_table <- get_lr(
     sim = sim,
     para = para,
     init_k = init_k

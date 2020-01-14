@@ -10,8 +10,8 @@ check_convergence_optim(folder = "data/optim/")
 \item{folder}{the folder where the results files are stored. All .rds files in the folder are read.}
 }
 \description{
-The function reads results files output from run_ML calls and prints whether some
-results are missing or some optimisations have not converged
+Reads result data frames in the optim folder and prints a message if there is
+any missing row.
 }
 \author{
 Théo Pannetier

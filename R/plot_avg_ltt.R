@@ -1,12 +1,11 @@
 #' Plot the average LTTs of paired DD and TD trees
 #'
-#' Simultaneously plots the average ltts of a set of DD and TD trees that share
-#' the same parameter set.
+#' Plots the average LTTs of a set of DD and TD trees that share the same parameter set.
 #'
 #' @param para numeric or character. A four-digits code specifying a set of
 #' parameter values.
-#' @param with_extinct logical. \code{with_extinct = F} for the reconstructed
-#' tree, \code{with_extinct = T} for the complete tree.
+#' @param with_extinct logical. \code{with_extinct = FALSE} for the
+#' reconstructed tree, \code{with_extinct = TRUE} for the complete tree.
 #'
 #' @author Théo Pannetier
 #' @export

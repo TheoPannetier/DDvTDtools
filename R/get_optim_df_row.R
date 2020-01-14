@@ -1,4 +1,4 @@
-#' Format run_ML optimisation results in a data frame row
+#' Assemble a row of results for run_ML output
 #'
 #' Internal function called by \code{run_ML}. Formats optimisation results and
 #' metadata in a data frame row.
@@ -32,8 +32,9 @@
 #'
 #' @export
 
-get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_output,
-                             num_cycles = 1, methode, optimmethod, jobID, cond)
+get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars,
+                             ML_output, num_cycles = 1, methode, optimmethod,
+                             jobID, cond)
 {
   df <- data.frame(
     sim = factor(sim, levels = get_sim_names()),
@@ -54,12 +55,14 @@ get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars, ML_outp
     K_ML = ML_output[,3],
     hasConverged = (ML_output$conv == 0),
     numCycles = num_cycles,
-    methode = factor(methode, levels = c("lsoda", "ode45", "lsodes", "analytical")),
+    methode = factor(
+      methode, levels = c("lsoda", "ode45", "lsodes", "analytical")
+      ),
     optimmethod = factor(optimmethod, levels = c("simplex", "subplex")),
     jobID = jobID,
     cond = cond,
     row.names = mc
   )
-  if(!is.na(df$K_ML) & df$K_ML == 0){df$K_ML <- NA}
+  if (!is.na(df$K_ML) & df$K_ML == 0) {df$K_ML <- NA}
   return(df)
 }

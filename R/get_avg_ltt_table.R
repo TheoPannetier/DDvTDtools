@@ -1,12 +1,14 @@
-#' Return the average number of lineage over time for a dataset
+#' Computes the average number of lineages over time for a set of phylogenies
 #'
-#' Returns the average number of lineage over time for a dataset
+#' Returns the average number of lineage over time for a dataset of 1000 simulated
+#' phylogenies
 #'
-#' @param sim name of the model used to simulate the trees. See \code{get_sim_names()}
+#' @param sim name of the model used to simulate the trees.
+#' See \code{get_sim_names()}
 #' @param para numeric or character. A four-digits code specifying a set of
 #' parameter values.
-#' @param with_extinct logical. \code{with_extinct = F} for the reconstructed
-#' tree, \code{with_extinct = T} for the complete tree.
+#' @param with_extinct logical. \code{with_extinct = FALSE} for the
+#' reconstructed tree, \code{with_extinct = TRUE} for the complete tree.
 #'
 #' @author Théo Pannetier
 #' @export

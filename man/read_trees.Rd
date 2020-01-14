@@ -7,12 +7,15 @@
 read_trees(sim, para)
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
+\item{sim}{name of the model used to simulate the trees.
+See \code{get_sim_names()}}
 
-\item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
+\item{para}{four-digit-character specifying the parameters used to simulate
+the trees. See \code{get_para_values}.}
 }
 \description{
-Loads a file containing simulated trees at the specified location. Target file must follow nomeclature 'simXX-para.RData
+Loads a file containing simulated trees at the specified location.
+Target file must follow nomeclature 'simXX-para.RData'
 }
 \author{
 Theo Pannetier

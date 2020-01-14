@@ -2,21 +2,23 @@
 % Please edit documentation in R/get_avg_ltt_table.R
 \name{get_avg_ltt_table}
 \alias{get_avg_ltt_table}
-\title{Return the average number of lineage over time for a dataset}
+\title{Computes the average number of lineages over time for a set of phylogenies}
 \usage{
 get_avg_ltt_table(sim, para, with_extinct = FALSE)
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
+\item{sim}{name of the model used to simulate the trees.
+See \code{get_sim_names()}}
 
 \item{para}{numeric or character. A four-digits code specifying a set of
 parameter values.}
 
-\item{with_extinct}{logical. \code{with_extinct = F} for the reconstructed
-tree, \code{with_extinct = T} for the complete tree.}
+\item{with_extinct}{logical. \code{with_extinct = FALSE} for the
+reconstructed tree, \code{with_extinct = TRUE} for the complete tree.}
 }
 \description{
-Returns the average number of lineage over time for a dataset
+Returns the average number of lineage over time for a dataset of 1000 simulated
+phylogenies
 }
 \author{
 Théo Pannetier

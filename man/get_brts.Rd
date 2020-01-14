@@ -7,22 +7,22 @@
 get_brts(sim, para, mc, with_extinct = F)
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See 
+\item{sim}{character, the name of a simulation model. See
 \code{get_sim_names()} for possible values.}
 
-\item{para}{numeric or character. A four-digits code specifying a set of 
+\item{para}{numeric or character. A four-digits code specifying a set of
 parameter values. See \code{get_para_values()}}
 
 \item{mc}{numeric. The index of the tree to return branching times from.}
 
-\item{with_extinct}{logical. \code{with_extinct = F} for the reconstructed 
-tree, \code{with_extinct = T} for the complete tree.}
+\item{with_extinct}{logical. \code{with_extinct = FALSE} for the
+reconstructed tree, \code{with_extinct = TRUE} for the complete tree.}
 }
 \value{
 a numerical vector containing the branching times of the tree.
 }
 \description{
-Read the dataset at specified location and returns branching times for specified tree.
+Read the dataset and returns the branching times for the specified tree.
 }
 \author{
 Theo Pannetier

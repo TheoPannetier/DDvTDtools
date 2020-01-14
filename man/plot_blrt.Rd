@@ -8,7 +8,7 @@ plot_blrt(
   para,
   init_k = "true_k",
   plot_thresholds = TRUE,
-  label_success = TRUE,
+  label_p_success = FALSE,
   threshold_dd = 0.05,
   threshold_td = 0.95,
   full_range = FALSE,
@@ -25,7 +25,7 @@ See \code{get_possible_init_k()} for possible values.}
 \item{plot_thresholds}{logical, should quantile bars be plotted with the
 distribution?}
 
-\item{label_success}{logical, should the proportion of successes be added as
+\item{label_p_success}{logical, should the proportion of successes be added as
 a label on the plot?}
 
 \item{threshold_dd}{numeric, quantiles of the lr distribution that should be

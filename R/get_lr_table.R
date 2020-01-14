@@ -1,36 +1,29 @@
-#' Compute logL_DD - logL_TD for a set of trees
+#' Assemble a table containing likelihood ratios
 #'
-#' @param sim character. The name of a simulation model
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values. See \code{get_para_values()} for possible values.
-#' @param init_k character, the setting used to initialise parameter K.
-#' See \code{get_possible_init_k()} for possible values.
+#' Calls \code{get_lr} and binds results in a table with corresponding
+#' \code{sim} ans \code{para} values.
 #'
-#' @author Théo Pannetier
+#' @param para
+#' @param init_k
+#'
+#' @author Theo Pannetier
 #' @export
+#'
+get_lr_table <- function(para, init_k) {
+  lr_table <- data.frame(
+    lr = numeric(),
+    para = factor(levels = rev(get_para_values()), ordered = TRUE),
+    sim = factor(levels = get_sim_names(), ordered = TRUE)
+  )
 
-get_lr_table <- function(sim, para, init_k = "true_k") {
-  assert_DDvTD_wd()
-  assert_sim(sim)
-  assert_para(para)
-  assert_init_k(init_k)
-
-  res_DD <- read_optim_table(
-    sim = sim, para = para, optim = "DD", init_k = init_k
+  for (sim in get_sim_names()) {
+    lr <- get_lr(sim = sim, para = para, init_k = init_k)
+    subtable <- data.frame(
+      lr = lr,
+      para = factor(para, levels = rev(get_para_values()), ordered = TRUE),
+      sim = factor(sim, levels = get_sim_names(), ordered = TRUE)
     )
-  res_TD <- read_optim_table(
-    sim = sim, para = para, optim = "TD", init_k = init_k
-    )
-
-  lr_table <- c()
-  for(mc in 1:1000) {
-    if (any(
-        c(res_DD$loglik[mc], res_TD$loglik[mc]) %in% c(Inf, -Inf, NA, -1))
-      ) {
-      lr_table <- c(lr_table, NA)
-    } else {
-      lr_table <-  c(lr_table, res_DD$loglik[mc] - res_TD$loglik[mc])
-    }
+    lr_table <- rbind(lr_table, subtable)
   }
   lr_table
 }

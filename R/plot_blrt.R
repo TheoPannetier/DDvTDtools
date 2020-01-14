@@ -44,7 +44,7 @@ plot_blrt <- function(para,
   }
 
   # Fetch and assemble data sets -----------------------------------------------
-  blrt_table <- get_blrt_table(para = para, init_k = init_k)
+  lr_table <- get_lr_table(para = para, init_k = init_k)
 
   # Set up label variables -----------------------------------------------------
   title <-  bquote(
@@ -54,14 +54,14 @@ plot_blrt <- function(para,
   )
   ymax <- ifelse(which_geom == "histogram", 500, 1)
   if (full_range) {
-    xlim <- c(min(-10, min(blrt_table$lr)) , max(10, max(blrt_table$lr)))
+    xlim <- c(min(-10, min(lr_table$lr)) , max(10, max(lr_table$lr)))
   } else {
     xlim <- c(-5, 10)
   }
 
   # Plot, proper ---------------------------------------------------------------
   gg <- ggplot2::ggplot(
-    data = blrt_table
+    data = lr_table
   ) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::coord_cartesian(
@@ -95,13 +95,13 @@ plot_blrt <- function(para,
   }
   if (which_geom == "density") {
     gg <- gg +  ggplot2::geom_density(
-      ggplot2::aes(x = blrt_table$lr, fill = blrt_table$sim),
+      ggplot2::aes(x = lr_table$lr, fill = lr_table$sim),
       alpha = 0.2 #,
       #bw = 0.15
     )
   } else {
     gg <- gg + ggplot2::geom_histogram(
-      ggplot2::aes(x = blrt_table$lr, fill = blrt_table$sim),
+      ggplot2::aes(x = lr_table$lr, fill = lr_table$sim),
       position = "dodge",
       binwidth = 0.5
     )

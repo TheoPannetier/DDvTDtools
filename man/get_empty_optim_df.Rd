@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_empty_optim_df.R
 \name{get_empty_optim_df}
 \alias{get_empty_optim_df}
-\title{Get an empty skeleton for run_ML output data frame.}
+\title{Get an empty data frame to initiate run_ML output.}
 \usage{
 get_empty_optim_df()
 }
