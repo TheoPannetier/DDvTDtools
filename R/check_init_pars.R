@@ -4,11 +4,9 @@
 #' ML optimisation do not break forbidden conditions inside \code{DDD::dd_ML()}
 #' and \code{DDD::bd_ML()}.
 #'
+#' @inheritParams params_doc
 #' @param init_pars numeric vector. The initial parameter values to be checked.
-#' @param optim character, the model to fit on the tree.
-#' Call \code{get_optim_names()} for possible values.
-#' @param brts numeric vector. The branching times for the tree to fit model
-#' \code{optim} on.
+#'
 #'
 #'
 #' @author Théo Pannetier

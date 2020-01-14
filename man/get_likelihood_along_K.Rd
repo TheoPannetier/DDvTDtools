@@ -13,10 +13,11 @@ get_likelihood_along_K(
 )
 }
 \arguments{
-\item{optim}{character. The name of the model to fit to the simulated
-phylogenies, either "DD" or "TD".}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{brts}{numeric vector, a set of branching times.}
+\item{brts}{numeric vector, a set of branching times as given by
+\code{ape::branching_times()}.}
 
 \item{lambda0}{numeric. A (fixed) value for the speciation rate.}
 

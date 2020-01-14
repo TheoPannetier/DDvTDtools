@@ -2,7 +2,7 @@
 #'
 #' Prints the parameter values associated with a given value of argument 'para'.
 #'
-#' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.
+#' @inheritParams params_doc
 #'
 #' @return a four-element numeric vector containing the parameter values associated to 'para'.
 #'

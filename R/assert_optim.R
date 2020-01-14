@@ -1,6 +1,6 @@
 #' Assert the value of 'optim' is a valid model name for DDvTDtools
 #'
-#' @param optim character. The name of a diversification model fitted to data.
+#' @inheritParams params_doc
 #' @author Theo Pannetier
 #'
 #' @export

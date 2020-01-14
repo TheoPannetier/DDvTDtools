@@ -4,10 +4,7 @@
 #' Reads a model name and coded parameter input to simulate a dataset of a
 #' number of simulated phylogenetic trees.
 #'
-#' @param sim a character used to select the model, can be either 'DD' or
-#' 'TD'.
-#' @param para a 4-digit code used to set the parameter values used for the
-#' simulation. See \code{parameter_list} for possible values.
+#' @inheritParams params_doc
 #' @param custom_pars a 4-element numeric vector containing c(age, pars)
 #' to supply custom parameters (i.e., values not covered with the \code{para}
 #' option). Either \code{para} or \code{custom_pars} must be supplied, not both.

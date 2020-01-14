@@ -20,21 +20,17 @@ run_from_n(
 )
 }
 \arguments{
-\item{sim}{character, the simulation model. Call \code{get_sim_names()} for a
-list of possible values.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{optim}{character. The name of the model to fit to the simulated
-phylogenies. See \code{get_optim_names()} for possible inputs.
-If \code{NULL} (default), values are initialized using true values used to
-simulate the trees.}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{character or numeric, the code specifying the parameter values
-used in the simulation.
-Call \code{get_para_values()} for possible inputs, and \code{para_to_pars()}
-for the corresponding parameter values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{rangemc}{a numeric vector containing all the indices of the trees to
-optimize the model on. Default to all the trees in the dataset.}
+\item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
 \item{methode}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
 \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more

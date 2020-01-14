@@ -3,8 +3,7 @@
 #' Calls \code{plot_avg_ltt} and \code{plot_n_distrib}, and nests the latter in
 #' the former
 #'
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values.
+#' @inheritParams params_doc
 #'
 #' @author Théo Pannetier
 #' @export

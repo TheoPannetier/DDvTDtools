@@ -3,11 +3,7 @@
 #' Fetches saved results for likelihood landscapes along K and assembles a data
 #' frame ready for plotting
 #'
-#' @param sim character, the name of a simulation model. See
-#' \code{get_sim_names()} for possible values.
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values.
-#' @param mc numeric, the index of the tree to get the landscape for.
+#' @inheritParams params_doc
 #'
 #' @author Théo Pannetier
 #' @export

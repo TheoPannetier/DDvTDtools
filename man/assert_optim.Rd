@@ -7,7 +7,8 @@
 assert_optim(optim)
 }
 \arguments{
-\item{optim}{character. The name of a diversification model fitted to data.}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 }
 \description{
 Assert the value of 'optim' is a valid model name for DDvTDtools

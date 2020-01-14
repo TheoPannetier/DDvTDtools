@@ -1,6 +1,6 @@
 #' Assert the value of 'sim' is a valid model name for DDvTDtools
 #'
-#' @param sim character. The name of a simulation model
+#' @inheritParams params_doc
 #' @author Theo Pannetier
 #'
 #' @export

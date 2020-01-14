@@ -16,11 +16,12 @@ simulate_trees(
 )
 }
 \arguments{
-\item{sim}{a character used to select the model, can be either 'DD' or
-'TD'.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{a 4-digit code used to set the parameter values used for the
-simulation. See \code{parameter_list} for possible values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
 \item{custom_pars}{a 4-element numeric vector containing c(age, pars)
 to supply custom parameters (i.e., values not covered with the \code{para}

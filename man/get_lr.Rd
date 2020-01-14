@@ -7,13 +7,16 @@
 get_lr(sim, para, init_k = "true_k")
 }
 \arguments{
-\item{sim}{character. The name of a simulation model}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values. See \code{get_para_values()} for possible values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{init_k}{character, the setting used to initialise parameter K.
-See \code{get_possible_init_k()} for possible values.}
+\item{init_k}{character code specifying the initial values of parameter K
+used in the optimisation. Refer to \code{get_possible init_k} doc for
+details, and call \code{get_possible_init_k} to see possible inputs.}
 }
 \description{
 Compute likelihood ratios for a results dataset

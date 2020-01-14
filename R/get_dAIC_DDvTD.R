@@ -1,7 +1,6 @@
 #' Compute AIC_DD - AIC_TD for a set of trees
 #'
-#' @param sim character. The name of a simulation model
-#' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.
+#' @inheritParams params_doc
 #'
 #' @author Théo Pannetier
 #' @export

@@ -7,11 +7,12 @@
 read_trees(sim, para)
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees.
-See \code{get_sim_names()}}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{four-digit-character specifying the parameters used to simulate
-the trees. See \code{get_para_values}.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 }
 \description{
 Loads a file containing simulated trees at the specified location.

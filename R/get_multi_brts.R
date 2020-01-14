@@ -2,10 +2,7 @@
 #'
 #' Read the dataset at specified location and returns branching times for multiple trees specified by indices.
 #'
-#' @param sim character, the name of a simulation model. See \code{get_sim_names()} for possible values.
-#' @param para numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()}
-#' @param rangemc numeric vector. The indices of the trees to return branching times from.
-#' @param with_extinct logical. \code{with_extinct = F} for the reconstructed tree, \code{with_extinct = T} for the complete tree.
+#' @inheritParams params_doc
 #'
 #' @return a list of numerical vectors containing the branching times of the specified trees.
 #'

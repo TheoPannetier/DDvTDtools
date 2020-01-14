@@ -3,14 +3,7 @@
 #' The function will go fetch the data frame corresponding to the arguments and
 #' return it.
 #'
-#' @param sim name of the model used to simulate the trees.
-#' See \code{get_sim_names()}
-#' @param optim name of the model fitted to the simulated trees.
-#' See \code{get_optim_names()}
-#' @param para four-digit-character specifying the parameters used to
-#' simulate the trees. See \code{get_para_values}.
-#' @param init_k character, the setting used to initialise parameter K.
-#' See \code{get_possible_init_k()} for possible values.
+#' @inheritParams params_doc
 ##'
 #' @author Theo Pannetier
 #' @export

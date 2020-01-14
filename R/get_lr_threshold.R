@@ -3,9 +3,7 @@
 #' Computes the threshold value for the log-likelihood ratio to reject either
 #' model.
 #'
-#' @param sim
-#' @param para
-#' @param init_k
+#' @inheritParams params_doc
 #' @param percentile numeric value between 0 and 1, the percentile on which the
 #' threshold should be based (normally 0.05 for DD, 0.95 for TD).
 #'

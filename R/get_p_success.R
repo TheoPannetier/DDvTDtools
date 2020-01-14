@@ -5,9 +5,7 @@
 #' model, i.e. logLR is beyond the corresponding threshold computed by
 #' \code{get_lr_threshold}.
 #'
-#' @param sim
-#' @param optim
-#' @param init_k
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #' @export

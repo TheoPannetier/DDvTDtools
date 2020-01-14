@@ -3,14 +3,7 @@
 #' Internal function called by \code{run_ML}. Formats optimisation results and
 #' metadata in a data frame row.
 #'
-#' @param mc numeric, the index of the tree on which model \code{optim} was
-#' fitted.
-#' @param sim character. The model used to simulate the tree.
-#' Call \code{get_sim_names} for possible values.
-#' @param optim character. The model fitted to the tree.
-#' Call \code{get_optim_names} for possible values.
-#' @param brts numeric vector. Branching times of the tree, used to compute
-#'  metadata entry \code{ntips}.
+#' @inheritParams params_doc
 #' @param true_pars numeric vector. The true parameter values used to simulate
 #' the tree.
 #' @param init_pars numeric vector. The initial parameter values used for

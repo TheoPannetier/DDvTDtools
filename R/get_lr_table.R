@@ -3,8 +3,7 @@
 #' Calls \code{get_lr} and binds results in a table with corresponding
 #' \code{sim} ans \code{para} values.
 #'
-#' @param para
-#' @param init_k
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #' @export

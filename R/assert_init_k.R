@@ -1,7 +1,6 @@
 #' Asserts input init parameter is supported
 #'
-#' @param init_k a character for the initial parameter setting, typically passed
-#' from another function
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #'

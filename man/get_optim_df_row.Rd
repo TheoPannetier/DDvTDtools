@@ -20,17 +20,16 @@ get_optim_df_row(
 )
 }
 \arguments{
-\item{mc}{numeric, the index of the tree on which model \code{optim} was
-fitted.}
+\item{mc}{numeric between 1 and 1000, the index of a tree within a dataset.}
 
-\item{sim}{character. The model used to simulate the tree.
-Call \code{get_sim_names} for possible values.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{optim}{character. The model fitted to the tree.
-Call \code{get_optim_names} for possible values.}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{brts}{numeric vector. Branching times of the tree, used to compute
-metadata entry \code{ntips}.}
+\item{brts}{numeric vector, a set of branching times as given by
+\code{ape::branching_times()}.}
 
 \item{true_pars}{numeric vector. The true parameter values used to simulate
 the tree.}

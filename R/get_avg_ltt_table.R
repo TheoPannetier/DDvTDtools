@@ -3,13 +3,7 @@
 #' Returns the average number of lineage over time for a dataset of 1000 simulated
 #' phylogenies
 #'
-#' @param sim name of the model used to simulate the trees.
-#' See \code{get_sim_names()}
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values.
-#' @param with_extinct logical. \code{with_extinct = FALSE} for the
-#' reconstructed tree, \code{with_extinct = TRUE} for the complete tree.
-#'
+#' @inheritParams params_doc
 #' @author Théo Pannetier
 #' @export
 

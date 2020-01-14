@@ -10,8 +10,9 @@ fill_missing_rows(df, para)
 \item{df}{a results data frame, i.e. as read by
 \code{DDvTDtools::read_optim_table()}}
 
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 }
 \description{
 Function used to fill result data for trees that miss any result.

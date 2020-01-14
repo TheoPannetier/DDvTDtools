@@ -1,10 +1,6 @@
 #' Compute likelihood ratios for a results dataset
 #'
-#' @param sim character. The name of a simulation model
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values. See \code{get_para_values()} for possible values.
-#' @param init_k character, the setting used to initialise parameter K.
-#' See \code{get_possible_init_k()} for possible values.
+#' @inheritParams params_doc
 #'
 #' @author Théo Pannetier
 #' @export

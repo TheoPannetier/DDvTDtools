@@ -3,10 +3,7 @@
 #' Loads a file containing simulated trees at the specified location.
 #' Target file must follow nomeclature 'simXX-para.RData'
 #'
-#' @param sim name of the model used to simulate the trees.
-#' See \code{get_sim_names()}
-#' @param para four-digit-character specifying the parameters used to simulate
-#' the trees. See \code{get_para_values}.
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #' @export

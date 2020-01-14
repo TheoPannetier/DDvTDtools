@@ -7,13 +7,14 @@
 assemble_landscape_data(sim, para, mc)
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See
-\code{get_sim_names()} for possible values.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{mc}{numeric, the index of the tree to get the landscape for.}
+\item{mc}{numeric between 1 and 1000, the index of a tree within a dataset.}
 }
 \description{
 Fetches saved results for likelihood landscapes along K and assembles a data

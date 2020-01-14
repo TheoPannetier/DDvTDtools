@@ -7,11 +7,11 @@
 plot_avg_ltt(para, with_extinct = FALSE)
 }
 \arguments{
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{with_extinct}{logical. \code{with_extinct = FALSE} for the
-reconstructed tree, \code{with_extinct = TRUE} for the complete tree.}
+\item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \description{
 Plots the average LTTs of a set of DD and TD trees that share the same parameter set.

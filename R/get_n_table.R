@@ -3,8 +3,7 @@
 #' Assemble a table containing the number of tips in each tree in a results data
 #' set.
 #'
-#' @param sim
-#' @param para
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #' @export

@@ -7,13 +7,16 @@
 get_multi_brts(sim, para, rangemc = NULL, with_extinct = F)
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See \code{get_sim_names()} for possible values.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()}}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{rangemc}{numeric vector. The indices of the trees to return branching times from.}
+\item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
-\item{with_extinct}{logical. \code{with_extinct = F} for the reconstructed tree, \code{with_extinct = T} for the complete tree.}
+\item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \value{
 a list of numerical vectors containing the branching times of the specified trees.

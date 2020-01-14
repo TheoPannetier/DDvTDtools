@@ -7,7 +7,8 @@
 assert_sim(sim)
 }
 \arguments{
-\item{sim}{character. The name of a simulation model}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 }
 \description{
 Assert the value of 'sim' is a valid model name for DDvTDtools

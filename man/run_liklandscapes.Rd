@@ -16,17 +16,17 @@ run_liklandscapes(
 )
 }
 \arguments{
-\item{sim}{character, the name of a simulation model. See
-\code{get_sim_names()} for possible values.}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{optim}{character. The name of the model to get the likelihood landscape
-of, can be either "DD" or "TD".}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values. See \code{get_para_values()}}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{rangemc}{numeric vector, the index(es) of the tree(s) to compute the
-landscape for.}
+\item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
 \item{fixed_pars_values}{character specifying which values to use for lambda0
 and mu0. 'true_values', to use true values of the parameters as given by

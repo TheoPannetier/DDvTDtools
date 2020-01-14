@@ -4,10 +4,10 @@
 #' Fills the result matrix for a parameter set with default values for these
 #' missing trees
 #'
+#' @inheritParams params_doc
 #' @param df a results data frame, i.e. as read by
 #'  \code{DDvTDtools::read_optim_table()}
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values.
+#'
 #'
 #' @author Théo Pannetier
 #' @export

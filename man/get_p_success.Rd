@@ -8,7 +8,16 @@ model}
 get_p_success(sim, para, init_k)
 }
 \arguments{
-\item{init_k}{}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
+
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
+
+\item{init_k}{character code specifying the initial values of parameter K
+used in the optimisation. Refer to \code{get_possible init_k} doc for
+details, and call \code{get_possible_init_k} to see possible inputs.}
 }
 \description{
 Computes the proportion of trees in the dataset that reject the opposite

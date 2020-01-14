@@ -7,11 +7,14 @@
 get_sim_multiPhylo(sim, para, with_extinct = F)
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees. See \code{get_sim_names()}}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{with_extinct}{logical. \code{with_extinct = F} for the reconstructed tree, \code{with_extinct = T} for the complete tree.}
+\item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \description{
 Load a simulated dataset as a multiPhylo object

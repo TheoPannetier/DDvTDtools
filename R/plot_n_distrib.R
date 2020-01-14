@@ -3,8 +3,7 @@
 #' Plots the distribution of the number of tips at present for a pair
 #' of TD and DD trees that share the same parameter set.
 #'
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values.
+#' @inheritParams params_doc
 #'
 #' @author Théo Pannetier
 #' @export

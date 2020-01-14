@@ -1,8 +1,6 @@
 #' Load a simulated dataset as a multiPhylo object
 #'
-#' @param sim name of the model used to simulate the trees. See \code{get_sim_names()}
-#' @param para four-digit-character specifying the parameters used to simulate the trees. See \code{get_para_values}.
-#' @param with_extinct logical. \code{with_extinct = F} for the reconstructed tree, \code{with_extinct = T} for the complete tree.
+#' @inheritParams params_doc
 #'
 #' @author Theo Pannetier
 #' @export

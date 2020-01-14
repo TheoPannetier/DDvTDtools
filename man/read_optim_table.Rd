@@ -7,17 +7,19 @@
 read_optim_table(sim, optim, para, init_k = "true_k")
 }
 \arguments{
-\item{sim}{name of the model used to simulate the trees.
-See \code{get_sim_names()}}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{optim}{name of the model fitted to the simulated trees.
-See \code{get_optim_names()}}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{para}{four-digit-character specifying the parameters used to
-simulate the trees. See \code{get_para_values}.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 
-\item{init_k}{character, the setting used to initialise parameter K.
-See \code{get_possible_init_k()} for possible values.}
+\item{init_k}{character code specifying the initial values of parameter K
+used in the optimisation. Refer to \code{get_possible init_k} doc for
+details, and call \code{get_possible_init_k} to see possible inputs.}
 }
 \description{
 The function will go fetch the data frame corresponding to the arguments and

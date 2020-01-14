@@ -7,7 +7,12 @@
 get_n_table(sim, para)
 }
 \arguments{
-\item{para}{}
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
+
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 }
 \description{
 Assemble a table containing the number of tips in each tree in a results data

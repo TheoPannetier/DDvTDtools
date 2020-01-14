@@ -7,6 +7,17 @@
 get_lr_threshold(sim, para, init_k, percentile)
 }
 \arguments{
+\item{sim}{character, name of simulation model, either \code{"DD"}
+or \code{"TD"}.}
+
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
+
+\item{init_k}{character code specifying the initial values of parameter K
+used in the optimisation. Refer to \code{get_possible init_k} doc for
+details, and call \code{get_possible_init_k} to see possible inputs.}
+
 \item{percentile}{numeric value between 0 and 1, the percentile on which the
 threshold should be based (normally 0.05 for DD, 0.95 for TD).}
 }

@@ -9,11 +9,11 @@ check_init_pars(init_pars, optim, brts)
 \arguments{
 \item{init_pars}{numeric vector. The initial parameter values to be checked.}
 
-\item{optim}{character, the model to fit on the tree.
-Call \code{get_optim_names()} for possible values.}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{brts}{numeric vector. The branching times for the tree to fit model
-\code{optim} on.}
+\item{brts}{numeric vector, a set of branching times as given by
+\code{ape::branching_times()}.}
 }
 \description{
 Checks that default or user-specified values entered to initialize the

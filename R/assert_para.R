@@ -1,6 +1,6 @@
 #' Assert the value of 'para' is a valid parameter combination for DDvTDtools
 #'
-#' @param para numeric or character. A four-digits code specifying a set of parameter values.
+#' @inheritParams params_doc
 #' @author Theo Pannetier
 #' @seealso \code{get_para_values()}, \code{para_to_pars()}
 #'

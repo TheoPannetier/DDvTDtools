@@ -2,14 +2,7 @@
 #'
 #' Calls \code{get_likelihood_along_K()} for a range of trees in DDvTD
 #'
-#' @param sim character, the name of a simulation model. See
-#' \code{get_sim_names()} for possible values.
-#' @param optim character. The name of the model to get the likelihood landscape
-#' of, can be either "DD" or "TD".
-#' @param rangemc numeric vector, the index(es) of the tree(s) to compute the
-#' landscape for.
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values. See \code{get_para_values()}
+#' @inheritParams params_doc
 #' @param K_seq numeric vector, the values of K to get the likelihood for, i.e.
 #' the points on which the landscape will be drawn. Default option is every 10
 #' up to 100, and every 100 up to 1000, plus increased resolution around both N

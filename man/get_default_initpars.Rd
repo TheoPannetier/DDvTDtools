@@ -10,11 +10,11 @@ get_default_initpars(true_pars, optim, brts)
 \item{true_pars}{numeric vector. The true parameter values used to simulate
 the trees.}
 
-\item{optim}{character, the model to fit on the tree.
-Call \code{get_optim_names()} for possible values.}
+\item{optim}{character, name of the optimisation model, either \code{"DD"}
+or \code{"TD"}.}
 
-\item{brts}{numeric vector. The branching times for the tree to fit model
-\code{optim} on.}
+\item{brts}{numeric vector, a set of branching times as given by
+\code{ape::branching_times()}.}
 }
 \description{
 Returns default initial parameter values used to fit \code{optim} models to

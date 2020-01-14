@@ -6,10 +6,7 @@
 #'
 #' @param true_pars numeric vector. The true parameter values used to simulate
 #' the trees.
-#' @param optim character, the model to fit on the tree.
-#' Call \code{get_optim_names()} for possible values.
-#' @param brts numeric vector. The branching times for the tree to fit model
-#' \code{optim} on.
+#' @inheritParams params_doc
 #'
 #' @details For the DD and TD models, initial parameter values are by default
 #' set to the true values used to simulate the trees. For thr CR model, la0

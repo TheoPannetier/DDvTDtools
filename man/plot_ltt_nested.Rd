@@ -7,8 +7,9 @@
 plot_ltt_nested(para)
 }
 \arguments{
-\item{para}{numeric or character. A four-digits code specifying a set of
-parameter values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 }
 \description{
 Calls \code{plot_avg_ltt} and \code{plot_n_distrib}, and nests the latter in

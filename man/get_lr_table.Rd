@@ -7,7 +7,13 @@
 get_lr_table(para, init_k)
 }
 \arguments{
-\item{init_k}{}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
+
+\item{init_k}{character code specifying the initial values of parameter K
+used in the optimisation. Refer to \code{get_possible init_k} doc for
+details, and call \code{get_possible_init_k} to see possible inputs.}
 }
 \description{
 Calls \code{get_lr} and binds results in a table with corresponding

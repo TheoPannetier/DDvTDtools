@@ -1,9 +1,6 @@
 #' Plot logLR distribution for DD & TD trees
 #'
-#' @param para numeric or character. A four-digits code specifying a set of
-#' parameter values. See \code{get_para_values()} for possible values.
-#' @param init_k character, the setting used to initialise parameter K.
-#' See \code{get_possible_init_k()} for possible values.
+#' @inheritParams params_doc
 #' @param plot_thresholds logical, should quantile bars be plotted with the
 #' distribution?
 #' @param label_p_success logical, should the proportion of successes be added as

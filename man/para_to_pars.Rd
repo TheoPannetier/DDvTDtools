@@ -7,7 +7,9 @@
 para_to_pars(para)
 }
 \arguments{
-\item{para}{numeric or character. A four-digits code specifying a set of parameter values. See \code{get_para_values()} for possible values.}
+\item{para}{numeric, a four-digits code specifying a set of four parameter
+values. Refer to \code{get_para_values} doc for details, and call
+\code{get_para_values} to see possible inputs.}
 }
 \value{
 a four-element numeric vector containing the parameter values associated to 'para'.

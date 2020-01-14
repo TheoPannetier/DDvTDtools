@@ -3,18 +3,7 @@
 #' \code{run_from_n} is simply a wrapper of \code{run_ML} where K is initialized
 #' from the number of tips in the tree, rather than the true value.
 #'
-#' @param sim character, the simulation model. Call \code{get_sim_names()} for a
-#'  list of possible values.
-#' @param para character or numeric, the code specifying the parameter values
-#' used in the simulation.
-#' Call \code{get_para_values()} for possible inputs, and \code{para_to_pars()}
-#' for the corresponding parameter values.
-#' @param optim character. The name of the model to fit to the simulated
-#' phylogenies. See \code{get_optim_names()} for possible inputs.
-#' If \code{NULL} (default), values are initialized using true values used to
-#' simulate the trees.
-#' @param rangemc a numeric vector containing all the indices of the trees to
-#' optimize the model on. Default to all the trees in the dataset.
+#' @inheritParams params_doc
 #' @param methode argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
 #' \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
 #' info.
