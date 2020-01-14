@@ -49,6 +49,6 @@ count_errors_log <- function(path_to_log){
     }
   }
   # Print the nb
-  cat(log_filename, "\t", counts, "\n")
+  cat(path_to_log, "\t", counts, "\n")
   return(mcs_error_list)
 }

@@ -3,7 +3,7 @@ Type: Package
 Title: Compare diversity-dependent (DD) and time-dependent (TD) diversification models
 Depends:
     R (>= 3.5.0)
-Version: 0.1.5
+Version: 0.2.0
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
 Description: More about what it does (maybe more than one line)
@@ -17,7 +17,8 @@ Imports:
     dplyr,
     purrr,
     plyr,
-    magrittr
+    magrittr,
+    latex2exp
 Suggests:
     TreeSim,
     testthat

@@ -23,7 +23,7 @@ get_p_success <- function(sim, para, init_k) {
       sim = "TD",
       para = para,
       init_k = init_k,
-      prob = 0.95
+      percentile = 0.95
     )
     n_success <- length(which(lr_table > success_threshold))
     p_success <- round(n_success / length(lr_table), 3)
@@ -33,7 +33,7 @@ get_p_success <- function(sim, para, init_k) {
       sim = "DD",
       para = para,
       init_k = init_k,
-      prob = 0.05
+      percentile = 0.05
     )
     n_success <- length(which(lr_table < success_threshold))
     p_success <- round(n_success / length(lr_table), 3)

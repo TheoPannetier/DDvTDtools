@@ -79,10 +79,10 @@ plot_blrt <- function(para,
     ggplot2::theme(text = ggplot2::element_text(size = 14))
   if (plot_thresholds == TRUE) {
     x_bar_dd <- get_lr_threshold(
-      sim = "DD", para = para, init_k = init_k,  prob = threshold_dd
+      sim = "DD", para = para, init_k = init_k,  percentile = threshold_dd
         )
     x_bar_td <- get_lr_threshold(
-      sim = "TD", para = para, init_k = init_k,  prob = threshold_td
+      sim = "TD", para = para, init_k = init_k,  percentile = threshold_td
     )
     gg <- gg +
       ggplot2::geom_rect(

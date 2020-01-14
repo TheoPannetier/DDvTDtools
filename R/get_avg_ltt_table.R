@@ -34,9 +34,9 @@ get_avg_ltt_table <- function(sim, para, with_extinct = FALSE) {
 
   avg_ltt_matrix <- TreeSim::LTT.plot.gen(trees = list(phylos))[[1]]
   avg_ltt <- dplyr::tibble(
-    "raw_time" = as.numeric(avg_ltt_matrix[,1]),
-    "raw_avg_n" = as.numeric(avg_ltt_matrix[,2]),
-    "sim" = factor(sim, levels = get_sim_names())
+    raw_time = as.numeric(avg_ltt_matrix[,1]),
+    raw_avg_n = as.numeric(avg_ltt_matrix[,2]),
+    sim = factor(sim, levels = get_sim_names())
   ) %>%
     # points from 0 to 2 tips (crown) are irrelevant
     dplyr::filter(round(raw_time, digits = 6) != -crown_age) %>%
