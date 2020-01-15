@@ -79,7 +79,7 @@ run_liklandscapes <- function(
     # Set lambda0 & mu0 values -------------------------------------------------
     if (fixed_pars_values %in% c("true_k", "from_n")) {
 
-      ML_results <- DDvTDtools::read_optim_table(
+      ML_results <- DDvTDtools::read_optim_results(
         sim = sim,
         optim = optim,
         para = para,

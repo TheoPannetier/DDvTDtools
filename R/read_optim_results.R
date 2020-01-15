@@ -1,14 +1,15 @@
-#' Access a table with model fitting results
+#' Read results of the model optimisation
 #'
-#' The function will go fetch the data frame corresponding to the arguments and
-#' return it.
+#' Reads a result dataframe produced by [run_optim()]. The file is expedcted to
+#' be found in `DDvTD/data/optim/` and have the default name computed by
+#' [run_optim()].
 #'
 #' @inheritParams params_doc
-##'
+#'
 #' @author Theo Pannetier
 #' @export
 
-read_optim_table <- function(sim, optim, para, init_k = "true_k"){
+read_optim_results <- function(sim, optim, para, init_k = "true_k"){
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)

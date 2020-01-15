@@ -12,7 +12,7 @@ run_sim(
   seed = 42,
   outputfile = paste0("./data/sim/sim", sim, "-", para, ".RData"),
   save_results = TRUE,
-  return_results = TRUE
+  return_results = FALSE
 )
 }
 \arguments{

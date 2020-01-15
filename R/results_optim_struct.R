@@ -4,7 +4,7 @@
 #'
 #' @author Théo Pannetier
 
-get_empty_optim_df <- function(){
+results_optim_struct <- function(){
   data.frame(
     sim = factor(levels = get_sim_names()),
     ntips = numeric(),

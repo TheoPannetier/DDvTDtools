@@ -11,10 +11,10 @@ get_lr <- function(sim, para, init_k = "true_k") {
   assert_para(para)
   assert_init_k(init_k)
 
-  res_DD <- read_optim_table(
+  res_DD <- read_optim_results(
     sim = sim, para = para, optim = "DD", init_k = init_k
     )
-  res_TD <- read_optim_table(
+  res_TD <- read_optim_results(
     sim = sim, para = para, optim = "TD", init_k = init_k
     )
 

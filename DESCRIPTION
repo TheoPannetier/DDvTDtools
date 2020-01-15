@@ -23,4 +23,4 @@ Suggests:
     TreeSim,
     testthat
 LazyData: true
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2

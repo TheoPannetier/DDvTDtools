@@ -2,20 +2,19 @@
 % Please edit documentation in R/run_optim.R
 \name{run_optim}
 \alias{run_optim}
-\title{Run maximum likelihood esimation of a diversification model on a set of simulated trees}
+\title{Run maximum likelihood optimisation of a model on simulated trees}
 \usage{
 run_optim(
   sim,
   optim,
   para,
-  custom_pars = NULL,
-  outputfile = NULL,
-  rangemc = NULL,
+  outputfile = paste0("sim", sim, "_optim", optim, "_", para, "_true_k.rds"),
+  rangemc = 1:1000,
   methode = "ode45",
   optimmethod = "subplex",
   tol = rep(1e-06, 3),
   save_results = TRUE,
-  return_res = FALSE,
+  return_results = FALSE,
   jobID = NA,
   num_cycles = 1,
   cond = 1
@@ -32,34 +31,37 @@ or \code{"TD"}.}
 values. Refer to \code{get_para_values} doc for details, and call
 \code{get_para_values} to see possible inputs.}
 
-\item{custom_pars}{numeric vector, user-specified initial values for the parameters to be optimized.
-If \code{NULL} (default), values are initialized using true values used to simulate the trees.}
-
-\item{outputfile}{character, the name of the file to save the output data frame in.
-Must be specified if \code{save_results = TRUE}.}
+\item{outputfile}{character, the name of the file to save the output data
+frame in. The default follows the structure expected by [read_optim_table].}
 
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
-\item{methode}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+\item{methode}{likelihood solving methode, passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{optimmethod}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+\item{optimmethod}{optimisation algorithm, passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{tol}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more info.}
+\item{tol}{optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{save_results}{logical. Should save the results to \code{outputfile} (default) or not.}
+\item{save_results}{logical. Should the results be saved to
+\code{outputfile}?}
 
-\item{return_res}{logical. Should results be returned? Default to \code{FALSE}.}
+\item{jobID}{SLURM job ID passed when the function is called from a
+cluster script.}
 
-\item{jobID}{is only relevant for metadata. Job scripts pass their ID to this argument. \code{NA} if run locally.}
+\item{num_cycles}{number of cycles of optimisation,
+passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{num_cycles}{numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of cycles of optimisation.}
+\item{cond}{code specifying how the likelihood is conditioned. Passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{cond}{numeric, conditionning parameter passed to
-\code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.}
+\item{return_res}{logical. Should the results be returned?}
 }
 \description{
-\code{run_optim} fetches the branching times from the dataset indicated by
-\code{sim} and \code{para}, and runs the maximum loglikelihood of the model specified in \code{optim}.
+Read a set of simulated trees as created by [run_sim()], set up initial
+parameter values, call [DDD::dd_ML()] or [DDD::bd_ML()] to run the
+optimisation and format output.
 }
 \author{
 Théo Pannetier

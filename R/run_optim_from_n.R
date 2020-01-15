@@ -1,50 +1,49 @@
 #' Run maximum likelihood esimation starting from the number of lineages
 #'
-#' \code{run_optim_from_n} is simply a wrapper of \code{run_optim} where K is initialized
-#' from the number of tips in the tree, rather than the true value.
+#' An alternative version of [run_optim()] where the initial value of K is set
+#' to N, the nb of tips in the trees, in order to ease convergence to the
+#' maximum likelihood.
 #'
 #' @inheritParams params_doc
-#' @param methode argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-#' \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-#' info.
-#' @param optimmethod argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-#' \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-#' info.
-#' @param tol argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-#' \code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-#' info.
-#' @param save_results logical. Should save the results to \code{outputfile}
-#' (default) or not.
-#' @param return_res logical. Should results be returned? Default to
-#' \code{FALSE}.
-#' @param jobID is only relevant for metadata. Job scripts pass their ID to
-#' this argument. \code{NA} if run locally.
-#' @param num_cycles numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of
-#' cycles of optimisation.
-#' @param cond numeric, conditionning parameter passed to
-#' \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.
+#' @param outputfile character, the name of the file to save the output data
+#' frame in. The default follows the structure expected by
+#' [read_optim_results()].
+#' @param methode likelihood solving methode, passed to
+#' [DDD::dd_ML()] / [DDD::bd_ML()].
+#' @param optimmethod optimisation algorithm, passed to
+#' [DDD::dd_ML()] / [DDD::bd_ML()].
+#' @param tol optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].
+#' @param save_results logical. Should the results be saved to
+#' \code{outputfile}?
+#' @param return_results logical. Should the results be returned?
+#' @param jobID SLURM job ID passed when the function is called from a
+#' cluster script.
+#' @param num_cycles number of cycles of optimisation,
+#' passed to [DDD::dd_ML()] / [DDD::bd_ML()].
+#' @param cond code specifying how the likelihood is conditioned. Passed to
+#' [DDD::dd_ML()] / [DDD::bd_ML()].
 
 #' @author Théo Pannetier
 #'
 #' @export
 #'
-run_optim_from_n <- function(sim, optim, para, rangemc = NULL,
+run_optim_from_n <- function(sim, optim, para, rangemc = 1:1000,
                        methode = "ode45", optimmethod = "subplex",
                        tol = rep(1E-6,3), jobID = NA, num_cycles = 1,
-                       save_results = TRUE, return_res = FALSE, cond = 1) {
+                       save_results = TRUE, return_resultsults = FALSE, cond = 1) {
   # Check argument values format
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_optim(optim)
   assert_para(para)
 
-  if (!(is.numeric(rangemc) | is.null(rangemc))) {
-    stop("rangemc must either be null or a numeric vector.")
+  if (!is.numeric(rangemc)) {
+    stop("rangemc must be a numeric vector.")
     }
   if (!is.character(methode)){stop("methode must be a character")}
   if (!is.character(optimmethod)){stop("optimmethod must be a character")}
   if (!is.logical(save_results)){stop("save_results must be a logical.")}
-  if (!is.logical(return_res)){stop("return_res must be a logical.")}
+  if (!is.logical(return_results)){stop("return_results must be a logical.")}
   if (!is.numeric(tol) | length(tol) != 3 ){
     stop("tol must be a numeric vector of length 3.")}
   if (is.na(jobID)) {
@@ -55,9 +54,6 @@ run_optim_from_n <- function(sim, optim, para, rangemc = NULL,
     outputfile <- paste0(
       "sim", sim, "_optim", optim, "_", para, "_from_n_", jobID, ".rds"
     )
-  }
-  if (is.null(rangemc)) {
-    rangemc <- 1:1000
   }
   if (!(cond %in% 0:3)){stop("cond must be a number between 0 and 3.")}
 
@@ -83,7 +79,7 @@ run_optim_from_n <- function(sim, optim, para, rangemc = NULL,
         optimmethod = optimmethod,
         tol = tol,
         save_results = FALSE,
-        return_res = TRUE,
+        return_results = TRUE,
         jobID = jobID,
         num_cycles = num_cycles,
         cond = cond
@@ -93,14 +89,14 @@ run_optim_from_n <- function(sim, optim, para, rangemc = NULL,
     }
   )
 
-  df <- get_empty_optim_df()
+  results <- results_optim_struct()
   for(i in seq_along(res)) {
-    df <- rbind(df, res[[i]])
+    results <- rbind(results, res[[i]])
   }
   if(save_results){
-    saveRDS(df, file = paste0("data/optim/", outputfile))
+    saveRDS(results, file = paste0("data/optim/", outputfile))
   }
-  if(return_res){
-    return(df)
+  if(return_results){
+    return(results)
   }
 }

@@ -25,7 +25,7 @@
 #'
 #' @export
 
-get_optim_df_row <- function(mc, sim, optim, brts, true_pars, init_pars,
+format_optim_results_row <- function(mc, sim, optim, brts, true_pars, init_pars,
                              ML_output, num_cycles = 1, methode, optimmethod,
                              jobID, cond)
 {

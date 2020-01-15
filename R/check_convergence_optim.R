@@ -3,7 +3,8 @@
 #' Reads result data frames in the optim folder and prints a message if there is
 #' any missing row.
 #'
-#' @param folder the folder where the results files are stored. All .rds files in the folder are read.
+#' @param folder the folder where the results files are stored. All .rds files
+#' in the folder are read.
 #'
 #' @author Théo Pannetier
 #'
@@ -12,7 +13,7 @@
 check_convergence_optim <- function(folder = "data/optim/"){
   assert_DDvTD_wd()
 
-  files_list <-  list.files(folder, pattern = ".rds")
+  files_list <- list.files(folder, pattern = ".rds")
 
   for(file in files_list){
     res <- readRDS(paste0(folder, file))
