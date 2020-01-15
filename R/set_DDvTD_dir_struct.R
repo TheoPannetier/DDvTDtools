@@ -11,7 +11,6 @@ set_DDvTD_dir_struct <- function() {
   dir.create("DDvTD/data")
   dir.create("DDvTD/data/sim")
   dir.create("DDvTD/data/optim")
-  dir.create("DDvTD/data/lik_landscapes")
   dir.create("DDvTD/figures")
   setwd("DDvTD")
 }
