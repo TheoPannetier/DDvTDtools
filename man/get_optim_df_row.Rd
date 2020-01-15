@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_optim_df_row.R
 \name{get_optim_df_row}
 \alias{get_optim_df_row}
-\title{Assemble a row of results for run_ML output}
+\title{Assemble a row of results for run_optim output}
 \usage{
 get_optim_df_row(
   mc,
@@ -56,7 +56,7 @@ that the result was obtained locally.}
 \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.}
 }
 \description{
-Internal function called by \code{run_ML}. Formats optimisation results and
+Internal function called by \code{run_optim}. Formats optimisation results and
 metadata in a data frame row.
 }
 \author{

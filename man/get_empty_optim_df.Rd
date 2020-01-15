@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_empty_optim_df.R
 \name{get_empty_optim_df}
 \alias{get_empty_optim_df}
-\title{Get an empty data frame to initiate run_ML output.}
+\title{Get an empty data frame to initiate run_optim output.}
 \usage{
 get_empty_optim_df()
 }
 \description{
-Internal function called only by \code{run_ML}.
+Internal function called only by \code{run_optim}.
 }
 \author{
 Théo Pannetier

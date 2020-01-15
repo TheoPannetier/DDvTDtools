@@ -1,6 +1,6 @@
-#' Get an empty data frame to initiate run_ML output.
+#' Get an empty data frame to initiate run_optim output.
 #'
-#' Internal function called only by \code{run_ML}.
+#' Internal function called only by \code{run_optim}.
 #'
 #' @author Théo Pannetier
 

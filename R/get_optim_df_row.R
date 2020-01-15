@@ -1,6 +1,6 @@
-#' Assemble a row of results for run_ML output
+#' Assemble a row of results for run_optim output
 #'
-#' Internal function called by \code{run_ML}. Formats optimisation results and
+#' Internal function called by \code{run_optim}. Formats optimisation results and
 #' metadata in a data frame row.
 #'
 #' @inheritParams params_doc

@@ -1,4 +1,4 @@
-#' Check initial parameter values for run_ML
+#' Check initial parameter values for run_optim
 #'
 #' Checks that default or user-specified values entered to initialize the
 #' ML optimisation do not break forbidden conditions inside \code{DDD::dd_ML()}

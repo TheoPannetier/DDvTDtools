@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_default_initpars.R
 \name{get_default_initpars}
 \alias{get_default_initpars}
-\title{Get default initial parameter values for run_ML optimisation}
+\title{Get default initial parameter values for run_optim optimisation}
 \usage{
 get_default_initpars(true_pars, optim, brts)
 }
@@ -18,7 +18,7 @@ or \code{"TD"}.}
 }
 \description{
 Returns default initial parameter values used to fit \code{optim} models to
-phylogenies with \code{run_ML}. Called by \code{run_ML} if \code{custom_pars}
+phylogenies with \code{run_optim}. Called by \code{run_optim} if \code{custom_pars}
 are not provided.
 }
 \details{

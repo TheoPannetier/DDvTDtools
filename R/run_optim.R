@@ -1,6 +1,6 @@
 #' Run maximum likelihood esimation of a diversification model on a set of simulated trees
 #'
-#' \code{run_ML} fetches the branching times from the dataset indicated by
+#' \code{run_optim} fetches the branching times from the dataset indicated by
 #' \code{sim} and \code{para}, and runs the maximum loglikelihood of the model specified in \code{optim}.
 #'
 #' @inheritParams params_doc
@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-run_ML <- function(
+run_optim <- function(
   sim, optim, para, custom_pars = NULL, outputfile = NULL,
   rangemc = NULL, methode = "ode45", optimmethod = "subplex",
   tol = rep(1E-6,3), save_results = TRUE, return_res = FALSE,

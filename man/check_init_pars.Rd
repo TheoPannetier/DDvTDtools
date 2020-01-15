@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_init_pars.R
 \name{check_init_pars}
 \alias{check_init_pars}
-\title{Check initial parameter values for run_ML}
+\title{Check initial parameter values for run_optim}
 \usage{
 check_init_pars(init_pars, optim, brts)
 }

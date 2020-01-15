@@ -1,6 +1,6 @@
 #' Run maximum likelihood esimation starting from the number of lineages
 #'
-#' \code{run_from_n} is simply a wrapper of \code{run_ML} where K is initialized
+#' \code{run_optim_from_n} is simply a wrapper of \code{run_optim} where K is initialized
 #' from the number of tips in the tree, rather than the true value.
 #'
 #' @inheritParams params_doc
@@ -28,7 +28,7 @@
 #'
 #' @export
 #'
-run_from_n <- function(sim, optim, para, rangemc = NULL,
+run_optim_from_n <- function(sim, optim, para, rangemc = NULL,
                        methode = "ode45", optimmethod = "subplex",
                        tol = rep(1E-6,3), jobID = NA, num_cycles = 1,
                        save_results = TRUE, return_res = FALSE, cond = 1) {
@@ -72,7 +72,7 @@ run_from_n <- function(sim, optim, para, rangemc = NULL,
         "mu0" = para_to_pars(para)[3],
         "k" = n
         )
-      row <- run_ML(
+      row <- run_optim(
         sim = sim,
         optim = optim,
         para = para,
