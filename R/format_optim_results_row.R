@@ -30,14 +30,14 @@ format_optim_results_row <- function(mc, sim, optim, brts, true_pars, init_pars,
                              jobID, cond)
 {
   df <- data.frame(
-    sim = factor(sim, levels = get_sim_names()),
+    sim = factor(sim, levels = arg_sim()),
     ntips = length(brts) + 1,
     crown_age = true_pars[1],
     true_lambda0 = true_pars[2],
     true_mu0 = true_pars[3],
     true_K = true_pars[4],
     mc = mc,
-    optim = factor(optim, levels = get_optim_names()),
+    optim = factor(optim, levels = arg_optim()),
     init_lambda0 = init_pars[1],
     init_mu0 = init_pars[2],
     init_K = init_pars[3],

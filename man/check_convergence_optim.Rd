@@ -7,7 +7,8 @@
 check_convergence_optim(folder = "data/optim/")
 }
 \arguments{
-\item{folder}{the folder where the results files are stored. All .rds files in the folder are read.}
+\item{folder}{the folder where the results files are stored. All .rds files
+in the folder are read.}
 }
 \description{
 Reads result data frames in the optim folder and prints a message if there is

@@ -8,8 +8,8 @@ assert_init_k(init_k)
 }
 \arguments{
 \item{init_k}{character code specifying the initial values of parameter K
-used in the optimisation. Refer to \code{get_possible init_k} doc for
-details, and call \code{get_possible_init_k} to see possible inputs.}
+used in the optimisation. Refer to \code{get_possible init_k()} doc for
+details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{
 Asserts input init parameter is supported

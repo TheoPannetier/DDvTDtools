@@ -8,11 +8,12 @@ para_to_pars(para)
 }
 \arguments{
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 }
 \value{
-a four-element numeric vector containing the parameter values associated to 'para'.
+a four-element numeric vector containing the parameter values
+associated to 'para'.
 }
 \description{
 Prints the parameter values associated with a given value of argument 'para'.

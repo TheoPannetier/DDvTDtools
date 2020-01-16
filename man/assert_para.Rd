@@ -8,14 +8,14 @@ assert_para(para)
 }
 \arguments{
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 }
 \description{
 Assert the value of 'para' is a valid parameter combination for DDvTDtools
 }
 \seealso{
-\code{get_para_values()}, \code{para_to_pars()}
+\code{arg_para()}, \code{para_to_pars()}
 }
 \author{
 Theo Pannetier

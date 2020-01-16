@@ -11,16 +11,16 @@
 get_lr_table <- function(para, init_k) {
   lr_table <- data.frame(
     lr = numeric(),
-    para = factor(levels = rev(get_para_values()), ordered = TRUE),
-    sim = factor(levels = get_sim_names(), ordered = TRUE)
+    para = factor(levels = rev(arg_para()), ordered = TRUE),
+    sim = factor(levels = arg_sim(), ordered = TRUE)
   )
 
-  for (sim in get_sim_names()) {
+  for (sim in arg_sim()) {
     lr <- get_lr(sim = sim, para = para, init_k = init_k)
     subtable <- data.frame(
       lr = lr,
-      para = factor(para, levels = rev(get_para_values()), ordered = TRUE),
-      sim = factor(sim, levels = get_sim_names(), ordered = TRUE)
+      para = factor(para, levels = rev(arg_para()), ordered = TRUE),
+      sim = factor(sim, levels = arg_sim(), ordered = TRUE)
     )
     lr_table <- rbind(lr_table, subtable)
   }

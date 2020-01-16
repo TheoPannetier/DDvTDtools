@@ -9,7 +9,7 @@
 #' @export
 #' @seealso \code{para_to_pars()}
 
-get_para_values <- function(incl_unused = FALSE) {
+arg_para <- function(incl_unused = FALSE) {
   if (!is.logical(incl_unused)) {
     stop("incl_unused must be logical")
     }

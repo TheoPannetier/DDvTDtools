@@ -5,9 +5,6 @@
 #' maximum likelihood.
 #'
 #' @inheritParams params_doc
-#' @param outputfile character, the name of the file to save the output data
-#' frame in. The default follows the structure expected by
-#' [read_optim_results()].
 #' @param methode likelihood solving methode, passed to
 #' [DDD::dd_ML()] / [DDD::bd_ML()].
 #' @param optimmethod optimisation algorithm, passed to
@@ -30,7 +27,7 @@
 run_optim_from_n <- function(sim, optim, para, rangemc = 1:1000,
                        methode = "ode45", optimmethod = "subplex",
                        tol = rep(1E-6,3), jobID = NA, num_cycles = 1,
-                       save_results = TRUE, return_resultsults = FALSE, cond = 1) {
+                       save_results = TRUE, return_results = FALSE, cond = 1) {
   # Check argument values format
   assert_DDvTD_wd()
   assert_sim(sim)

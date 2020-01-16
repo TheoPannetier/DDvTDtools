@@ -2,12 +2,12 @@
 % Please edit documentation in R/default_pars2_td4.R
 \name{default_pars2_td4}
 \alias{default_pars2_td4}
-\title{Predefined pars2 argument for bd_loglik as used in DDvTD}
+\title{Default TD pars2 argument passed to DDD}
 \usage{
 default_pars2_td4()
 }
 \description{
-Returns default settings to call bd_loglik() for DDvTD, model TD4
+Default values for the `pars2` argument of [DDD::bd_loglik]
 }
 \author{
 Theo Pannetier

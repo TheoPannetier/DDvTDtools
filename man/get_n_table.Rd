@@ -11,12 +11,12 @@ get_n_table(sim, para)
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 }
 \description{
-Assemble a table containing the number of tips in each tree in a results data
-set.
+Assemble a table containing N, the number of tips in each tree in a
+results data set.
 }
 \author{
 Theo Pannetier

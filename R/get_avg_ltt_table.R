@@ -1,7 +1,7 @@
 #' Computes the average number of lineages over time for a set of phylogenies
 #'
-#' Returns the average number of lineage over time for a dataset of 1000 simulated
-#' phylogenies
+#' Computes a table containing the number of species over time averaged over
+#' the 1000 replicates of a results dataset.
 #'
 #' @inheritParams params_doc
 #' @author Théo Pannetier
@@ -19,7 +19,7 @@ get_avg_ltt_table <- function(sim, para, with_extinct = FALSE) {
          call. = FALSE)
   }
 
-  phylos <- get_sim_multiPhylo(
+  phylos <- read_sim_multiPhylo(
     sim = sim,
     para = para,
     with_extinct = with_extinct
@@ -30,7 +30,7 @@ get_avg_ltt_table <- function(sim, para, with_extinct = FALSE) {
   avg_ltt <- dplyr::tibble(
     raw_time = as.numeric(avg_ltt_matrix[,1]),
     raw_avg_n = as.numeric(avg_ltt_matrix[,2]),
-    sim = factor(sim, levels = get_sim_names())
+    sim = factor(sim, levels = arg_sim())
   ) %>%
     # points from 0 to 2 tips (crown) are irrelevant
     dplyr::filter(round(raw_time, digits = 6) != -crown_age) %>%

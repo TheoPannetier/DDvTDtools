@@ -8,6 +8,7 @@ run_optim(
   sim,
   optim,
   para,
+  custom_pars = NULL,
   outputfile = paste0("sim", sim, "_optim", optim, "_", para, "_true_k.rds"),
   rangemc = 1:1000,
   methode = "ode45",
@@ -28,11 +29,14 @@ or \code{"TD"}.}
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
+
+\item{custom_pars}{numeric vector, user-specified initial values for the parameters to be optimized.
+If \code{NULL} (default), values are initialized using true values used to simulate the trees.}
 
 \item{outputfile}{character, the name of the file to save the output data
-frame in. The default follows the structure expected by [read_optim_table].}
+frame in. The default follows the structure expected by [read_optim_results].}
 
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
@@ -47,6 +51,8 @@ frame in. The default follows the structure expected by [read_optim_table].}
 \item{save_results}{logical. Should the results be saved to
 \code{outputfile}?}
 
+\item{return_results}{logical. Should the results be returned?}
+
 \item{jobID}{SLURM job ID passed when the function is called from a
 cluster script.}
 
@@ -55,8 +61,6 @@ passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 
 \item{cond}{code specifying how the likelihood is conditioned. Passed to
 [DDD::dd_ML()] / [DDD::bd_ML()].}
-
-\item{return_res}{logical. Should the results be returned?}
 }
 \description{
 Read a set of simulated trees as created by [run_sim()], set up initial

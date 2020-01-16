@@ -8,7 +8,7 @@
 #' @author Theo Pannetier
 #' @export
 
-get_brts <- function(sim, para, mc, with_extinct = F){
+get_brts <- function(sim, para, mc, with_extinct = FALSE){
   assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)
@@ -19,17 +19,15 @@ get_brts <- function(sim, para, mc, with_extinct = F){
     stop('with_extinct must be a logical')
   }
 
-  trees <- read_trees(sim = sim, para = para)
+  trees <- read_sim(sim = sim, para = para)
 
   if(any(!mc %in% seq_along(trees))){
     stop('There is no tree is the file for that mc.')
   }
 
   if(!with_extinct){
-    # return brts for reconstructed tree
     brts <- as.numeric( ape::branching.times( trees[[mc]][[1]] ) )
   } else {
-    # return brts for complete tree
     brts <- as.numeric( ape::branching.times( trees[[mc]][[2]] ) )
   }
 

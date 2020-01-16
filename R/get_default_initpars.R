@@ -1,8 +1,7 @@
 #' Get default initial parameter values for run_optim optimisation
 #'
 #' Returns default initial parameter values used to fit \code{optim} models to
-#' phylogenies with \code{run_optim}. Called by \code{run_optim} if \code{custom_pars}
-#' are not provided.
+#' phylogenies with \code{run_optim()}. Called by \code{run_optim()}.
 #'
 #' @param true_pars numeric vector. The true parameter values used to simulate
 #' the trees.

@@ -20,10 +20,12 @@ run_sim(
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 
-\item{nb_trees}{Integer. How many trees should be generated?}
+\item{nb_trees}{numeric. How many trees should be generated?}
+
+\item{seed}{numeric, the number to seed the random number generator.}
 
 \item{outputfile}{path and name for output file, by default generated
 automatically from \code{sim} and \code{para}.}

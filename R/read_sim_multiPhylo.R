@@ -5,7 +5,7 @@
 #' @author Theo Pannetier
 #' @export
 #'
-get_sim_multiPhylo <- function(sim, para, with_extinct = F){
+read_sim_multiPhylo <- function(sim, para, with_extinct = FALSE){
   assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)
@@ -14,7 +14,7 @@ get_sim_multiPhylo <- function(sim, para, with_extinct = F){
     stop('with_extinct must be a logical')
   }
 
-  trees <- read_trees(sim = sim, para = para)
+  trees <- read_sim(sim = sim, para = para)
 
   for (mc in seq_along(trees)){
 

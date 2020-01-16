@@ -11,14 +11,14 @@ get_avg_ltt_table(sim, para, with_extinct = FALSE)
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 
 \item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \description{
-Returns the average number of lineage over time for a dataset of 1000 simulated
-phylogenies
+Computes a table containing the number of species over time averaged over
+the 1000 replicates of a results dataset.
 }
 \author{
 Théo Pannetier

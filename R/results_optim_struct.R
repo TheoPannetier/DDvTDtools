@@ -6,14 +6,14 @@
 
 results_optim_struct <- function(){
   data.frame(
-    sim = factor(levels = get_sim_names()),
+    sim = factor(levels = arg_sim()),
     ntips = numeric(),
     crown_age = numeric(),
     true_lambda0 = numeric(),
     true_mu0 = numeric(),
     true_K = numeric(),
     mc = numeric(),
-    optim = factor(levels = get_optim_names()),
+    optim = factor(levels = arg_optim()),
     init_lambda0 = numeric(),
     init_mu0 = numeric(),
     init_K = numeric(),

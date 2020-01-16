@@ -7,6 +7,6 @@
 #' @author Theo Pannetier
 #'
 #' @export
-get_possible_init_k <- function() {
+arg_init_k <- function() {
   c("true_k", "from_n")
 }

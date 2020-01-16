@@ -6,7 +6,7 @@
 #' @export
 
 assert_sim <- function(sim) {
-  if ( !(sim %in% get_sim_names())){
-    stop(cat("'optim' is invalid. Possible inputs are", get_sim_names()))
+  if ( !(sim %in% arg_sim())){
+    stop(cat("'optim' is invalid. Possible inputs are", arg_sim()))
   }
 }

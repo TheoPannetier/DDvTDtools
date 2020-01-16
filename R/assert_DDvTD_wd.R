@@ -1,7 +1,8 @@
 #' Assert that DDvTD is the working directory
 #'
-#' Most functions in DDvTDtools rely on a relative path from DDvTD folder to access data and save files.
-#' This function asserts it is the case.
+#' Many functions in DDvTDtools rely on a relative path from DDvTD folder to
+#' access data and save files. This function asserts R is set at this folder
+#' before proceeding.
 #'
 #' @author Théo Pannetier
 #'

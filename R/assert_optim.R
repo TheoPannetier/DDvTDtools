@@ -6,7 +6,7 @@
 #' @export
 
 assert_optim <- function(optim) {
-  if ( !(optim %in% get_optim_names())){
-    stop(cat("'optim' is invalid. Possible inputs are", get_optim_names()))
+  if ( !(optim %in% arg_optim())){
+    stop(cat("'optim' is invalid. Possible inputs are", arg_optim()))
   }
 }

@@ -4,20 +4,19 @@
 \alias{fill_missing_rows}
 \title{Fill missing results row with default values}
 \usage{
-fill_missing_rows(df, para)
+fill_missing_rows(results, para)
 }
 \arguments{
-\item{df}{a results data frame, i.e. as read by
-\code{DDvTDtools::read_optim_table()}}
+\item{results}{a results data frame, as produced by [run_optim()] or accessed
+through [read_optim_results()].}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 }
 \description{
-Function used to fill result data for trees that miss any result.
-Fills the result matrix for a parameter set with default values for these
-missing trees
+Searches a results data frame for missing rows and fills them with default
+values.
 }
 \author{
 Théo Pannetier

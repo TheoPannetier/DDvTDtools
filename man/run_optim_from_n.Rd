@@ -8,14 +8,14 @@ run_optim_from_n(
   sim,
   optim,
   para,
-  rangemc = NULL,
+  rangemc = 1:1000,
   methode = "ode45",
   optimmethod = "subplex",
   tol = rep(1e-06, 3),
   jobID = NA,
   num_cycles = 1,
   save_results = TRUE,
-  return_res = FALSE,
+  return_results = FALSE,
   cond = 1
 )
 }
@@ -27,41 +27,37 @@ or \code{"TD"}.}
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
-\item{methode}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-\code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-info.}
+\item{methode}{likelihood solving methode, passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{optimmethod}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-\code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-info.}
+\item{optimmethod}{optimisation algorithm, passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{tol}{argument passed to \code{\link[DDD:dd_ML]{dd_ML}} or
-\code{\link[DDD:dd_ML]{bd_ML}}. See the \pkg{DDD} documentation for more
-info.}
+\item{tol}{optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{jobID}{is only relevant for metadata. Job scripts pass their ID to
-this argument. \code{NA} if run locally.}
+\item{jobID}{SLURM job ID passed when the function is called from a
+cluster script.}
 
-\item{num_cycles}{numeric, passed to \code{dd_ML}/\code{bd_ML}. Number of
-cycles of optimisation.}
+\item{num_cycles}{number of cycles of optimisation,
+passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 
-\item{save_results}{logical. Should save the results to \code{outputfile}
-(default) or not.}
+\item{save_results}{logical. Should the results be saved to
+\code{outputfile}?}
 
-\item{return_res}{logical. Should results be returned? Default to
-\code{FALSE}.}
+\item{return_results}{logical. Should the results be returned?}
 
-\item{cond}{numeric, conditionning parameter passed to
-\code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.}
+\item{cond}{code specifying how the likelihood is conditioned. Passed to
+[DDD::dd_ML()] / [DDD::bd_ML()].}
 }
 \description{
-\code{run_optim_from_n} is simply a wrapper of \code{run_optim} where K is initialized
-from the number of tips in the tree, rather than the true value.
+An alternative version of [run_optim()] where the initial value of K is set
+to N, the nb of tips in the trees, in order to ease convergence to the
+maximum likelihood.
 }
 \author{
 Théo Pannetier

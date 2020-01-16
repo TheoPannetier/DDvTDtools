@@ -1,9 +1,8 @@
-#' Predefined pars2 argument for bd_loglik as used in DDvTD
+#' Default TD pars2 argument passed to DDD
 #'
-#' Returns default settings to call bd_loglik() for DDvTD, model TD4
+#' Default values for the `pars2` argument of [DDD::bd_loglik]
 #'
 #' @author Theo Pannetier
-#'
 #' @export
 default_pars2_td4 <- function(){
   c(

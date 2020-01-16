@@ -11,12 +11,12 @@ get_lr(sim, para, init_k = "true_k")
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 
 \item{init_k}{character code specifying the initial values of parameter K
-used in the optimisation. Refer to \code{get_possible init_k} doc for
-details, and call \code{get_possible_init_k} to see possible inputs.}
+used in the optimisation. Refer to \code{get_possible init_k()} doc for
+details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{
 Compute likelihood ratios for a results dataset

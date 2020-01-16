@@ -1,7 +1,7 @@
 #' Get N for each tree in a dataset
 #'
-#' Assemble a table containing the number of tips in each tree in a results data
-#' set.
+#' Assemble a table containing N, the number of tips in each tree in a
+#' results data set.
 #'
 #' @inheritParams params_doc
 #'
@@ -13,7 +13,7 @@ get_n_table <- function(sim, para) {
   assert_sim(sim)
   assert_para(para)
 
-  phylo_list <- DDvTDtools::get_sim_multiPhylo(sim, para)
+  phylo_list <- read_sim_multiPhylo(sim, para)
 
   n_table <- purrr::map(
     phylo_list,

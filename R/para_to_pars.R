@@ -4,7 +4,8 @@
 #'
 #' @inheritParams params_doc
 #'
-#' @return a four-element numeric vector containing the parameter values associated to 'para'.
+#' @return a four-element numeric vector containing the parameter values
+#' associated to 'para'.
 #'
 #' @author Theo Pannetier
 #'

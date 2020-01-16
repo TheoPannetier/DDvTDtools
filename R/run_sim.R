@@ -5,7 +5,8 @@
 #' number of simulated phylogenetic trees.
 #'
 #' @inheritParams params_doc
-#' @param nb_trees Integer. How many trees should be generated?
+#' @param nb_trees numeric. How many trees should be generated?
+#' @param seed numeric, the number to seed the random number generator.
 #' @param outputfile path and name for output file, by default generated
 #' automatically from \code{sim} and \code{para}.
 #' @param save_results logical. Should save the results to \code{outpufile}

@@ -4,15 +4,15 @@
 \alias{fix_indexing}
 \title{Fix indexing of results data frame}
 \usage{
-fix_indexing(df)
+fix_indexing(results)
 }
 \arguments{
-\item{df}{a results data frame, i.e. as read by
-\code{DDvTDtools::read_optim_table()}}
+\item{results}{a results data frame, as produced by [run_optim()] or accessed
+through [read_optim_results()].}
 }
 \description{
-Checks if the row are indexed correctly (from 1 to 1000), and, if not, re-
-orders them accordingly.
+Checks if rows in the results data frame are indexed correctly
+(from 1 to 1000), and, if not, re-orders them accordingly.
 }
 \author{
 Theo Pannetier

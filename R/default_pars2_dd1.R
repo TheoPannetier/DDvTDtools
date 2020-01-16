@@ -1,11 +1,9 @@
-#' Predefined pars2 argument for dd_loglik as used in DDvTD
+#' Default DD pars2 argument passed to DDD
 #'
-#' Returns default settings to call dd_loglik() for DDvTD, model DD1
+#' Default values for the `pars2` argument of [DDD::dd_loglik]
 #'
 #' @author Theo Pannetier
-#'
 #' @export
-
 default_pars2_dd1 <- function(){
   c(
     1000, # max lx

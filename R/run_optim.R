@@ -5,8 +5,10 @@
 #' optimisation and format output.
 #'
 #' @inheritParams params_doc
+#' @param custom_pars numeric vector, user-specified initial values for the parameters to be optimized.
+#' If \code{NULL} (default), values are initialized using true values used to simulate the trees.
 #' @param outputfile character, the name of the file to save the output data
-#' frame in. The default follows the structure expected by [read_optim_table].
+#' frame in. The default follows the structure expected by [read_optim_results].
 #' @param methode likelihood solving methode, passed to
 #' [DDD::dd_ML()] / [DDD::bd_ML()].
 #' @param optimmethod optimisation algorithm, passed to
@@ -14,7 +16,7 @@
 #' @param tol optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].
 #' @param save_results logical. Should the results be saved to
 #' \code{outputfile}?
-#' @param return_res logical. Should the results be returned?
+#' @param return_results logical. Should the results be returned?
 #' @param jobID SLURM job ID passed when the function is called from a
 #' cluster script.
 #' @param num_cycles number of cycles of optimisation,
@@ -27,7 +29,7 @@
 #' @export
 #'
 run_optim <- function(
-  sim, optim, para, outputfile = paste0(
+  sim, optim, para, custom_pars = NULL, outputfile = paste0(
     "sim", sim, "_optim", optim, "_", para, "_true_k.rds"
   ), rangemc = 1:1000, methode = "ode45", optimmethod = "subplex",
   tol = rep(1E-6,3), save_results = TRUE, return_results = FALSE,
@@ -39,13 +41,27 @@ run_optim <- function(
   assert_sim(sim)
   assert_optim(optim)
   assert_para(para)
+  if (!is.null(custom_pars) & !(is.numeric(custom_pars))) {
+    stop("custom_pars must be a numeric vector")
+  }
+  if (optim %in% c("DD", "TD")) {
+    custom_length <- 3
+  } else {
+    custom_length <- 2
+  }
+  if (!is.null(custom_pars) & length(custom_pars) != custom_length) {
+    stop(paste("For optim =", optim, "custom_pars must have length", custom_length))
+  }
+  if (!(is.numeric(rangemc) | is.null(rangemc)) ){stop("rangemc must either be null or a numeric vector.")}
   if (!(is.numeric(rangemc))) {stop("rangemc must be a numeric vector.")}
   if (save_results == TRUE & !is.character(outputfile)) {
     stop("outputfile must be a character")
-    }
+  }
   if (!is.character(methode)){stop("methode must be a character")}
   if (!is.character(optimmethod)){stop("optimmethod must be a character")}
-  if (!is.numeric(tol) | length(tol) != 3 ){stop("tol must be a numeric vector of length 3.")}
+  if (!is.numeric(tol) | length(tol) != 3 ){
+    stop("tol must be a numeric vector of length 3.")
+  }
   if (!is.logical(save_results)){stop("save_results must be a logical.")}
   if (!is.logical(return_results)){stop("return_results must be a logical.")}
   if (!(cond %in% 0:3)){stop("cond must be a number between 0 and 3.")}
@@ -65,18 +81,22 @@ run_optim <- function(
     cat(paste("Nb tips = ", length(brts)+1, "\n"))
 
     # Set initial parameter values
-    init_pars <- get_default_initpars(
-      true_pars = true_pars,
-      optim = optim,
-      brts = brts
-    ) %>%
-      check_init_pars(optim = optim, brts = brts)
+    if(!is.null(custom_pars)) {
+      init_pars <- custom_pars
+    } else {
+      init_pars <- get_default_initpars(
+        true_pars = true_pars, optim = optim, brts = brts
+      )
+    }
+    init_pars <- check_init_pars(
+      init_pars = init_pars, optim = optim, brts = brts
+    )
 
     cat(paste("Initial parameter values:"))
     cat(paste(round(init_pars, digits = 2)),"\n")
 
     # Run maximum likelihood optimisation
-    if (optim == "DD"){
+    if (optim == "DD") {
       ML_output = try( DDD::dd_ML(
         brts,
         initparsopt = init_pars + 1E-6,

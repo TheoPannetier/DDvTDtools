@@ -8,7 +8,7 @@
 #' @author Theo Pannetier
 #' @export
 
-read_trees <- function(sim, para) {
+read_sim <- function(sim, para) {
   assert_DDvTD_wd()
   assert_para(para)
   assert_sim(sim)

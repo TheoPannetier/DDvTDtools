@@ -14,11 +14,11 @@ plot_n_distrib <- function(para) {
 
   n_table_DD <- cbind(
     get_n_table(sim = "DD", para = para),
-    "sim" = factor("DD", levels = get_sim_names())
+    "sim" = factor("DD", levels = arg_sim())
   )
   n_table_TD <- cbind(
     get_n_table(sim = "TD", para = para),
-    "sim" = factor("TD", levels = get_sim_names())
+    "sim" = factor("TD", levels = arg_sim())
   )
   n_table <- rbind(n_table_DD, n_table_TD)
 

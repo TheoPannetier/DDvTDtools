@@ -4,15 +4,15 @@
 \alias{get_multi_brts}
 \title{Extract multiple sets of branching times from a dataset of simulated trees}
 \usage{
-get_multi_brts(sim, para, rangemc = NULL, with_extinct = F)
+get_multi_brts(sim, para, rangemc = NULL, with_extinct = FALSE)
 }
 \arguments{
 \item{sim}{character, name of simulation model, either \code{"DD"}
 or \code{"TD"}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
-values. Refer to \code{get_para_values} doc for details, and call
-\code{get_para_values} to see possible inputs.}
+values. Refer to \code{arg_para()} doc for details, and call
+\code{arg_para()} to see possible inputs.}
 
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
@@ -22,7 +22,8 @@ values. Refer to \code{get_para_values} doc for details, and call
 a list of numerical vectors containing the branching times of the specified trees.
 }
 \description{
-Read the dataset at specified location and returns branching times for multiple trees specified by indices.
+Read the dataset at specified location and returns branching times for
+multiple trees specified by indices.
 }
 \author{
 Theo Pannetier
