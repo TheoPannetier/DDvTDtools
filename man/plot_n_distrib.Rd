@@ -7,7 +7,7 @@
 plot_n_distrib(para)
 }
 \arguments{
-\item{para}{numeric, a four-digits code specifying a set of four parameter
+\item{para}{numeric, a four-digits number coding for a set of four parameter
 values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 }

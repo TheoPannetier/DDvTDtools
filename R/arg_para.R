@@ -1,9 +1,37 @@
-#' Get possible values of para argument
+#' Get possible values of argument para
 #'
-#' Input values currently accepted for para.
-#'    Use \code{para_to_pars} to translate para into paramter values.
+#' Input values currently accepted for argument `para`.
+#'
+#' Use [para_to_pars()] to translate `para` into parameter values.
+#'
 #' @param incl_unused logical, specify whether you want to include values that
 #' have been considered in earlier phases of the project.
+#'
+#' @details Each value is a four-digit number coding for a set of parameter
+#' values. In order: crown age, baseline speciation rate
+#' (\eqn{\lambda_0}{\lambda_0}), extinction rate (\eqn{\mu_0}{\mu_0}),
+#' and carrying capacity (K). Values are encoded as follows:
+#' \tabular{ccccc}{
+#'    \strong{digit} \tab \strong{crown_age} \tab \strong{\eqn{\lambda_0}}
+#'    \tab \strong{\eqn{\mu_0}} \tab \strong{K} \cr
+#'    1 \tab 5  \tab  -   \tab 0   \tab 40 \cr
+#'    2 \tab 10  \tab 0.8 \tab -   \tab - \cr
+#'    3 \tab 15  \tab -   \tab -   \tab - \cr
+#'    4 \tab 60  \tab -   \tab 0.4 \tab -
+#' }
+#'
+#' For example, `para = 3241` denotes the following parameter set:
+#' * crown age = 15 myr
+#' * \eqn{\lambda_0} = 0.8
+#' * \eqn{\mu_0} = 0.4
+#' * K = 40.
+#'
+#' This `para` code can be converted to parameter values with [para_to_pars()].
+#'
+#' Note that many cells in the table above are left empty, and only two
+#' parameters actually change value across parameter sets. These empty cells
+#' correspond to parameter values that were considered in earlier steps of the
+#' project, and later abandonned.
 #'
 #' @author Theo Pannetier
 #' @export

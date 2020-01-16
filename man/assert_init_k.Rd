@@ -8,7 +8,7 @@ assert_init_k(init_k)
 }
 \arguments{
 \item{init_k}{character code specifying the initial values of parameter K
-used in the optimisation. Refer to \code{get_possible init_k()} doc for
+used in the optimisation. Refer to \code{arg_init_k()} doc for
 details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{

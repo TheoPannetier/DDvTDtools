@@ -7,7 +7,7 @@
 assert_sim(sim)
 }
 \arguments{
-\item{sim}{character, name of simulation model, either \code{"DD"}
+\item{sim}{character, name of the simulation model, either \code{"DD"}
 or \code{"TD"}.}
 }
 \description{

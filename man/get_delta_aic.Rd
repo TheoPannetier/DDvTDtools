@@ -7,15 +7,15 @@
 get_delta_aic(sim, para, init_k = "true_k")
 }
 \arguments{
-\item{sim}{character, name of simulation model, either \code{"DD"}
+\item{sim}{character, name of the simulation model, either \code{"DD"}
 or \code{"TD"}.}
 
-\item{para}{numeric, a four-digits code specifying a set of four parameter
+\item{para}{numeric, a four-digits number coding for a set of four parameter
 values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 
 \item{init_k}{character code specifying the initial values of parameter K
-used in the optimisation. Refer to \code{get_possible init_k()} doc for
+used in the optimisation. Refer to \code{arg_init_k()} doc for
 details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{

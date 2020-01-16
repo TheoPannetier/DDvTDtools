@@ -22,7 +22,7 @@ format_optim_results_row(
 \arguments{
 \item{mc}{numeric between 1 and 1000, the index of a tree within a dataset.}
 
-\item{sim}{character, name of simulation model, either \code{"DD"}
+\item{sim}{character, name of the simulation model, either \code{"DD"}
 or \code{"TD"}.}
 
 \item{optim}{character, name of the optimisation model, either \code{"DD"}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/arg_para.R
 \name{arg_para}
 \alias{arg_para}
-\title{Get possible values of para argument}
+\title{Get possible values of argument para}
 \usage{
 arg_para(incl_unused = FALSE)
 }
@@ -11,8 +11,38 @@ arg_para(incl_unused = FALSE)
 have been considered in earlier phases of the project.}
 }
 \description{
-Input values currently accepted for para.
-Use \code{para_to_pars} to translate para into paramter values.
+Input values currently accepted for argument \code{para}.
+}
+\details{
+Use \code{\link[=para_to_pars]{para_to_pars()}} to translate \code{para} into parameter values.
+
+Each value is a four-digit number coding for a set of parameter
+values. In order: crown age, baseline speciation rate
+(\eqn{\lambda_0}{\lambda_0}), extinction rate (\eqn{\mu_0}{\mu_0}),
+and carrying capacity (K). Values are encoded as follows:
+\tabular{ccccc}{
+\strong{digit} \tab \strong{crown_age} \tab \strong{\eqn{\lambda_0}}
+\tab \strong{\eqn{\mu_0}} \tab \strong{K} \cr
+1 \tab 5  \tab  -   \tab 0   \tab 40 \cr
+2 \tab 10  \tab 0.8 \tab -   \tab - \cr
+3 \tab 15  \tab -   \tab -   \tab - \cr
+4 \tab 60  \tab -   \tab 0.4 \tab -
+}
+
+For example, \code{para = 3241} denotes the following parameter set:
+\itemize{
+\item crown age = 15 myr
+\item \eqn{\lambda_0} = 0.8
+\item \eqn{\mu_0} = 0.4
+\item K = 40.
+}
+
+This \code{para} code can be converted to parameter values with \code{\link[=para_to_pars]{para_to_pars()}}.
+
+Note that many cells in the table above are left empty, and only two
+parameters actually change value across parameter sets. These empty cells
+correspond to parameter values that were considered in earlier steps of the
+project, and later abandonned.
 }
 \seealso{
 \code{para_to_pars()}

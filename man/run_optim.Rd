@@ -22,13 +22,13 @@ run_optim(
 )
 }
 \arguments{
-\item{sim}{character, name of simulation model, either \code{"DD"}
+\item{sim}{character, name of the simulation model, either \code{"DD"}
 or \code{"TD"}.}
 
 \item{optim}{character, name of the optimisation model, either \code{"DD"}
 or \code{"TD"}.}
 
-\item{para}{numeric, a four-digits code specifying a set of four parameter
+\item{para}{numeric, a four-digits number coding for a set of four parameter
 values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 

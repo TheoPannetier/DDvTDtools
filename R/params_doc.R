@@ -3,15 +3,15 @@
 #' This function does nothing. It is intended to inherit is parameters'
 #' documentation.
 #'
-#' @param sim character, name of simulation model, either \code{"DD"}
+#' @param sim character, name of the simulation model, either \code{"DD"}
 #' or \code{"TD"}.
-#' @param para numeric, a four-digits code specifying a set of four parameter
+#' @param para numeric, a four-digits number coding for a set of four parameter
 #' values. Refer to \code{arg_para()} doc for details, and call
 #' \code{arg_para()} to see possible inputs.
 #' @param optim character, name of the optimisation model, either \code{"DD"}
 #' or \code{"TD"}.
 #' @param init_k character code specifying the initial values of parameter K
-#' used in the optimisation. Refer to \code{get_possible init_k()} doc for
+#' used in the optimisation. Refer to \code{arg_init_k()} doc for
 #' details, and call \code{arg_init_k()} to see possible inputs.
 #' @param mc numeric between 1 and 1000, the index of a tree within a dataset.
 #' @param rangemc numeric vector, a set of tree indices ranging from 1 to 1000.
