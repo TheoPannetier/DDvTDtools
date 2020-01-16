@@ -1,6 +1,8 @@
-#' Plot the average LTTs of paired DD and TD trees
+#' Plot average lineage-through-time plots
 #'
-#' Plots the average LTTs of a set of DD and TD trees that share the same parameter set.
+#' Plots the lineage-through-time curves for a pair of sets of
+#' (diversity-dependent and time-dependent) simulated trees. Each curve is
+#' averaged over 1000 trees with [TreeSim::LTT.plot.gen()].
 #'
 #' @inheritParams params_doc
 #'
@@ -48,6 +50,10 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
       axis.title.y = ggplot2::element_text(vjust = 0.5, size = 16),
       axis.title.x = ggplot2::element_text(size = 16)
     ) +
-    ggplot2::labs(x = "Time", y = "Number of tips")
+    ggplot2::labs(
+      title = make_plot_title_expr(para),
+      x = "Time",
+      y = "Number of tips"
+      )
   avg_ltt_plot
 }

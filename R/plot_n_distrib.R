@@ -1,7 +1,7 @@
-#' Plot the distribution of N for DD & TD trees as violins
+#' Plot the distribution of N for DD & TD trees as violin plots
 #'
-#' Plots the distribution of the number of tips at present for a pair
-#' of TD and DD trees that share the same parameter set.
+#' Plots the distribution of the number of tips at present for a pair of sets
+#' of diversity-dependent and time-dependent simulated trees.
 #'
 #' @inheritParams params_doc
 #'
@@ -31,11 +31,12 @@ plot_n_distrib <- function(para) {
       yintercept = 40, color = "grey50", linetype = "dashed"
       ) +
     ggplot2::theme_classic() +
+    ggplot2::labs(
+      title = make_plot_title_expr(para),
+      y = "Number of tips"
+      ) +
     ggplot2::theme(
-      text = ggplot2::element_text(size = 14),
-      title = ggplot2::element_blank(),
-      axis.title.x = ggplot2::element_blank(),
-      axis.title.y = ggplot2::element_blank()
-      )
+      axis.title.x = ggplot2::element_blank()
+    )
  n_plot
 }

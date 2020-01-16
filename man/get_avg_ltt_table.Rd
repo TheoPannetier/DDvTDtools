@@ -17,8 +17,9 @@ values. Refer to \code{arg_para()} doc for details, and call
 \item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \description{
-Computes a table containing the number of species over time averaged over
-the 1000 replicates of a results dataset.
+Computes a table containing the average number of species over time over
+1000 replicates of a simulated set of trees. The averaging is performed with
+[TreeSim::LTT.plot.gen()].
 }
 \author{
 Théo Pannetier

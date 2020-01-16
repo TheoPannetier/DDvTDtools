@@ -12,8 +12,8 @@ values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 }
 \description{
-Calls \code{plot_avg_ltt} and \code{plot_n_distrib}, and nests the latter in
-the former
+Plots [plot_n_distrib()] inside [plot_avg_ltt()], as Fig. 2 in
+Pannetier et al. (2020).
 }
 \author{
 Théo Pannetier

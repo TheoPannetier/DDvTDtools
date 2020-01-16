@@ -1,7 +1,8 @@
 #' Computes the average number of lineages over time for a set of phylogenies
 #'
-#' Computes a table containing the number of species over time averaged over
-#' the 1000 replicates of a results dataset.
+#' Computes a table containing the average number of species over time over
+#' 1000 replicates of a simulated set of trees. The averaging is performed with
+#' [TreeSim::LTT.plot.gen()].
 #'
 #' @inheritParams params_doc
 #' @author Théo Pannetier

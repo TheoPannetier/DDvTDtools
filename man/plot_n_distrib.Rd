@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_n_distrib.R
 \name{plot_n_distrib}
 \alias{plot_n_distrib}
-\title{Plot the distribution of N for DD & TD trees as violins}
+\title{Plot the distribution of N for DD & TD trees as violin plots}
 \usage{
 plot_n_distrib(para)
 }
@@ -12,8 +12,8 @@ values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 }
 \description{
-Plots the distribution of the number of tips at present for a pair
-of TD and DD trees that share the same parameter set.
+Plots the distribution of the number of tips at present for a pair of sets
+of diversity-dependent and time-dependent simulated trees.
 }
 \author{
 Théo Pannetier

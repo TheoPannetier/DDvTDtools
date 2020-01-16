@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_avg_ltt.R
 \name{plot_avg_ltt}
 \alias{plot_avg_ltt}
-\title{Plot the average LTTs of paired DD and TD trees}
+\title{Plot average lineage-through-time plots}
 \usage{
 plot_avg_ltt(para, with_extinct = FALSE)
 }
@@ -14,7 +14,9 @@ values. Refer to \code{arg_para()} doc for details, and call
 \item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \description{
-Plots the average LTTs of a set of DD and TD trees that share the same parameter set.
+Plots the lineage-through-time curves for a pair of sets of
+(diversity-dependent and time-dependent) simulated trees. Each curve is
+averaged over 1000 trees with [TreeSim::LTT.plot.gen()].
 }
 \author{
 Théo Pannetier
