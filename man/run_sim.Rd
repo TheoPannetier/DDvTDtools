@@ -39,12 +39,12 @@ automatically from \code{sim} and \code{para}.}
 \value{
 A \code{list} containing \code{nb_trees} simulated trees. Each
 element is itself a list of four elements, as the the output of
-\code{DDD:dd_sim}. Refer to the relevant documentation in \code{DDD} for more
+\code{\link[DDD:dd_sim]{DDD::dd_sim()}}. Refer to the relevant documentation in \code{DDD} for more
 details.
 }
 \description{
-Reads a model name and coded parameter input to simulate a dataset of a
-number of simulated phylogenetic trees.
+Sets parameter values and calls \code{\link[DDD:dd_sim]{DDD::dd_sim()}} or \code{\link[DDD:td_sim]{DDD::td_sim()}}
+to simulate a set of phylogenetic trees.
 }
 \author{
 Cesar Martinez and Theo Pannetier

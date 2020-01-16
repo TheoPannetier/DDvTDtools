@@ -37,26 +37,26 @@ the tree.}
 \item{init_pars}{numeric vector. The initial parameter values used for
 likelihood optimisation.}
 
-\item{ML_output}{numeric vector. Raw output of \code{DDD::dd_loglik} /
-\code{DDD::bd_loglik}.}
+\item{ML_output}{numeric vector. Raw output of \code{\link[DDD:dd_ML]{DDD::dd_ML()}} /
+\code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
 \item{num_cycles}{numeric. Maximum number of optimisation cycles.}
 
 \item{methode}{character. Integration methode for computing the likelihood.
-See \code{DDD::dd_loglik} / \code{DDD::bd_loglik} for details.}
+See \code{\link[DDD:dd_loglik]{DDD::dd_loglik()}} / \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}} for details.}
 
 \item{optimmethod}{character. Optimisation methode used to compute the
-maximum likelihood. See \code{DDD::dd_ML} / \code{DDD::bd_ML} for details.}
+maximum likelihood. See \code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}} for details.}
 
 \item{jobID}{the ID number of the cluster job that returned the results.
 Saved in metadata to retrieve logs, for example. A value of \code{NULL} means
 that the result was obtained locally.}
 
 \item{cond}{numeric, conditionning parameter passed to
-\code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.}
+\code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 }
 \description{
-Internal function called by \code{run_optim}. Formats optimisation results and
+Internal function called by \code{\link[=run_optim]{run_optim()}}. Formats optimisation results and
 metadata in a data frame row.
 }
 \author{

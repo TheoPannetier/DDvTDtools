@@ -7,7 +7,7 @@
 results_optim_struct()
 }
 \description{
-Internal function called only by \code{run_optim}.
+Internal function called only by \code{\link[=run_optim]{run_optim()}}.
 }
 \author{
 Théo Pannetier

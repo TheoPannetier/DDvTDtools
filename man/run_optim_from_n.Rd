@@ -33,18 +33,18 @@ values. Refer to \code{arg_para()} doc for details, and call
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
 \item{methode}{likelihood solving methode, passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_loglik]{DDD::dd_loglik()}} / \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}}.}
 
 \item{optimmethod}{optimisation algorithm, passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
-\item{tol}{optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
+\item{tol}{optimisation tolerance, passed to \code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
 \item{jobID}{SLURM job ID passed when the function is called from a
 cluster script.}
 
 \item{num_cycles}{number of cycles of optimisation,
-passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
+passed to \code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
 \item{save_results}{logical. Should the results be saved to
 \code{outputfile}?}
@@ -52,10 +52,10 @@ passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
 \item{return_results}{logical. Should the results be returned?}
 
 \item{cond}{code specifying how the likelihood is conditioned. Passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_loglik]{DDD::dd_loglik()}} / \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}}.}
 }
 \description{
-An alternative version of [run_optim()] where the initial value of K is set
+An alternative version of \code{\link[=run_optim]{run_optim()}} where the initial value of K is set
 to N, the nb of tips in the trees, in order to ease convergence to the
 maximum likelihood.
 }

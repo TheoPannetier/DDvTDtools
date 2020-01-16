@@ -1,6 +1,6 @@
 #' Default TD pars2 argument passed to DDD
 #'
-#' Default values for the `pars2` argument of [DDD::bd_loglik]
+#' Default values for the `pars2` argument of [DDD::bd_loglik()]
 #'
 #' @author Theo Pannetier
 #' @export

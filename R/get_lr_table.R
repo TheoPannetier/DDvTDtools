@@ -1,6 +1,6 @@
 #' Assemble a table containing likelihood ratios
 #'
-#' Calls \code{get_lr} and binds results in a table with corresponding
+#' Calls [get_lr()] and binds results in a table with corresponding
 #' \code{sim} ans \code{para} values.
 #'
 #' @inheritParams params_doc

@@ -23,4 +23,5 @@ Suggests:
     TreeSim,
     testthat
 LazyData: true
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2

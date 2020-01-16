@@ -2,13 +2,13 @@
 % Please edit documentation in R/check_results.R
 \name{check_duplicated_rows}
 \alias{check_duplicated_rows}
-\title{Check a resultsults data frame does not have duplicated rows}
+\title{Check a results data frame does not have duplicated rows}
 \usage{
 check_duplicated_rows(results, return_rows)
 }
 \arguments{
-\item{results}{a resultsults data frame, as produced by [run_optim()] or accessed by
-[read_optim_resultsults].}
+\item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed by
+\code{\link[=read_optim_results]{read_optim_results()}}.}
 
 \item{return_rows}{logical. Should rows that don't pass the check be
 returned?}

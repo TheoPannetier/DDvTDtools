@@ -16,7 +16,7 @@ used in the optimisation. Refer to \code{get_possible init_k()} doc for
 details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{
-Calls \code{get_lr} and binds results in a table with corresponding
+Calls \code{\link[=get_lr]{get_lr()}} and binds results in a table with corresponding
 \code{sim} ans \code{para} values.
 }
 \author{

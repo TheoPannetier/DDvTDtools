@@ -16,7 +16,7 @@ values. Refer to \code{arg_para()} doc for details, and call
 \description{
 Plots the lineage-through-time curves for a pair of sets of
 (diversity-dependent and time-dependent) simulated trees. Each curve is
-averaged over 1000 trees with [TreeSim::LTT.plot.gen()].
+averaged over 1000 trees with \code{\link[TreeSim:LTT.plot.gen]{TreeSim::LTT.plot.gen()}}.
 }
 \author{
 Théo Pannetier

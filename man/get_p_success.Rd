@@ -22,7 +22,7 @@ details, and call \code{arg_init_k()} to see possible inputs.}
 \description{
 Computes the proportion of trees in the dataset that reject the opposite
 model, i.e. logLR is beyond the corresponding threshold computed by
-\code{get_lr_threshold}.
+\code{\link[=get_lr_threshold]{get_lr_threshold()}}.
 }
 \author{
 Theo Pannetier

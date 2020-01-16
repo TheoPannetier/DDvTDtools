@@ -19,7 +19,7 @@ values. Refer to \code{arg_para()} doc for details, and call
 \description{
 Computes a table containing the average number of species over time over
 1000 replicates of a simulated set of trees. The averaging is performed with
-[TreeSim::LTT.plot.gen()].
+\code{\link[TreeSim:LTT.plot.gen]{TreeSim::LTT.plot.gen()}}.
 }
 \author{
 Théo Pannetier

@@ -7,8 +7,8 @@
 fill_missing_rows(results, para)
 }
 \arguments{
-\item{results}{a results data frame, as produced by [run_optim()] or accessed
-through [read_optim_results()].}
+\item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed
+through \code{\link[=read_optim_results]{read_optim_results()}}.}
 
 \item{para}{numeric, a four-digits code specifying a set of four parameter
 values. Refer to \code{arg_para()} doc for details, and call

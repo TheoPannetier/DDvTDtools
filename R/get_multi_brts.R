@@ -5,7 +5,8 @@
 #'
 #' @inheritParams params_doc
 #'
-#' @return a list of numerical vectors containing the branching times of the specified trees.
+#' @return a list of numerical vectors containing the branching times of the
+#' specified trees.
 #'
 #' @author Theo Pannetier
 #' @export

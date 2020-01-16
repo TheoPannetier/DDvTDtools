@@ -12,7 +12,7 @@ values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 }
 \description{
-Plots [plot_n_distrib()] inside [plot_avg_ltt()], as Fig. 2 in
+Plots \code{\link[=plot_n_distrib]{plot_n_distrib()}} inside \code{\link[=plot_avg_ltt]{plot_avg_ltt()}}, as Fig. 2 in
 Pannetier et al. (2020).
 }
 \author{

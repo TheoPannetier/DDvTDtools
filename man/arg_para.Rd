@@ -12,7 +12,7 @@ have been considered in earlier phases of the project.}
 }
 \description{
 Input values currently accepted for para.
-   Use \code{para_to_pars} to translate para into paramter values.
+Use \code{para_to_pars} to translate para into paramter values.
 }
 \seealso{
 \code{para_to_pars()}

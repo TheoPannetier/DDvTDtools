@@ -19,7 +19,7 @@ used in the optimisation. Refer to \code{get_possible init_k()} doc for
 details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{
-Reads a pair of `optim = "DD"` and `optim = "TD"` results data frames and
+Reads a pair of \code{optim = "DD"} and \code{optim = "TD"} results data frames and
 computes the AIC difference between them.
 }
 \author{

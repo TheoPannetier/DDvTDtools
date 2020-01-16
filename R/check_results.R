@@ -1,10 +1,10 @@
-#' Check a resultsults data frame does not have duplicated rows
+#' Check a results data frame does not have duplicated rows
 #'
 #' Goes through rows and returns a message if two rows are found to be
 #' duplicates.
 #'
-#' @param results a resultsults data frame, as produced by [run_optim()] or accessed by
-#' [read_optim_resultsults].
+#' @param results a results data frame, as produced by [run_optim()] or accessed by
+#' [read_optim_results()].
 #' @param return_rows logical. Should rows that don't pass the check be
 #' returned?
 #'
@@ -28,12 +28,12 @@ check_duplicated_rows <- function(results, return_rows) {
 
 }
 
-#' Check a resultsults data frame for NAs in rows
+#' Check a results data frame for NAs in rows
 #'
 #' Goes through rows and returns a message if any NA is found in  row.
 #'
-#' @param results a resultsults data frame, as produced by [run_optim()] or accessed by
-#' [read_optim_resultsults].
+#' @param results a results data frame, as produced by [run_optim()] or accessed by
+#' [read_optim_results()].
 #' @param return_rows logical. Should rows that don't pass the check be
 #' returned?
 #'
@@ -63,13 +63,13 @@ check_incomplete_rows <- function(results, return_rows){
 
 }
 
-#' Check a resultsults data frame for log-likelihood
+#' Check a results data frame for log-likelihood
 #'
 #' Goes through rows and returns a message if a row lacks a valid
 #' log- likelihood value
 #'
-#' @param results a resultsults data frame, as produced by [run_optim()] or accessed by
-#' [read_optim_resultsults].
+#' @param results a results data frame, as produced by [run_optim()] or accessed by
+#' [read_optim_results()].
 #' @param return_rows logical. Should rows that don't pass the check be
 #' returned?
 #'
@@ -93,12 +93,12 @@ check_loglikelihood_exists <- function(results, return_rows){
   }
 }
 
-#' Check a resultsults data frame for missing rows
+#' Check a results data frame for missing rows
 #'
 #' Goes through rows and returns a message if any row from 1 to 1000 is missing
 #'
-#' @param results a resultsults data frame, as produced by [run_optim()] or accessed by
-#' [read_optim_resultsults].
+#' @param results a results data frame, as produced by [run_optim()] or accessed by
+#' [read_optim_results()].
 #' @param return_rows logical. Should rows that don't pass the check be
 #' returned?
 #'
@@ -110,7 +110,7 @@ check_missing_mcs <- function(results, return_rows){
 
   if(length(missing_mcs > 0)){
     print(
-      c("There is no resultsults for the following mcs: ",
+      c("There is no results for the following mcs: ",
         paste(missing_mcs, collapse = " ")
       )
     )

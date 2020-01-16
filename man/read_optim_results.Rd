@@ -22,9 +22,9 @@ used in the optimisation. Refer to \code{get_possible init_k()} doc for
 details, and call \code{arg_init_k()} to see possible inputs.}
 }
 \description{
-Reads a result dataframe produced by [run_optim()]. The file is expedcted to
-be found in `DDvTD/data/optim/` and have the default name computed by
-[run_optim()].
+Reads a result dataframe produced by \code{\link[=run_optim]{run_optim()}}. The file is expedcted to
+be found in \verb{DDvTD/data/optim/} and have the default name computed by
+\code{\link[=run_optim]{run_optim()}}.
 }
 \author{
 Theo Pannetier

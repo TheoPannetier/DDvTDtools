@@ -18,7 +18,7 @@ or \code{"TD"}.}
 }
 \description{
 Returns default initial parameter values used to fit \code{optim} models to
-phylogenies with \code{run_optim()}. Called by \code{run_optim()}.
+phylogenies with \link{run_optim}. Called by \code{\link[=run_optim]{run_optim()}}.
 }
 \details{
 For the DD and TD models, initial parameter values are by default

@@ -6,7 +6,7 @@
 #'
 #' @inheritParams params_doc
 #' @param methode likelihood solving methode, passed to
-#' [DDD::dd_ML()] / [DDD::bd_ML()].
+#' [DDD::dd_loglik()] / [DDD::bd_loglik()].
 #' @param optimmethod optimisation algorithm, passed to
 #' [DDD::dd_ML()] / [DDD::bd_ML()].
 #' @param tol optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].
@@ -18,7 +18,7 @@
 #' @param num_cycles number of cycles of optimisation,
 #' passed to [DDD::dd_ML()] / [DDD::bd_ML()].
 #' @param cond code specifying how the likelihood is conditioned. Passed to
-#' [DDD::dd_ML()] / [DDD::bd_ML()].
+#' [DDD::dd_loglik()] / [DDD::bd_loglik()].
 
 #' @author Théo Pannetier
 #'

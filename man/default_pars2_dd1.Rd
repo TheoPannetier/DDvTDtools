@@ -7,7 +7,7 @@
 default_pars2_dd1()
 }
 \description{
-Default values for the `pars2` argument of [DDD::dd_loglik]
+Default values for the \code{pars2} argument of \code{\link[DDD:dd_loglik]{DDD::dd_loglik()}}
 }
 \author{
 Theo Pannetier

@@ -7,7 +7,7 @@
 default_pars2_td4()
 }
 \description{
-Default values for the `pars2` argument of [DDD::bd_loglik]
+Default values for the \code{pars2} argument of \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}}
 }
 \author{
 Theo Pannetier

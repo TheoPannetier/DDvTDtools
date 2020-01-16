@@ -3,7 +3,7 @@
 #'
 #' Computes the proportion of trees in the dataset that reject the opposite
 #' model, i.e. logLR is beyond the corresponding threshold computed by
-#' \code{get_lr_threshold}.
+#' [get_lr_threshold()].
 #'
 #' @inheritParams params_doc
 #'

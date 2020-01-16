@@ -7,8 +7,8 @@
 fix_indexing(results)
 }
 \arguments{
-\item{results}{a results data frame, as produced by [run_optim()] or accessed
-through [read_optim_results()].}
+\item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed
+through \code{\link[=read_optim_results]{read_optim_results()}}.}
 }
 \description{
 Checks if rows in the results data frame are indexed correctly

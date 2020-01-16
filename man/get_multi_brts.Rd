@@ -19,7 +19,8 @@ values. Refer to \code{arg_para()} doc for details, and call
 \item{with_extinct}{logical, should the tree include extinct lineages?}
 }
 \value{
-a list of numerical vectors containing the branching times of the specified trees.
+a list of numerical vectors containing the branching times of the
+specified trees.
 }
 \description{
 Read the dataset at specified location and returns branching times for

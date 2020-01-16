@@ -1,6 +1,6 @@
 #' Assemble a row of results for run_optim output
 #'
-#' Internal function called by \code{run_optim}. Formats optimisation results and
+#' Internal function called by [run_optim()]. Formats optimisation results and
 #' metadata in a data frame row.
 #'
 #' @inheritParams params_doc
@@ -8,18 +8,18 @@
 #' the tree.
 #' @param init_pars numeric vector. The initial parameter values used for
 #' likelihood optimisation.
-#' @param ML_output numeric vector. Raw output of \code{DDD::dd_loglik} /
-#' \code{DDD::bd_loglik}.
+#' @param ML_output numeric vector. Raw output of [DDD::dd_ML()] /
+#' [DDD::bd_ML()].
 #' @param num_cycles numeric. Maximum number of optimisation cycles.
 #' @param methode character. Integration methode for computing the likelihood.
-#' See \code{DDD::dd_loglik} / \code{DDD::bd_loglik} for details.
+#' See [DDD::dd_loglik()] / [DDD::bd_loglik()] for details.
 #' @param optimmethod character. Optimisation methode used to compute the
-#' maximum likelihood. See \code{DDD::dd_ML} / \code{DDD::bd_ML} for details.
+#' maximum likelihood. See [DDD::dd_ML()] / [DDD::bd_ML()] for details.
 #' @param jobID the ID number of the cluster job that returned the results.
 #' Saved in metadata to retrieve logs, for example. A value of \code{NULL} means
 #' that the result was obtained locally.
 #' @param cond numeric, conditionning parameter passed to
-#' \code{dd_ML}/\code{bd_ML}. See \code{?dd_ML} for possible values.
+#' [DDD::dd_ML()] / [DDD::bd_ML()].
 #'
 #' @author Théo Pannetier
 #'

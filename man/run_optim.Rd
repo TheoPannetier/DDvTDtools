@@ -36,17 +36,17 @@ values. Refer to \code{arg_para()} doc for details, and call
 If \code{NULL} (default), values are initialized using true values used to simulate the trees.}
 
 \item{outputfile}{character, the name of the file to save the output data
-frame in. The default follows the structure expected by [read_optim_results].}
+frame in. The default follows the structure expected by \link{read_optim_results}.}
 
 \item{rangemc}{numeric vector, a set of tree indices ranging from 1 to 1000.}
 
 \item{methode}{likelihood solving methode, passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_loglik]{DDD::dd_loglik()}} / \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}}.}
 
 \item{optimmethod}{optimisation algorithm, passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
-\item{tol}{optimisation tolerance, passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
+\item{tol}{optimisation tolerance, passed to \code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
 \item{save_results}{logical. Should the results be saved to
 \code{outputfile}?}
@@ -57,14 +57,14 @@ frame in. The default follows the structure expected by [read_optim_results].}
 cluster script.}
 
 \item{num_cycles}{number of cycles of optimisation,
-passed to [DDD::dd_ML()] / [DDD::bd_ML()].}
+passed to \code{\link[DDD:dd_ML]{DDD::dd_ML()}} / \code{\link[DDD:bd_ML]{DDD::bd_ML()}}.}
 
 \item{cond}{code specifying how the likelihood is conditioned. Passed to
-[DDD::dd_ML()] / [DDD::bd_ML()].}
+\code{\link[DDD:dd_loglik]{DDD::dd_loglik()}} / \code{\link[DDD:bd_loglik]{DDD::bd_loglik()}}.}
 }
 \description{
-Read a set of simulated trees as created by [run_sim()], set up initial
-parameter values, call [DDD::dd_ML()] or [DDD::bd_ML()] to run the
+Read a set of simulated trees as created by \code{\link[=run_sim]{run_sim()}}, set up initial
+parameter values, call \code{\link[DDD:dd_ML]{DDD::dd_ML()}} or \code{\link[DDD:bd_ML]{DDD::bd_ML()}} to run the
 optimisation and format output.
 }
 \author{

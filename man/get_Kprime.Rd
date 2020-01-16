@@ -7,7 +7,7 @@
 get_Kprime(pars)
 }
 \arguments{
-\item{pars}{a numeric vector containing c(la0, mu0, K)}
+\item{pars}{a numeric vector containing \code{c(la0, mu0, K)}}
 }
 \description{
 Compute K' from la0, mu0, K
