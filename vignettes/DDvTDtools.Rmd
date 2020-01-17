@@ -1,0 +1,126 @@
+---
+title: "How to use DDvTDtools"
+author: "Théo Pannetier"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to use DDvTDtools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+Replicate the results of Pannetier et al. (2020).
+Data is found in some online repo, but with this package you can have a go if you feel the need to replicate these data.
+
+**Warning** 
+Simulations and maximum likelihood optimisations called upon the integration of the DD master system introduced in Etienne et al. (2012), and this can take an awful lot of time. This is specially true for parameter settings with a long age (larger trees) and with extinction, and the computation is heavier for the time-dependent model. We performed these over 1000 trees each time, so if you only want to try the neat functions of the package (thanks for the interest!) you could run the functions introduced below for just a handful of trees. The full datasets used in the study are available on ***?***.
+
+## Package installation
+If you haven't done so already, install the `DDvTDtools` package from Github and the latest CRAN release of `DDD`.
+```{r inst_packages}
+install.packages("DDD")
+devtools::install_github("TheoPannetier/DDvTDtools")
+```
+## Step 1 - Set up directory structure
+The package works from a specific relative path, and most functions expect to access data located in pre-defined directories. For example, `DDvTDtools::read_sim()` expects to find the simulation output in `DDvTD/data/sim`. The command below will set up the required directory structure in your working directory.
+```{r set_folder_struct}
+DDvTDtools::set_DDvTD_dir_struct()
+```
+
+## Step 1 - Simulate phylogenetic trees
+Diversity-dependent and time-dependent trees can be simulated with `DDvTDtools::run_sim()`, which is simply a wrapper around `DDD::dd_sim()` and `DDD::td_sim()` that standardizes the input and formats the output.
+```{r simulation}
+DDvTDtools::run_sim(
+  sim = "DD",
+  para = 1211,
+  nb_trees = 1000
+)
+```
+The first argument, `sim` refers to the name of the simulating model, either `"DD"` or `"TD"`. The second argument, `para`, is a four-digit number that codes the values of the four parameters (crown age, baseline speciation rate, extinction rate and carrying capacity) used in the study. 
+`1211` for example means 
+* crown age = 5 myr
+* speciation rate = 0.8 
+* extinction rate = 0, 
+* carrying capacity = 40 
+(This is the fastest setting to simulate and run maximum likelihood optimisation on.)
+
+Calling `arg_para()` will print the different values used through the study.
+```{r call_para, eval=TRUE}
+DDvTDtools::arg_para()
+```
+And what values they code can be found in the documentation
+```{r doc_para}
+?DDvTDtools::arg_para()
+```
+It is also possible to directly translate the code into proper values:
+```{r translate_para, eval=TRUE}
+DDvTDtools::para_to_pars(1211)
+```
+Simulated trees are stored in `DDvTD/data/sim`, and can be loaded with `read_sim()`
+```{r read_trees}
+DDvTDtools::read_sim(sim = "DD", para = 1211)
+```
+
+## Step 2 - Fit the models on simulated trees
+Once phylogenetic trees have been simulated, each model should be fitted to each type of trees. This is done by `DDD::dd_ML()` and `DDD::bd_ML()`, but again, we have used a wrapper to standardise the input and output. 
+```{r fit_model}
+DDvTDtools::run_optim(
+  sim = "DD", 
+  para = 1211, 
+  optim = "DD"
+)
+DDvTDtools::run_optim(
+  sim = "DD", 
+  para = 1211, 
+  optim = "TD"
+)
+```
+Argument `optim` is equivalent to argument `sim` introduced above.
+`run_optim()` will fetch the simulated trees from `DDvTD/data/sim` and save its output in `DDvTD/data/optim`. You can load these tables with
+```{r read_tables }
+df <- DDvTDtools::read_optim_results(
+  sim = "DD",
+  para = 1211,
+  optim = "TD",
+  init_k = "true_k"
+)
+```
+`init_k` denotes which value of parameter K was used to initialise the maximum likelihood optimisation. The default value, `true_k`, means the true value, i.e. 40. The alternative is `from_n`, where K was instead set to the number of tips in the tree. This is for some settings which produced large trees, for which the likelihood optimisation proved particularly tedious.
+The values of `init_k` used for each setting can be called with:
+```{r which_init_k, eval=TRUE}
+DDvTDtools::get_init_k()
+```
+Optimisation using `init_k = from_n` is run with another function, which calls `run_optim()`
+```{r from_n} 
+DDvTDtools::run_optim_from_n(
+  sim = "DD", 
+  para = 1211, 
+  optim = "TD"
+)
+```
+### Step 3 - Plot the results
+
+Fig. 1 was produced from randomly sampled numbers, and I am not reporting it here.
+
+The plots below draw results from both models fit to both type of trees, and so require that the four combinations of `sim` and `optim` for a single value of `para` are present in `DDvTD\data\optim`.
+
+**Fig. 2 - Average lineage-through-time plots**
+```{r plot_ltt}
+DDvTDtools::plot_ltt_nested(para = 1211)
+```
+
+**Fig. 3 - log-likelihood ratio distributions**
+```{r plot_lrs}
+DDvTDtools::plot_lr(para = 1211)
+```
+
+
+

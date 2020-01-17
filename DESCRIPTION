@@ -21,7 +21,10 @@ Imports:
     latex2exp
 Suggests:
     TreeSim,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
+VignetteBuilder: knitr
