@@ -2,12 +2,46 @@
 % Please edit documentation in R/results_optim_struct.R
 \name{results_optim_struct}
 \alias{results_optim_struct}
-\title{Get an empty data frame to initiate run_optim output.}
+\title{Structure of the optimisation results data frames}
 \usage{
 results_optim_struct()
 }
 \description{
-Internal function called only by \code{\link[=run_optim]{run_optim()}}.
+Returns a skeleton for the data frame in which the output of \code{\link[=run_optim]{run_optim()}}
+is stored.
+}
+\details{
+The dataset contains the following variables:
+\itemize{
+\item \strong{sim} factor, the name of the model used for simulation
+\item \strong{ntips} numeric, the number of tips in the tree
+\item \strong{crown_age} numeric, the crown age of the tree
+\item \strong{true_lambda0} numeric, the true value of \eqn{\lambda_0}
+\item \strong{true_mu0} numeric, the true value of \eqn{\mu_0}
+\item \strong{true_K numeric}, the true value of K
+\item \strong{mc} numeric, the index of the tree (from 1 to 1000)
+\item \strong{optim} factor, the model fit to the tree
+\item \strong{init_lambda0} numeric, the initial value of \eqn{\lambda_0} used for
+optimisation
+\item \strong{init_mu0}, numeric, the initial value of \eqn{\mu_0} used for optimisation
+\item \strong{init_k} numeric, the initial value of K used for optimisation.
+\item \strong{loglik} numeric, the log-likelihood of the fitted model
+\item \strong{AIC} numeric, the AIC derived from the log-likelihood
+\item \strong{lambda0_ML} numeric, the maximum likelihood estimate of \eqn{\lambda_0}
+\item \strong{mu0_ML} numeric, the maximum likelihood estimate of \eqn{\mu_0}
+\item \strong{K_ML}, the maximum likelihood estimate of K.
+\item \strong{hasConverged} logical, has the optimisation chain converged to a value?
+\item \strong{numCycles} numeric, number of cycles of optimisation, run in a loop. See
+\code{\link[DDD:dd_ML]{DDD::dd_ML()}}
+\item \strong{methode} factor, the method used to solve the likelihood equation. See
+\code{\link[DDD:dd_ML]{DDD::dd_ML()}}
+\item \strong{optimmethod} factor, the method used for optimisation (either simplex or
+subplex). See \code{\link[DDD:dd_ML]{DDD::dd_ML()}}
+\item \strong{jobID} numeric, the ID of the job is the optimisation was run on a
+high-performance cluster.
+\item \strong{cond} numeric, a code specifying how the likelihood is conditioned.
+See \code{\link[DDD:dd_ML]{DDD::dd_ML()}}
+}
 }
 \author{
 Théo Pannetier
