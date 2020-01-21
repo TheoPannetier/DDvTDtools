@@ -15,13 +15,15 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = FALSE
 )
+knitr::opts_knit$set(root.dir = "example_dir/DDvTD")
 ```
 
-Replicate the results of Pannetier et al. (2020).
-Data is found in some online repo, but with this package you can have a go if you feel the need to replicate these data.
+__`DDvTDtools`__ is an R package accompanying the article:
+Pannetier, T., Martinez, C., Bunnefeld, L., and Etienne, R.S, 2020. Branching patterns in phylogenies cannot distinguish diversity-dependent diversification from time-dependent diversification. Submitted to Evolution.
+The package is a collection of functions and objects that were used to generate the data and figures presented Pannetier _et al._ (2020).
 
 **Warning** 
-Simulations and maximum likelihood optimisations called upon the integration of the DD master system introduced in Etienne et al. (2012), and this can take an awful lot of time. This is specially true for parameter settings with a long age (larger trees) and with extinction, and the computation is heavier for the time-dependent model. We performed these over 1000 trees each time, so if you only want to try the neat functions of the package (thanks for the interest!) you could run the functions introduced below for just a handful of trees. The full datasets used in the study are available on ***?***.
+Simulations and maximum likelihood optimisations called upon the integration of the DD master system introduced in Etienne _et al._ (2012), and this can take an awful lot of time. This is specially true for parameter settings with a long age (larger trees) and with extinction, and the computation is heavier for the time-dependent model. We performed these over 1000 trees each time, so if you only want to try the neat functions of the package (thanks for the interest!) you could run the functions introduced below for just a handful of trees. The full datasets used in the study are available on **???**.
 
 ## Package installation
 If you haven't done so already, install the `DDvTDtools` package from Github and the latest CRAN release of `DDD`.
@@ -29,7 +31,7 @@ If you haven't done so already, install the `DDvTDtools` package from Github and
 install.packages("DDD")
 devtools::install_github("TheoPannetier/DDvTDtools")
 ```
-## Step 1 - Set up directory structure
+## Set up directory structure
 The package works from a specific relative path, and most functions expect to access data located in pre-defined directories. For example, `DDvTDtools::read_sim()` expects to find the simulation output in `DDvTD/data/sim`. The command below will set up the required directory structure in your working directory.
 ```{r set_folder_struct}
 DDvTDtools::set_DDvTD_dir_struct()
@@ -65,8 +67,9 @@ It is also possible to directly translate the code into proper values:
 DDvTDtools::para_to_pars(1211)
 ```
 Simulated trees are stored in `DDvTD/data/sim`, and can be loaded with `read_sim()`
-```{r read_trees}
-DDvTDtools::read_sim(sim = "DD", para = 1211)
+```{r read_trees, eval=TRUE}
+trees <- DDvTDtools::read_sim(sim = "DD", para = 1211)
+trees[[1]]$tes
 ```
 
 ## Step 2 - Fit the models on simulated trees
@@ -85,14 +88,16 @@ DDvTDtools::run_optim(
 ```
 Argument `optim` is equivalent to argument `sim` introduced above.
 `run_optim()` will fetch the simulated trees from `DDvTD/data/sim` and save its output in `DDvTD/data/optim`. You can load these tables with
-```{r read_tables }
+```{r read_tables, eval=TRUE}
 df <- DDvTDtools::read_optim_results(
   sim = "DD",
   para = 1211,
   optim = "TD",
   init_k = "true_k"
 )
+head(df)
 ```
+The structure of a results data frame with a description of all the variables can be found in the documentation of `DDvTDtools::results_optim_struct()`.
 `init_k` denotes which value of parameter K was used to initialise the maximum likelihood optimisation. The default value, `true_k`, means the true value, i.e. 40. The alternative is `from_n`, where K was instead set to the number of tips in the tree. This is for some settings which produced large trees, for which the likelihood optimisation proved particularly tedious.
 The values of `init_k` used for each setting can be called with:
 ```{r which_init_k, eval=TRUE}
@@ -113,12 +118,12 @@ Fig. 1 was produced from randomly sampled numbers, and I am not reporting it her
 The plots below draw results from both models fit to both type of trees, and so require that the four combinations of `sim` and `optim` for a single value of `para` are present in `DDvTD\data\optim`.
 
 **Fig. 2 - Average lineage-through-time plots**
-```{r plot_ltt}
+```{r plot_ltt, eval=TRUE}
 DDvTDtools::plot_ltt_nested(para = 1211)
 ```
 
 **Fig. 3 - log-likelihood ratio distributions**
-```{r plot_lrs}
+```{r plot_lrs, eval=TRUE}
 DDvTDtools::plot_lr(para = 1211)
 ```
 
