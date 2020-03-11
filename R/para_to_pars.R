@@ -13,8 +13,6 @@
 #'
 para_to_pars <- function(para){
 
-  assert_para(para)
-
   crown_age = c(5, 10, 15, 60)
   lambda0 = c(0.4, 0.8, 1.4, 3.2)
   mu0 = c(0, 0.1, 0.2, 0.4)
