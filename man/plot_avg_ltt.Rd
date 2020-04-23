@@ -4,7 +4,7 @@
 \alias{plot_avg_ltt}
 \title{Plot average lineage-through-time plots}
 \usage{
-plot_avg_ltt(para, with_extinct = FALSE)
+plot_avg_ltt(para, with_extinct = FALSE, include_ltts = TRUE)
 }
 \arguments{
 \item{para}{numeric, a four-digits number coding for a set of four parameter
@@ -12,6 +12,9 @@ values. Refer to \code{arg_para()} doc for details, and call
 \code{arg_para()} to see possible inputs.}
 
 \item{with_extinct}{logical, should the tree include extinct lineages?}
+
+\item{include_ltts}{logical. If \code{TRUE}, the LTTs of 500 trees are also
+plotted with transparence.}
 }
 \description{
 Plots the lineage-through-time curves for a pair of sets of
