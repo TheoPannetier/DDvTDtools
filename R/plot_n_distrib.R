@@ -24,19 +24,19 @@ plot_n_distrib <- function(para) {
 
   n_plot <- ggplot2::ggplot(n_table, ggplot2::aes(
     x = n_table$sim, y = n_table$N, fill = n_table$sim
-    )) +
+  )) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
       yintercept = 40, color = "grey50", linetype = "dashed"
-      ) +
+    ) +
     ggplot2::theme_classic() +
     ggplot2::labs(
       title = make_plot_title_expr(para),
       y = "Number of tips"
-      ) +
+    ) +
     ggplot2::theme(
       axis.title.x = ggplot2::element_blank()
     )
- n_plot
+  n_plot
 }
