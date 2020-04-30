@@ -25,7 +25,7 @@ get_ltt_tbls <- function(sim, para, with_extinct = FALSE) {
     sim = sim,
     para = para,
     with_extinct = with_extinct
-    )
+  )
   crown_age <- para_to_pars(para)[1]
 
   ltts <- TreeSim::LTT.plot.gen(trees = list(phylos))

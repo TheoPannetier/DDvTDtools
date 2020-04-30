@@ -35,15 +35,17 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, include_ltts = TRUE) {
     ltt_tbls_DD[[1]], ltt_tbls_TD[[1]]
   )
   # Gather the rest as a single tibble
-  ltt_tbls_DD[[1]] <- NULL
-  tbl_DD <- lapply(seq_along(ltt_tbls_DD), function(i) {
-    ltt_tbls_DD[[i]] %>% dplyr::mutate("mc" = i)
-  }) %>% dplyr::bind_rows()
+  if (include_ltts) {
+    ltt_tbls_DD[[1]] <- NULL
+    tbl_DD <- lapply(seq_along(ltt_tbls_DD), function(i) {
+      ltt_tbls_DD[[i]] %>% dplyr::mutate("mc" = i)
+    }) %>% dplyr::bind_rows()
 
-  ltt_tbls_TD[[1]] <- NULL
-  tbl_TD <- lapply(seq_along(ltt_tbls_TD), function(i) {
-    ltt_tbls_TD[[i]] %>% dplyr::mutate("mc" = i)
-  }) %>% dplyr::bind_rows()
+    ltt_tbls_TD[[1]] <- NULL
+    tbl_TD <- lapply(seq_along(ltt_tbls_TD), function(i) {
+      ltt_tbls_TD[[i]] %>% dplyr::mutate("mc" = i)
+    }) %>% dplyr::bind_rows()
+  }
 
   if (para == 4241) {
     ymax <- 120
@@ -71,7 +73,7 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, include_ltts = TRUE) {
     ggplot2::labs(
       title = make_plot_title_expr(para),
       x = "Time",
-      y = "Number of tips"
+      y = "Number of lineages"
     )
   # Add all individual LTTs in transparency
   if (include_ltts) {
