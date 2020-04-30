@@ -18,9 +18,10 @@ Imports:
     purrr,
     plyr,
     magrittr,
-    latex2exp
-Suggests:
+    latex2exp,
     TreeSim,
+    tibble
+Suggests:
     testthat,
     knitr,
     rmarkdown
