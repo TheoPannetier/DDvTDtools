@@ -24,7 +24,7 @@ and carrying capacity (K). Values are encoded as follows:
 \strong{digit} \tab \strong{crown_age} \tab \strong{\eqn{\lambda_0}}
 \tab \strong{\eqn{\mu_0}} \tab \strong{K} \cr
 1 \tab 5  \tab  -   \tab 0   \tab 40 \cr
-2 \tab 10  \tab 0.8 \tab -   \tab - \cr
+2 \tab 10  \tab 0.8 \tab -   \tab 80 \cr
 3 \tab 15  \tab -   \tab -   \tab - \cr
 4 \tab 60  \tab -   \tab 0.4 \tab -
 }
@@ -39,7 +39,7 @@ For example, \code{para = 3241} denotes the following parameter set:
 
 This \code{para} code can be converted to parameter values with \code{\link[=para_to_pars]{para_to_pars()}}.
 
-Note that many cells in the table above are left empty, and only two
+Note that many cells in the table above are left empty, and only three
 parameters actually change value across parameter sets. These empty cells
 correspond to parameter values that were considered in earlier steps of the
 project, and later abandonned.
