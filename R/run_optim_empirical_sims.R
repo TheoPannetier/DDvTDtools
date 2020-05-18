@@ -28,7 +28,7 @@ run_optim_empirical_sims <- function(family_name,
   assert_DDvTD_wd()
 
   cat(paste("Loading trees for", family_name, "\n"))
-  load(paste0("data/empirical_trees/sim", sim, "_", family_name, ".RData"))
+  load(paste0("data/empirical_trees/sim/sim", sim, "_", family_name, ".RData"))
 
   ## DDD arguments passed to metadata
   optimmethod <- "subplex"
@@ -89,7 +89,7 @@ run_optim_empirical_sims <- function(family_name,
     results <- rbind(results, results_row)
     results <- results[order(results$mc),]
     if (save_results) {
-      saveRDS(results, file = paste0("data/empirical_trees/", outputfile))
+      saveRDS(results, file = paste0("data/empirical_trees/optim/", outputfile))
     }
   }
   if (return_results) {
