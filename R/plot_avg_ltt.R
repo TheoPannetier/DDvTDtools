@@ -60,7 +60,9 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, include_ltts = TRUE) {
     ggplot2::geom_line(size = 1) +
     ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
-      yintercept = 40, color = "grey50", linetype = "dashed"
+      yintercept = DDvTDtools::para_to_pars(para)[4],
+      color = "grey50",
+      linetype = "dashed"
     ) +
     ggplot2::coord_cartesian(ylim = c(0, ymax)) +
     ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
