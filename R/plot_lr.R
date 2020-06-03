@@ -85,12 +85,12 @@ plot_lr <- function(para,
   }
   if (which_geom == "density") {
     gg <- gg +  ggplot2::geom_density(
-      ggplot2::aes(x = lr_table$lr, fill = lr_table$sim),
+      ggplot2::aes(x = lr, fill = sim),
       alpha = 0.2
     )
   } else {
     gg <- gg + ggplot2::geom_histogram(
-      ggplot2::aes(x = lr_table$lr, fill = lr_table$sim),
+      ggplot2::aes(x = lr, fill = sim),
       position = "dodge",
       binwidth = 0.5
     )
