@@ -47,6 +47,7 @@ arg_para <- function(incl_unused = FALSE) {
       2211, 2241,
       3211, 3241,
       4211, 4241,
+      3411, 3441,
       3212, 3242
     )
   } else {

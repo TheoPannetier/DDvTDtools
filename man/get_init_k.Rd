@@ -4,11 +4,7 @@
 \alias{get_init_k}
 \title{Get values for argument init_k}
 \usage{
-get_init_k(incl_unused = FALSE)
-}
-\arguments{
-\item{incl_unused}{logical, specify whether you want to include values that
-have been considered in earlier phases of the project.}
+get_init_k()
 }
 \description{
 Labels for initial value of K associated with each parameter setting for the
