@@ -4,7 +4,12 @@
 \alias{get_lr_threshold}
 \title{Get the relevant log LR threshold value to reject either model}
 \usage{
-get_lr_threshold(sim, para, init_k, percentile)
+get_lr_threshold(
+  sim,
+  para,
+  init_k = get_init_k()[which(names(get_init_k()) == para)],
+  percentile
+)
 }
 \arguments{
 \item{sim}{character, name of the simulation model, either \code{"DD"}

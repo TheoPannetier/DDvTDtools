@@ -20,7 +20,8 @@ Imports:
     magrittr,
     latex2exp,
     TreeSim,
-    tibble
+    tibble,
+    tidyr
 Suggests:
     testthat,
     knitr,

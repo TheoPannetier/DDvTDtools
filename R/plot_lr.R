@@ -18,7 +18,7 @@
 #' @export
 
 plot_lr <- function(para,
-                    init_k = "true_k",
+                    init_k = get_init_k()[which(names(get_init_k()) == para)],
                     plot_thresholds = TRUE,
                     label_p_success = TRUE,
                     full_range = FALSE,
@@ -33,18 +33,21 @@ plot_lr <- function(para,
     stop("invalid input - which_geom options are 'density' or 'histogram'")
   }
   # Fetch and assemble data sets -----------------------------------------------
-  lr_table <- get_lr_table(para = para, init_k = init_k)
+  lr_tbl <- lapply(arg_sim(), function(sim) {
+    get_lr_tbl(sim = sim, para = para, init_k = init_k) %>%
+      dplyr::mutate("sim" = sim)
+  }) %>% dplyr::bind_rows()
 
   # Set up label variables -----------------------------------------------------
   ymax <- ifelse(which_geom == "histogram", 500, 1)
   if (full_range) {
-    xlim <- c(min(-10, min(lr_table$lr)) , max(10, max(lr_table$lr)))
+    xlim <- c(min(-10, min(lr_tbl$lr)) , max(10, max(lr_tbl$lr)))
   } else {
     xlim <- c(-5, 10)
   }
 
   # Plot, proper ---------------------------------------------------------------
-  gg <- ggplot2::ggplot(data = lr_table) +
+  gg <- ggplot2::ggplot(data = lr_tbl) +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::coord_cartesian(xlim = xlim,
                              ylim = c(0, ymax)) +

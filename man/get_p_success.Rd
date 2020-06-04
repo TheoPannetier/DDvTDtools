@@ -5,7 +5,11 @@
 \title{Computes the proportion of trees that can successfully be assigned to either
 model}
 \usage{
-get_p_success(sim, para, init_k)
+get_p_success(
+  sim,
+  para,
+  init_k = get_init_k()[which(names(get_init_k()) == para)]
+)
 }
 \arguments{
 \item{sim}{character, name of the simulation model, either \code{"DD"}

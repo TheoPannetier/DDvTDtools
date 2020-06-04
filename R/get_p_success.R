@@ -10,8 +10,11 @@
 #' @author Theo Pannetier
 #' @export
 
-get_p_success <- function(sim, para, init_k) {
-  lr_table <- get_lr(
+get_p_success <- function(sim,
+                          para,
+                          init_k = get_init_k()[which(names(get_init_k()) == para)]
+                          ){
+  lr_tbl <- get_lr_tbl(
     sim = sim,
     para = para,
     init_k = init_k
@@ -23,8 +26,8 @@ get_p_success <- function(sim, para, init_k) {
       init_k = init_k,
       percentile = 0.95
     )
-    n_success <- length(which(lr_table > success_threshold))
-    p_success <- round(n_success / length(lr_table), 3)
+    n_success <- length(which(lr_tbl > success_threshold))
+    p_success <- round(n_success / length(lr_tbl), 3)
 
   } else if (sim == "TD") {
     success_threshold <- get_lr_threshold(
@@ -33,8 +36,8 @@ get_p_success <- function(sim, para, init_k) {
       init_k = init_k,
       percentile = 0.05
     )
-    n_success <- length(which(lr_table < success_threshold))
-    p_success <- round(n_success / length(lr_table), 3)
+    n_success <- length(which(lr_tbl < success_threshold))
+    p_success <- round(n_success / length(lr_tbl), 3)
   }
  p_success
 }

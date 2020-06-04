@@ -6,7 +6,7 @@
 \usage{
 plot_lr(
   para,
-  init_k = "true_k",
+  init_k = get_init_k()[which(names(get_init_k()) == para)],
   plot_thresholds = TRUE,
   label_p_success = TRUE,
   full_range = FALSE,

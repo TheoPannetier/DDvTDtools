@@ -10,7 +10,10 @@
 #' @author Theo Pannetier
 #' @export
 
-get_lr_threshold <- function(sim, para, init_k, percentile) {
+get_lr_threshold <- function(sim,
+                             para,
+                             init_k = get_init_k()[which(names(get_init_k()) == para)],
+                             percentile) {
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)
@@ -19,6 +22,6 @@ get_lr_threshold <- function(sim, para, init_k, percentile) {
     stop("prob must be a proportion")
   }
 
-  lr <- get_lr(sim = sim, para = para, init_k = init_k)
+  lr <- get_lr_tbl(sim = sim, para = para, init_k = init_k)$lr
   lr %>% stats::quantile(probs = percentile, na.rm = TRUE)
 }
