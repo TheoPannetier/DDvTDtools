@@ -4,7 +4,7 @@
 \alias{check_loglikelihood_exists}
 \title{Check a results data frame for log-likelihood}
 \usage{
-check_loglikelihood_exists(results, return_rows)
+check_loglikelihood_exists(results, return_rows = TRUE)
 }
 \arguments{
 \item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed by

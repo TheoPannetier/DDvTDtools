@@ -4,7 +4,7 @@
 \alias{check_duplicated_rows}
 \title{Check a results data frame does not have duplicated rows}
 \usage{
-check_duplicated_rows(results, return_rows)
+check_duplicated_rows(results, return_rows = TRUE)
 }
 \arguments{
 \item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed by

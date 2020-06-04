@@ -10,7 +10,7 @@
 #'
 #' @export
 #' @author Theo Pannetier
-check_duplicated_rows <- function(results, return_rows) {
+check_duplicated_rows <- function(results, return_rows = TRUE) {
 
   duplicated_rows <- which(duplicated(results))
   if (length(duplicated_rows > 0)) {
@@ -39,7 +39,7 @@ check_duplicated_rows <- function(results, return_rows) {
 #'
 #' @export
 #' @author Theo Pannetier
-check_incomplete_rows <- function(results, return_rows){
+check_incomplete_rows <- function(results, return_rows = TRUE) {
 
   incomplete_rows <- c()
   for(i in seq_along(results$mc)){
@@ -75,7 +75,7 @@ check_incomplete_rows <- function(results, return_rows){
 #'
 #' @export
 #' @author Theo Pannetier
-check_loglikelihood_exists <- function(results, return_rows){
+check_loglikelihood_exists <- function(results, return_rows = TRUE) {
 
   missing_loglikelihoods <- which(results$loglik %in% c(NA,-1,-Inf))
   if(length(missing_loglikelihoods > 0)){
@@ -104,7 +104,7 @@ check_loglikelihood_exists <- function(results, return_rows){
 #'
 #' @export
 #' @author Theo Pannetier
-check_missing_mcs <- function(results, return_rows){
+check_missing_mcs <- function(results, return_rows = TRUE) {
 
   missing_mcs <- which(!(1:1000 %in% results$mc))
 

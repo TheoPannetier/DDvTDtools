@@ -4,7 +4,7 @@
 \alias{check_missing_mcs}
 \title{Check a results data frame for missing rows}
 \usage{
-check_missing_mcs(results, return_rows)
+check_missing_mcs(results, return_rows = TRUE)
 }
 \arguments{
 \item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed by

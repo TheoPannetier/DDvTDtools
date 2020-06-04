@@ -4,7 +4,7 @@
 \alias{check_incomplete_rows}
 \title{Check a results data frame for NAs in rows}
 \usage{
-check_incomplete_rows(results, return_rows)
+check_incomplete_rows(results, return_rows = TRUE)
 }
 \arguments{
 \item{results}{a results data frame, as produced by \code{\link[=run_optim]{run_optim()}} or accessed by
