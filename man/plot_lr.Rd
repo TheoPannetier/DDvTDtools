@@ -9,8 +9,7 @@ plot_lr(
   init_k = get_init_k()[which(names(get_init_k()) == para)],
   plot_thresholds = TRUE,
   label_p_success = TRUE,
-  full_range = FALSE,
-  which_geom = "density"
+  full_range = FALSE
 )
 }
 \arguments{
@@ -30,9 +29,6 @@ as a label on the plot?}
 
 \item{full_range}{logical. If \code{TRUE}, the range of the x-axis is set to
 include all points in the dataset. Otherwise, default is \code{c(-5, 10)}.}
-
-\item{which_geom}{character giving the type of plot to be drawn. Options are
-\code{"density"} and \code{"histograms"}.}
 }
 \description{
 Produces the log-LR distribution for all trees sharing the same parameter
