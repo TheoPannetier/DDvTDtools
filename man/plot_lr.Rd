@@ -9,7 +9,7 @@ plot_lr(
   init_k = get_init_k()[which(names(get_init_k()) == para)],
   plot_thresholds = TRUE,
   label_p_success = TRUE,
-  full_range = FALSE
+  quant_range = c(0, 1)
 )
 }
 \arguments{
@@ -27,8 +27,8 @@ distribution?}
 \item{label_p_success}{logical, should the proportion of successes be added
 as a label on the plot?}
 
-\item{full_range}{logical. If \code{TRUE}, the range of the x-axis is set to
-include all points in the dataset. Otherwise, default is \code{c(-5, 10)}.}
+\item{quant_range}{a length-2 numeric vector, the quantiles defining the
+range of values to be plotted}
 }
 \description{
 Produces the log-LR distribution for all trees sharing the same parameter

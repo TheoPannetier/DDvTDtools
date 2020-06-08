@@ -8,8 +8,8 @@
 #' distribution?
 #' @param label_p_success logical, should the proportion of successes be added
 #' as a label on the plot?
-#' @param full_range logical. If \code{TRUE}, the range of the x-axis is set to
-#' include all points in the dataset. Otherwise, default is \code{c(-5, 10)}.
+#' @param quant_range a length-2 numeric vector, the quantiles defining the
+#' range of values to be plotted
 #'
 #' @author Théo Pannetier
 #'
@@ -19,7 +19,7 @@ plot_lr <- function(para,
                     init_k = get_init_k()[which(names(get_init_k()) == para)],
                     plot_thresholds = TRUE,
                     label_p_success = TRUE,
-                    full_range = FALSE) {
+                    quant_range = c(0, 1)) {
   assert_DDvTD_wd()
   assert_para(para)
   assert_init_k(init_k)
@@ -33,19 +33,12 @@ plot_lr <- function(para,
       dplyr::mutate("sim" = sim)
   }) %>% dplyr::bind_rows()
 
-  # Set up scope -----------------------------------------------------
-  # if (full_range) {
-  #   xlim <- c(min(-10, min(lr_tbl$lr)) , max(10, max(lr_tbl$lr)))
-  # } else {
-  #   xlim <- c(-5, 10)
-  # }
-
   # Plot  ---------------------------------------------------------------
   gg <- ggplot2::ggplot(data = lr_tbl) +
     # data are plotted at the end to be overlaid on grey rect background
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::coord_cartesian(
-      # xlim = xlim,
+      xlim = quantile(lr_tbl$lr, probs = quant_range, na.rm = TRUE),
       ylim = c(0, 1)
     ) +
     ggplot2::scale_y_continuous(breaks = seq(0, 1, 0.2)) +
