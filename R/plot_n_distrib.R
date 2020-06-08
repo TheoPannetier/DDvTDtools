@@ -23,7 +23,7 @@ plot_n_distrib <- function(para) {
   n_table <- rbind(n_table_DD, n_table_TD)
 
   n_plot <- ggplot2::ggplot(n_table, ggplot2::aes(
-    x = n_table$sim, y = n_table$N, fill = n_table$sim
+    x = sim, y = N, fill = sim
   )) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
