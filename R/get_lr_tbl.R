@@ -35,9 +35,8 @@ get_lr_tbl <- function(sim,
       names_prefix = "loglik_",
       names_from = optim,
       values_from = loglik
-    ) %>%
-    dplyr::transmute(
-      mc,
+    )  %>%
+    dplyr::mutate(
       "lr" = loglik_DD - loglik_TD
     )
   nb_NAs <- sum(is.na(lr_tbl$lr))
