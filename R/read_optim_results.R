@@ -9,7 +9,7 @@
 #' @author Theo Pannetier
 #' @export
 
-read_optim_results <- function(sim, optim, para, init_k = "true_k"){
+read_optim_results <- function(sim, optim, para, init_k = "true_k") {
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)
@@ -22,13 +22,8 @@ read_optim_results <- function(sim, optim, para, init_k = "true_k"){
     stop(paste0("data/optim/",res_filename, " does not exist"))
   }
 
-  res <- readRDS(paste0("data/optim/",res_filename))
-
-  if(!is.data.frame(res)){
-    rm(res)
-    stop(paste0(paste0("data/optim/",res_filename)," does not contain a data frame."))
-  }
+  res <- readRDS(paste0("data/optim/", res_filename)) %>%
+    tibble::as_tibble()
 
   return(res)
-
 }
