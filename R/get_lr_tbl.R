@@ -40,9 +40,9 @@ get_lr_tbl <- function(sim,
       mc,
       "lr" = loglik_DD - loglik_TD
     )
-  nb_NAs <- sum(which(is.na(lr_tbl$lr)))
+  nb_NAs <- sum(is.na(lr_tbl$lr))
   if (nb_NAs > 0) {
-    warning("logLR could not be computed for", nb_NAs, "trees.")
+    warning("For sim", sim, "_", para,": logLR could not be computed for ", nb_NAs, " trees.")
   }
 
   return(lr_tbl)
