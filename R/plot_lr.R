@@ -85,12 +85,13 @@ plot_lr <- function(para,
       p_dd <- lr_tbl %>%
         dplyr::filter(sim == "DD") %>%
         dplyr::summarise(
-          "p_dd"  = mean(lr > threshold_td, na.rm = TRUE) # mean of a condition is a proportion
+          # mean of a condition is a proportion
+          "p_dd"  = mean(lr > threshold_td, na.rm = TRUE) %>% round(3)
         )
       p_td <- lr_tbl %>%
         dplyr::filter(sim == "TD") %>%
         dplyr::summarise(
-          "p_td"  = mean(lr < threshold_dd, na.rm = TRUE) # mean of a condition is a proportion
+          "p_td"  = mean(lr < threshold_dd, na.rm = TRUE) %>% round(3)
         )
 
       gg <- gg +
