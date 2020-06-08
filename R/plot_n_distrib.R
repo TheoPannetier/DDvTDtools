@@ -28,7 +28,7 @@ plot_n_distrib <- function(para) {
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
-      yintercept = 40, color = "grey50", linetype = "dashed"
+      yintercept = para_to_pars(para)[4], color = "grey50", linetype = "dashed"
     ) +
     ggplot2::theme_classic() +
     ggplot2::labs(
