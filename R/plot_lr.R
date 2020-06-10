@@ -28,17 +28,17 @@ plot_lr <- function(para,
   }
 
   # Fetch and assemble data sets -----------------------------------------------
-  lr_tbl <- lapply(arg_sim(), function(sim) {
-    get_lr_tbl(sim = sim, para = para, init_k = init_k) %>%
+  optim_tbl <- lapply(arg_sim(), function(sim) {
+    join_optim_tbls(sim = sim, para = para, init_k = init_k) %>%
       dplyr::mutate("sim" = sim)
   }) %>% dplyr::bind_rows()
 
   # Plot  ---------------------------------------------------------------
-  gg <- ggplot2::ggplot(data = lr_tbl) +
+  gg <- ggplot2::ggplot(data = optim_tbl) +
     # data are plotted at the end to be overlaid on grey rect background
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::coord_cartesian(
-      xlim = quantile(lr_tbl$lr, probs = quant_range, na.rm = TRUE),
+      xlim = quantile(optim_tbl$log_lr, probs = quant_range, na.rm = TRUE),
       ylim = c(0, 1)
     ) +
     ggplot2::scale_y_continuous(breaks = seq(0, 1, 0.2)) +
@@ -52,13 +52,13 @@ plot_lr <- function(para,
 
   # Thresholds ---------------------------------------------------------
   if (plot_thresholds == TRUE) {
-    threshold_dd <- lr_tbl %>%
+    threshold_dd <- optim_tbl %>%
       dplyr::filter(sim == "DD") %>%
-      dplyr::select(lr) %>%
+      dplyr::select(log_lr) %>%
       stats::quantile(probs = 0.05, na.rm = TRUE)
-    threshold_td <- lr_tbl %>%
+    threshold_td <- optim_tbl %>%
       dplyr::filter(sim == "TD") %>%
-      dplyr::select(lr) %>%
+      dplyr::select(log_lr) %>%
       stats::quantile(probs = 0.95, na.rm = TRUE)
 
     gg <- gg +
@@ -75,16 +75,16 @@ plot_lr <- function(para,
     # Labels if requested as well ------------------------------------------
     if (label_p_success) {
 
-      p_dd <- lr_tbl %>%
+      p_dd <- optim_tbl %>%
         dplyr::filter(sim == "DD") %>%
         dplyr::summarise(
           # mean of a condition is a proportion
-          "p_dd"  = mean(lr > threshold_td, na.rm = TRUE) %>% round(3)
+          "p_dd"  = mean(log_lr > threshold_td, na.rm = TRUE) %>% round(3)
         )
-      p_td <- lr_tbl %>%
+      p_td <- optim_tbl %>%
         dplyr::filter(sim == "TD") %>%
         dplyr::summarise(
-          "p_td"  = mean(lr < threshold_dd, na.rm = TRUE) %>% round(3)
+          "p_td"  = mean(log_lr < threshold_dd, na.rm = TRUE) %>% round(3)
         )
 
       gg <- gg +
@@ -115,7 +115,7 @@ plot_lr <- function(para,
 
   # Plot proper ------------------------------------------------------------
   gg <- gg + ggplot2::geom_density(
-    ggplot2::aes(x = lr, fill = sim),
+    ggplot2::aes(x = log_lr, fill = sim),
     position = "identity",
     na.rm = TRUE,
     alpha = 0.3
