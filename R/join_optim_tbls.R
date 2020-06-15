@@ -38,7 +38,7 @@ join_optim_tbls <- function(sim,
     dplyr::mutate("log_lr" = loglik_dd - loglik_td) %>%
     dplyr::relocate(loglik_td, log_lr, .after = loglik_dd)
 
-  nb_NAs <- sum(is.na(lr_tbl$lr))
+  nb_NAs <- sum(is.na(optim_tbl$log_lr))
   if (nb_NAs > 0) {
     warning("For sim", sim, "_", para,": logLR could not be computed for ", nb_NAs, " trees.")
   }
