@@ -6,8 +6,6 @@
 #' @inheritParams params_doc
 #' @param plot_thresholds logical, should threshold bars be plotted with the
 #' distribution?
-#' @param label_p_success logical, should the proportion of successes be added
-#' as a label on the plot?
 #' @param quant_range a length-2 numeric vector, the quantiles defining the
 #' range of values to be plotted
 #'
@@ -18,7 +16,6 @@
 plot_lr <- function(para,
                     init_k = get_init_k()[which(names(get_init_k()) == para)],
                     plot_thresholds = TRUE,
-                    label_p_success = TRUE,
                     quant_range = c(0, 1)) {
   assert_DDvTD_wd()
   assert_para(para)
@@ -72,45 +69,6 @@ plot_lr <- function(para,
       ggplot2::geom_vline(xintercept = threshold_dd, color = "green4") +
       ggplot2::geom_vline(xintercept = threshold_td, color = "blue")
 
-    # Labels if requested as well ------------------------------------------
-    if (label_p_success) {
-
-      p_dd <- optim_tbl %>%
-        dplyr::filter(sim == "DD") %>%
-        dplyr::summarise(
-          # mean of a condition is a proportion
-          "p_dd"  = mean(log_lr > threshold_td, na.rm = TRUE) %>% round(3)
-        )
-      p_td <- optim_tbl %>%
-        dplyr::filter(sim == "TD") %>%
-        dplyr::summarise(
-          "p_td"  = mean(log_lr < threshold_dd, na.rm = TRUE) %>% round(3)
-        )
-
-      gg <- gg +
-        ggplot2::annotate(
-          geom = "label",
-          label = paste0("p_dd = ", p_dd),
-          x = 6,
-          y = 0.9,
-          size = 3,
-          label.r = ggplot2::unit(0.1, "lines"),
-          label.padding = ggplot2::unit(0.5, "lines"),
-          fill = "grey95",
-          hjust = 0
-        ) +
-        ggplot2::annotate(
-          geom = "label",
-          label = paste0("p_td = ", p_td),
-          x = -4,
-          y = 0.9,
-          size = 3,
-          label.r = ggplot2::unit(0.1, "lines"),
-          label.padding = ggplot2::unit(0.5, "lines"),
-          fill = "grey95",
-          hjust = 0
-        )
-    } # end labels
   } # end thresholds
 
   # Plot proper ------------------------------------------------------------

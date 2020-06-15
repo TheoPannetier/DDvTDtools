@@ -8,7 +8,6 @@ plot_lr(
   para,
   init_k = get_init_k()[which(names(get_init_k()) == para)],
   plot_thresholds = TRUE,
-  label_p_success = TRUE,
   quant_range = c(0, 1)
 )
 }
@@ -23,9 +22,6 @@ details, and call \code{arg_init_k()} to see possible inputs.}
 
 \item{plot_thresholds}{logical, should threshold bars be plotted with the
 distribution?}
-
-\item{label_p_success}{logical, should the proportion of successes be added
-as a label on the plot?}
 
 \item{quant_range}{a length-2 numeric vector, the quantiles defining the
 range of values to be plotted}
