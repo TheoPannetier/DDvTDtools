@@ -65,6 +65,16 @@ plot_lr <- function(para,
         ymin = 0, ymax = 1.5),
         fill = "grey85"
       ) +
+      ggplot2::geom_rect(ggplot2::aes(
+        xmin = -Inf, xmax = threshold_dd,
+        ymin = 0, ymax = 1.5),
+        fill = "#d0d8ff" # light blue
+      ) +
+      ggplot2::geom_rect(ggplot2::aes(
+        xmin = threshold_td, xmax = Inf,
+        ymin = 0, ymax = 1.5),
+        fill = "#d2ecd5" # light green
+      ) +
       # Plot thresholds
       ggplot2::geom_vline(xintercept = threshold_dd, color = "green4") +
       ggplot2::geom_vline(xintercept = threshold_td, color = "blue")
@@ -76,7 +86,7 @@ plot_lr <- function(para,
     ggplot2::aes(x = log_lr, fill = sim),
     position = "identity",
     na.rm = TRUE,
-    alpha = 0.3
+    alpha = 0.4
   )
   return(gg)
 }
