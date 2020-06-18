@@ -7,11 +7,12 @@
 #' @inheritParams params_doc
 #' @param trees a vector of trees indices. If supplied, the LTTs of these trees
 #' will also be plotted.
+#' @param alpha transparence level for LTTs, if `trees` is supplied.
 #'
 #' @author Théo Pannetier
 #' @export
 
-plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL) {
+plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL, alpha = 0.05) {
   assert_DDvTD_wd()
   assert_para(para)
   if(!is.logical(with_extinct)) {
@@ -30,15 +31,6 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL) {
       with_extinct = with_extinct
     )
   )
-  crown_age <- para_to_pars(para)[1]
-  time_seq <- seq(-crown_age, 0, by = 1)
-
-  avg_ltt_tbl <- purrr::map(
-    phylos,
-    function(x) {
-      phylobates::get_summary_ltt(phylos = x, time_seq = time_seq)
-    }
-  ) %>% dplyr::bind_rows(.id = "sim")
 
   # Get ltt tbls for both DD and TD
   ltt_tbls_DD <- get_ltt_tbls(
@@ -69,41 +61,13 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL) {
     }) %>% dplyr::bind_rows()
   }
 
-  if (para == 4241) {
-    ymax <- 120
-  } else {
-    ymax <- 100
-  }
-  # Main plot with average LTTs
-  avg_ltt_tbl %>% ggplot2::ggplot(
-    ggplot2::aes(x = t, y = mean_n, colour = sim)
-    ) +
-    ggplot2::geom_line(size = 1) +
-    ggplot2::scale_colour_manual(values = c("green4", "blue")) +
-    ggplot2::geom_hline(
-      yintercept = DDvTDtools::para_to_pars(para)[4],
-      color = "grey50",
-      linetype = "dashed"
-    ) +
-    ggplot2::coord_cartesian(ylim = c(0, ymax)) +
-    ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
-    ggplot2::theme_classic() +
-    ggplot2::theme(
-      text = ggplot2::element_text(size = 14),
-      axis.title.y = ggplot2::element_text(vjust = 0.5, size = 16),
-      axis.title.x = ggplot2::element_text(size = 16)
-    ) +
-    ggplot2::labs(
-      title = make_plot_title_expr(para),
-      x = "Time",
-      y = "Number of lineages"
-    )
+  # if (para == 4241) {ymax <- 120} else {ymax <- 100}
 
+  # Main plot with average LTTs
   ltt_plot <- ggplot2::ggplot(
     avg_ltt_tbl,
     ggplot2::aes(x = time, y = N, color = sim)
   ) +
-    ggplot2::geom_line(size = 1) +
     ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
       yintercept = DDvTDtools::para_to_pars(para)[4],
@@ -111,7 +75,7 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL) {
       linetype = "dashed"
     ) +
     ggplot2::coord_cartesian(ylim = c(0, ymax)) +
-    ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
+    # ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
     ggplot2::theme_classic() +
     ggplot2::theme(
       text = ggplot2::element_text(size = 14),
@@ -128,14 +92,16 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL) {
     ltt_plot <- ltt_plot +
       ggplot2::geom_step(
         ggplot2::aes(group = mc),
-        data = tbl_DD %>% dplyr::filter(mc %in% trees), # not enough room
-        alpha = 0.01
+        data = tbl_DD %>% dplyr::filter(mc %in% trees),
+        alpha = alpha
       ) +
       ggplot2::geom_step(
         ggplot2::aes(group = mc),
         data = tbl_TD %>% dplyr::filter(mc %in% trees),
-        alpha = 0.01
+        alpha = alpha
       )
   }
+  ltt_plot <- ltt_plot +
+    ggplot2::geom_line(size = 1)
   return(ltt_plot)
 }
