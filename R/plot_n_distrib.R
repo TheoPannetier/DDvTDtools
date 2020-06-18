@@ -12,31 +12,35 @@ plot_n_distrib <- function(para) {
   assert_DDvTD_wd()
   assert_para(para)
 
-  n_table_DD <- cbind(
-    get_n_table(sim = "DD", para = para),
-    "sim" = factor("DD", levels = arg_sim())
+  phylos <- list(
+    "DD" = read_sim_multiPhylo("DD", para),
+    "TD" = read_sim_multiPhylo("TD", para)
   )
-  n_table_TD <- cbind(
-    get_n_table(sim = "TD", para = para),
-    "sim" = factor("TD", levels = arg_sim())
-  )
-  n_table <- rbind(n_table_DD, n_table_TD)
 
-  n_plot <- ggplot2::ggplot(n_table, ggplot2::aes(
-    x = sim, y = N, fill = sim
-  )) +
+  n_tbl <- purrr::map_dfc(
+    phylos,
+    function(x) {
+      return("n" = ape::Ntip(x))
+    }
+  ) %>%
+    tidyr::pivot_longer(
+      everything(),
+      names_to = "sim",
+      values_to = "n"
+    )
+
+  n_plot <- n_tbl %>% ggplot2::ggplot(
+    ggplot2::aes(x = sim, y = n, fill = sim)
+    ) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
       yintercept = para_to_pars(para)[4], color = "grey50", linetype = "dashed"
     ) +
     ggplot2::theme_classic() +
-    ggplot2::labs(
-      title = make_plot_title_expr(para),
-      y = "Number of tips"
-    ) +
     ggplot2::theme(
       axis.title.x = ggplot2::element_blank()
     )
-  n_plot
+
+  return(n_plot)
 }
