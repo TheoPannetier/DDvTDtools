@@ -61,8 +61,8 @@ get_p_tbl <- function(paras) {
         "la_0" = pars[2],
         "mu_0" = pars[3],
         "K" = pars[4],
-        "DD" = threshold_dd,
-        "TD" = threshold_td,
+        "DD_5th" = threshold_dd,
+        "TD_95th" = threshold_td,
         "p_DD" = p_dd,
         "p_TD" = p_td
       )
