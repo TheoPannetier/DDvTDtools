@@ -10,6 +10,11 @@ get_p_tbl(paras)
 \item{paras}{numeric or character vector, a set of \code{para} values. See
 \link{arg_para} for possible values.}
 }
+\value{
+a \code{tibble} with the parameter values corresponding to \code{para}, the
+threshold values based on percentiles, and the proportion of trees beyond
+the threshold for each model.
+}
 \description{
 Given a set of parameters, computes the 5th and 95th percentile of the
 log-likelihood ratio for DD trees and TD trees, respectively, and the

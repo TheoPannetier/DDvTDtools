@@ -9,7 +9,7 @@
 #' @param paras numeric or character vector, a set of `para` values. See
 #' [arg_para] for possible values.
 #'
-#' @value a `tibble` with the parameter values corresponding to `para`, the
+#' @return a `tibble` with the parameter values corresponding to `para`, the
 #' threshold values based on percentiles, and the proportion of trees beyond
 #' the threshold for each model.
 #'
