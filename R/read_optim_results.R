@@ -9,7 +9,10 @@
 #' @author Theo Pannetier
 #' @export
 
-read_optim_results <- function(sim, optim, para, init_k = "true_k") {
+read_optim_results <- function(sim,
+                               optim,
+                               para,
+                               init_k = get_init_k()[which(names(get_init_k()) == para)]) {
   assert_DDvTD_wd()
   assert_sim(sim)
   assert_para(para)

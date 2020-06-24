@@ -4,7 +4,12 @@
 \alias{read_optim_results}
 \title{Read results of the model optimisation}
 \usage{
-read_optim_results(sim, optim, para, init_k = "true_k")
+read_optim_results(
+  sim,
+  optim,
+  para,
+  init_k = get_init_k()[which(names(get_init_k()) == para)]
+)
 }
 \arguments{
 \item{sim}{character, name of the simulation model, either \code{"DD"}
