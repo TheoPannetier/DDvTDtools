@@ -21,7 +21,8 @@ Imports:
     latex2exp,
     TreeSim,
     tibble,
-    tidyr
+    tidyr,
+    phylobates
 Suggests:
     testthat,
     knitr,
