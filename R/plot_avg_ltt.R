@@ -5,70 +5,59 @@
 #' averaged over 1000 trees with [TreeSim::LTT.plot.gen()].
 #'
 #' @inheritParams params_doc
-#' @param trees a vector of trees indices. If supplied, the LTTs of these trees
-#' will also be plotted.
-#' @param alpha transparence level for LTTs, if `trees` is supplied.
-#'
 #' @author Théo Pannetier
 #' @export
 
-plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL, alpha = 0.05) {
+plot_avg_ltt <- function(para, with_extinct = FALSE) {
   assert_DDvTD_wd()
   assert_para(para)
   if(!is.logical(with_extinct)) {
     stop('with_extinct must be a logical')
   }
 
-  phylos <- list(
-    "DD" = read_sim_multiPhylo(
-      sim = "DD",
-      para = para,
-      with_extinct = with_extinct
-    ),
-    "TD" = read_sim_multiPhylo(
-      sim = "TD",
-      para = para,
-      with_extinct = with_extinct
-    )
+  # Fetch phylogenies
+  phylos <- purrr::map(
+    arg_sim(),
+    function(sim) {
+      read_sim_multiPhylo(
+        sim = sim,
+        para = para,
+        with_extinct = with_extinct)
+    })
+  names(phylos) <- arg_sim()
+
+  # Compute summaries over all LTTs
+  time_seq <- seq(-para_to_pars(para)[1], 0, 1)
+  summary_ltt_tbl <- phylos %>% purrr::map_dfr(
+    get_summary_ltt_tbl,
+    time_seq = time_seq,
+    .id = "sim"
   )
 
-  # Get ltt tbls for both DD and TD
-  ltt_tbls_DD <- get_ltt_tbls(
-    sim = "DD",
-    para = para,
-    with_extinct = with_extinct
-  )
-  ltt_tbls_TD <- get_ltt_tbls(
-    sim = "TD",
-    para = para,
-    with_extinct = with_extinct
-  )
-
-  # Separate average LTTs from the rest
-  avg_ltt_tbl <- dplyr::bind_rows(
-    ltt_tbls_DD[[1]], ltt_tbls_TD[[1]]
-  )
-  # Gather the rest as a single tibble
-  if (!is.null(trees)) {
-    ltt_tbls_DD[[1]] <- NULL
-    tbl_DD <- lapply(seq_along(ltt_tbls_DD), function(i) {
-      ltt_tbls_DD[[i]] %>% dplyr::mutate("mc" = i)
-    }) %>% dplyr::bind_rows()
-
-    ltt_tbls_TD[[1]] <- NULL
-    tbl_TD <- lapply(seq_along(ltt_tbls_TD), function(i) {
-      ltt_tbls_TD[[i]] %>% dplyr::mutate("mc" = i)
-    }) %>% dplyr::bind_rows()
-  }
-
-  # if (para == 4241) {ymax <- 120} else {ymax <- 100}
+  if (para == 4241) {ymax <- 120} else {ymax <- 100}
 
   # Main plot with average LTTs
   ltt_plot <- ggplot2::ggplot(
-    avg_ltt_tbl,
-    ggplot2::aes(x = time, y = N, color = sim)
+    summary_ltt_tbl,
+    ggplot2::aes(
+      # mean curves
+      x = t, y = mean_n
+      # quantile ribbons
+    )
   ) +
-    ggplot2::scale_colour_manual(values = c("green4", "blue"), guide = FALSE) +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = qt_10, ymax = qt_90, fill = sim),
+      alpha = 0.2
+    ) +
+    ggplot2::geom_line(
+      ggplot2::aes(colour = sim),
+      size = 1
+    ) +
+    ggplot2::scale_colour_manual(
+      values = c("green4", "blue"),
+      aesthetics = c("colour", "fill"),
+      guide = FALSE
+    ) +
     ggplot2::geom_hline(
       yintercept = DDvTDtools::para_to_pars(para)[4],
       color = "grey50",
@@ -87,21 +76,5 @@ plot_avg_ltt <- function(para, with_extinct = FALSE, trees = NULL, alpha = 0.05)
       x = "Time",
       y = "Number of lineages"
     )
-  # Add all individual LTTs in transparency
-  if (!is.null(trees)) {
-    ltt_plot <- ltt_plot +
-      ggplot2::geom_step(
-        ggplot2::aes(group = mc),
-        data = tbl_DD %>% dplyr::filter(mc %in% trees),
-        alpha = alpha
-      ) +
-      ggplot2::geom_step(
-        ggplot2::aes(group = mc),
-        data = tbl_TD %>% dplyr::filter(mc %in% trees),
-        alpha = alpha
-      )
-  }
-  ltt_plot <- ltt_plot +
-    ggplot2::geom_line(size = 1)
   return(ltt_plot)
 }
