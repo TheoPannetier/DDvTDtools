@@ -17,26 +17,22 @@ plot_n_distrib <- function(para) {
     "TD" = read_sim_multiPhylo("TD", para)
   )
 
-  n_tbl <- purrr::map_dfc(
-    phylos,
-    function(x) {
-      return("n" = ape::Ntip(x))
+  n_tbl <- purrr::map(
+    arg_sim(),
+    function(sim) {
+      read_optim_results(sim, "DD", para) %>% dplyr::select(sim, ntips)
     }
-  ) %>%
-    tidyr::pivot_longer(
-      everything(),
-      names_to = "sim",
-      values_to = "n"
-    )
+  ) %>% dplyr::bind_rows()
 
   n_plot <- n_tbl %>% ggplot2::ggplot(
-    ggplot2::aes(x = sim, y = n, fill = sim)
+    ggplot2::aes(x = sim, y = ntips, fill = sim)
     ) +
     ggplot2::geom_violin(scale = "width") +
     ggplot2::scale_fill_manual(values = c("green4", "blue"), guide = FALSE) +
     ggplot2::geom_hline(
       yintercept = para_to_pars(para)[4], color = "grey50", linetype = "dashed"
     ) +
+    ggplot2::ylab("Number of tips") +
     ggplot2::theme_classic() +
     ggplot2::theme(
       axis.title.x = ggplot2::element_blank()
