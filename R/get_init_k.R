@@ -19,7 +19,15 @@ get_init_k <- function() {
     "3411" = "from_n",
     "3441" = "true_k",
     "3212" = "from_n",
-    "3242" = "from_n"
+    "3242" = "from_n",
+    "1221" = "true_k",
+    "1231" = "true_k",
+    "2221" = "true_k",
+    "2231" = "true_k",
+    "3221" = "true_k",
+    "3231" = "true_k",
+    "4221" = "true_k",
+    "4231" = "true_k"
   )
 
 }
