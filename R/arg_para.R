@@ -4,9 +4,6 @@
 #'
 #' Use [para_to_pars()] to translate `para` into parameter values.
 #'
-#' @param incl_unused logical, specify whether you want to include values that
-#' have been considered in earlier phases of the project.
-#'
 #' @details Each value is a four-digit number coding for a set of parameter
 #' values. In order: crown age, baseline speciation rate
 #' (\eqn{\lambda_0}{\lambda_0}), extinction rate (\eqn{\mu_0}{\mu_0}),
@@ -37,32 +34,12 @@
 #' @export
 #' @seealso \code{para_to_pars()}
 
-arg_para <- function(incl_unused = FALSE) {
-  if (!is.logical(incl_unused)) {
-    stop("incl_unused must be logical")
-    }
-  if (!incl_unused) {
-    c(
-      1211, 1241,
-      2211, 2241,
-      3211, 3241,
-      4211, 4241,
-      3212, 3242,
-      #3411, 3441,
-      1221, 1231,
-      2221, 2231,
-      3221, 3231,
-      4221, 4231,
-      3222, 3232
-    )
-  } else {
-    c(
-      1211, 1221, 1231, 1241,
-      2211, 2221, 2231, 2241,
-      3211, 3221, 3231, 3241,
-      4211, 4221, 4231, 4241,
-      3411, 3421, 3431, 3441,
-      3212, 3242
-    )
-  }
+arg_para <- function() {
+  c(
+    1211, 1221, 1231, 1241,
+    2211, 2221, 2231, 2241,
+    3211, 3221, 3231, 3241,
+    4211, 4221, 4231, 4241,
+    3212, 3222, 3232, 3242
+  )
 }

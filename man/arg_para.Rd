@@ -4,11 +4,7 @@
 \alias{arg_para}
 \title{Get possible values of argument para}
 \usage{
-arg_para(incl_unused = FALSE)
-}
-\arguments{
-\item{incl_unused}{logical, specify whether you want to include values that
-have been considered in earlier phases of the project.}
+arg_para()
 }
 \description{
 Input values currently accepted for argument \code{para}.
