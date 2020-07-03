@@ -41,7 +41,7 @@ plot_lr <- function(para,
     ggplot2::scale_y_continuous(breaks = seq(0, 1, 0.2)) +
     ggplot2::labs(
       title = make_plot_title_expr(para),
-      x = latex2exp::TeX("logL_{DD} - logL_{TD}"),
+      x = latex2exp::TeX("log L_{DD} - log L_{TD}"),
       y = "Density"
     ) +
     ggplot2::theme_classic() +

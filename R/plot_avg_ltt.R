@@ -34,8 +34,6 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
     .id = "sim"
   )
 
-  # if (para == 4241) {ymax <- 120} else {ymax <- 100}
-
   # Main plot with average LTTs
   ltt_plot <- ggplot2::ggplot(
     summary_ltt_tbl,
@@ -58,8 +56,7 @@ plot_avg_ltt <- function(para, with_extinct = FALSE) {
       color = "grey50",
       linetype = "dashed"
     ) +
-    ggplot2::coord_cartesian(ylim = c(0, max(summary_ltt_tbl$qt_90) * 1.1)) +
-    # ggplot2::scale_y_continuous(breaks = seq(0, ymax, by = 20)) +
+    ggplot2::scale_y_log10() +
     ggplot2::theme_classic() +
     ggplot2::theme(
       text = ggplot2::element_text(size = 14),
