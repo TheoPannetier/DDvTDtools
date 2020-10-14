@@ -20,26 +20,31 @@ knitr::opts_knit$set(root.dir = "example_dir/DDvTD")
 
 __`DDvTDtools`__ is an R package accompanying the manuscript:
 
-Pannetier, T., Martinez, C., Bunnefeld, L., and Etienne, R.S. Branching patterns in phylogenies cannot distinguish diversity-dependent diversification from time-dependent diversification. Submitted
+Pannetier, T., Martinez, C., Bunnefeld, L., and Etienne, R.S. Branching patterns in phylogenies cannot distinguish diversity-dependent diversification from time-dependent diversification
 
-The package is a collection of functions and objects that were used to generate the data and figures presented in the article.
+The package consists in a collection of functions that were used to generate the results presented in Pannetier et al. (2021).
 
-Note that the simulations and maximum likelihood optimisations call upon the integration of the DD master system introduced in Etienne _et al._ (2012), and this can take an awful lot of time. This is specially true for parameter settings with a long age (larger trees) and with extinction, and the computation is heavier for the time-dependent model. We performed these over 1000 trees each time, so if you only want to try the neat functions of the package (thanks for the interest!) you could run the functions introduced below for just a handful of trees.
+Note that the simulations and maximum likelihood optimisations call upon the integration of the DD master system introduced in Etienne _et al._ (2012), and this can take an awful lot of time. This is specially true for parameter settings with an old age (larger trees) and with extinction, and the computation is heavier for the time-dependent model.
+
 
 ## Package installation
-If you haven't done so already, install the `DDvTDtools` package from Github and the latest CRAN release of `DDD`.
 ```{r inst_packages}
 install.packages("DDD")
 devtools::install_github("TheoPannetier/DDvTDtools")
 ```
+
 ## Set up directory structure
-The package works from a specific relative path, and most functions expect to access data located in pre-defined directories. For example, `DDvTDtools::read_sim()` expects to find the simulation output in `DDvTD/data/sim`. The command below will set up the required directory structure in your working directory.
+`DDvTDtools` expects to be working from a folder named `DDvTD`, and expects to find the data read by its functions at `data/sim` (simulated trees) and `data/optim` (maximum likelihood parameter estimation results).
+
+The command below will set up the required directory structure in your working directory.
+
 ```{r set_folder_struct}
 DDvTDtools::set_DDvTD_dir_struct()
 ```
 
 ## Step 1 - Simulate phylogenetic trees
 Diversity-dependent and time-dependent trees can be simulated with `DDvTDtools::run_sim()`, which is simply a wrapper around `DDD::dd_sim()` and `DDD::td_sim()` that standardizes the input and formats the output.
+
 ```{r simulation}
 DDvTDtools::run_sim(
   sim = "DD",
@@ -47,6 +52,7 @@ DDvTDtools::run_sim(
   nb_trees = 1000
 )
 ```
+
 The first argument, `sim` refers to the name of the simulating model, either `"DD"` or `"TD"`. The second argument, `para`, is a four-digit number that codes the values of the four parameters (crown age, baseline speciation rate, extinction rate and carrying capacity) used in the study. 
 `1211` for example means 
 
@@ -58,18 +64,25 @@ The first argument, `sim` refers to the name of the simulating model, either `"D
 (This is the fastest setting to simulate and run maximum likelihood optimisation on.)
 
 Calling `arg_para()` will print the different values used through the study.
+
 ```{r call_para, eval=TRUE}
 DDvTDtools::arg_para()
 ```
+
 And what values they code can be found in the documentation
+
 ```{r doc_para}
 ?DDvTDtools::arg_para()
 ```
+
 It is also possible to directly translate the code into proper values:
+
 ```{r translate_para, eval=TRUE}
 DDvTDtools::para_to_pars(1211)
 ```
+
 Simulated trees are stored in `DDvTD/data/sim`, and can be loaded with `read_sim()`
+
 ```{r read_trees, eval=TRUE}
 trees <- DDvTDtools::read_sim(sim = "DD", para = 1211)
 trees[[1]][[1]]
@@ -77,6 +90,7 @@ trees[[1]][[1]]
 
 ## Step 2 - Fit the models on simulated trees
 Once phylogenetic trees have been simulated, each model should be fitted to each type of trees. This is done by `DDD::dd_ML()` and `DDD::bd_ML()`, but again, we have used a wrapper to standardise the input and output. 
+
 ```{r fit_model}
 DDvTDtools::run_optim(
   sim = "DD", 
@@ -89,8 +103,10 @@ DDvTDtools::run_optim(
   optim = "TD"
 )
 ```
+
 Argument `optim` is equivalent to argument `sim` introduced above.
 `run_optim()` will fetch the simulated trees from `DDvTD/data/sim` and save its output in `DDvTD/data/optim`. You can load these tables with
+
 ```{r read_tables, eval=TRUE}
 df <- DDvTDtools::read_optim_results(
   sim = "DD",
@@ -103,10 +119,13 @@ head(df)
 The structure of a results data frame with a description of all the variables can be found in the documentation of `DDvTDtools::results_optim_struct()`.
 `init_k` denotes which value of parameter K was used to initialise the maximum likelihood optimisation. The default value, `true_k`, means the true value, i.e. 40. The alternative is `from_n`, where K was instead set to the number of tips in the tree. This is for some settings which produced large trees, for which the likelihood optimisation proved particularly tedious.
 The values of `init_k` used for each setting can be called with:
+
 ```{r which_init_k, eval=TRUE}
 DDvTDtools::get_init_k()
 ```
-Optimisation using `init_k = from_n` is run with another function, which calls `run_optim()`
+
+Optimisation using `init_k = from_n` is run with another function, which itself calls `run_optim()`
+
 ```{r from_n} 
 DDvTDtools::run_optim_from_n(
   sim = "DD", 
@@ -114,9 +133,8 @@ DDvTDtools::run_optim_from_n(
   optim = "TD"
 )
 ```
-### Step 3 - Plot the results
 
-Fig. 1 was produced from randomly sampled numbers, and I am not reporting it here.
+### Step 3 - Plot results
 
 The plots below draw results from both models fit to both type of trees, and so require that the four combinations of `sim` and `optim` for a single value of `para` are present in `DDvTD\data\optim`.
 
