@@ -27,7 +27,7 @@ plot_n_distrib <- function(para) {
   variances <- n_tbl %>%
     dplyr::group_by(sim) %>%
     dplyr::summarise(
-      "var" = var(ntips) %>% round(3)
+      "var" = var(ntips) %>% round(1)
     )
 
   n_plot <- n_tbl %>% ggplot2::ggplot(
@@ -38,6 +38,9 @@ plot_n_distrib <- function(para) {
     ggplot2::geom_hline(
       yintercept = para_to_pars(para)[4], color = "grey50", linetype = "dashed"
     ) +
+    # ggplot2::coord_cartesian(
+    #   ylim = c(1, max(n_tbl$ntips) * 3.2)
+    # ) +
     ggplot2::scale_y_log10() +
     ggplot2::ylab("Number of tips") +
     ggplot2::theme_classic() +
@@ -45,16 +48,23 @@ plot_n_distrib <- function(para) {
       axis.title.x = ggplot2::element_blank()
     ) +
     # Variance labels
-    ggplot2::geom_text(
-      data = variances,
-      ggplot2::aes(
-        x = factor(sim),
-        y = max(n_tbl$ntips) * 1.5,
-        label = paste("sigma[", sim, "]^2 ==", var)
-      ),
-      parse = TRUE
-    )
-  n_plot
+    # ggplot2::geom_text(
+    #   data = variances,
+    #   ggplot2::aes(
+    #     x = factor(sim),
+    #     y = max(n_tbl$ntips) * 1.5,
+    #     label = paste("sigma[", sim, "]^2 ==", var)
+    #   ),
+    #   size = 3,
+    #   nudge_x = 0.1,
+    #   nudge_y = 0.2,
+    #   angle = 45,
+    #   parse = TRUE
+    # ) +
+    ggplot2::labs(
+      title = bquote(sigma[DD]^2 == .((variances$var[1])) ~~~ sigma[TD]^2 == .((variances$var[2])))
+    ) +
+    ggplot2::theme(plot.title = ggplot2::element_text(size = 10))
 
   return(n_plot)
 }

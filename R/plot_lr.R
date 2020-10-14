@@ -62,17 +62,17 @@ plot_lr <- function(para,
       # Background grey area
       ggplot2::geom_rect(ggplot2::aes(
         xmin = threshold_dd, xmax = threshold_td,
-        ymin = 0, ymax = 1.5),
+        ymin = 0, ymax = 3),
         fill = "grey85"
       ) +
       ggplot2::geom_rect(ggplot2::aes(
         xmin = -Inf, xmax = threshold_dd,
-        ymin = 0, ymax = 1.5),
+        ymin = 0, ymax = 3),
         fill = "#d0d8ff" # light blue
       ) +
       ggplot2::geom_rect(ggplot2::aes(
         xmin = threshold_td, xmax = Inf,
-        ymin = 0, ymax = 1.5),
+        ymin = 0, ymax = 3),
         fill = "#d2ecd5" # light green
       ) +
       # Plot thresholds
